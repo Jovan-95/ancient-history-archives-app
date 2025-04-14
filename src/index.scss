@@ -1,0 +1,12 @@
+@import "./scss/wrapper.scss";
+@import "./scss/auth-pages/auth.scss";
+@import "./scss/components/buttons.scss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}

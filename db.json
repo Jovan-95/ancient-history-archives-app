@@ -1,0 +1,125 @@
+{
+  "artifacts": [
+    {
+      "id": "1",
+      "title": "Rosetta Stone",
+      "description": "A granodiorite stele inscribed with a decree issued in Memphis, Egypt in 196 BC.",
+      "period": "Ptolemaic Period",
+      "region": "Egypt",
+      "imageUrl": "/images/rosetta.jpg",
+      "collectionId": 1,
+      "likes": 87,
+      "views": 540,
+      "tags": [
+        "language",
+        "inscription",
+        "translation"
+      ],
+      "createdAt": "2023-06-14T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "title": "Terracotta Army",
+      "description": "Thousands of life-sized terracotta sculptures buried with China's first Emperor.",
+      "period": "Qin Dynasty",
+      "region": "China",
+      "imageUrl": "/images/terracotta.jpg",
+      "collectionId": 2,
+      "likes": 120,
+      "views": 890,
+      "tags": [
+        "funerary",
+        "china",
+        "army"
+      ],
+      "createdAt": "2023-07-22T12:30:00Z"
+    }
+  ],
+  "collections": [
+    {
+      "id": "1",
+      "title": "Egyptian Wonders",
+      "description": "A collection of iconic Egyptian discoveries.",
+      "createdBy": 1
+    },
+    {
+      "id": "2",
+      "title": "Ancient China",
+      "description": "Key archaeological findings from Chinese history.",
+      "createdBy": 2
+    }
+  ],
+  "timelines": [
+    {
+      "id": "1",
+      "title": "Rise of the Roman Empire",
+      "events": [
+        {
+          "year": -27,
+          "title": "Augustus Becomes Emperor"
+        },
+        {
+          "year": 80,
+          "title": "Colosseum Completed"
+        }
+      ],
+      "createdBy": 1
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "artifactId": 1,
+      "userId": 2,
+      "text": "Fascinating how it helped decode Egyptian hieroglyphs!",
+      "createdAt": "2025-04-13T12:00:00Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "historyBuff123",
+      "email": "buff@example.com",
+      "password": "buff123",
+      "role": "Researcher",
+      "favorites": [
+        1
+      ],
+      "bio": "Ancient history enthusiast and amateur archaeologist.",
+      "avatar": "/avatars/user1.png"
+    },
+    {
+      "id": "2",
+      "username": "curatorJane",
+      "email": "jane@example.com",
+      "password": "jane456",
+      "role": "Curator",
+      "favorites": [
+        2
+      ],
+      "bio": "Museum curator with a passion for East Asian artifacts.",
+      "avatar": "/avatars/user2.png"
+    },
+    {
+      "id": "c45f",
+      "username": "test",
+      "email": "vuksanovicjovan@hotmail.com",
+      "password": "111111",
+      "confirmPassword": "111111"
+    },
+    {
+      "id": "8ea2",
+      "username": "jvoan",
+      "email": "test@gmail.com",
+      "password": "111111",
+      "confirmPassword": "111111"
+    },
+    {
+      "id": "4480",
+      "username": "eee",
+      "email": "test@gmail.com",
+      "password": "wwwwww",
+      "confirmPassword": "wwwwww"
+    }
+  ]
+}
