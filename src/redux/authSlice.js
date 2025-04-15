@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 import { createSlice } from "@reduxjs/toolkit";
 
 /* eslint-disable no-unused-vars */
 const initialState = {
-  loggedInUsers: {},
+  loggedInUser: JSON.parse(localStorage.getItem("loggedInUser")) || null,
 };
 
 const authSlice = createSlice({
@@ -10,7 +11,8 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     addLoggedUser: (state, action) => {
-      state.loggedInUsers = { ...action.payload };
+      state.loggedInUser = { ...action.payload };
+      localStorage.setItem("loggedInUser", JSON.stringify(state.loggedInUser));
     },
   },
 });

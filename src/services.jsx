@@ -5,12 +5,14 @@
 // http://localhost:5000/artifacts
 // http://localhost:5000/collections
 // http://localhost:5000/timelines
+// http://localhost:5000/empires
+// http://localhost:5000/figures
 // http://localhost:5000/comments
 // http://localhost:5000/users
 
 import { useState } from "react";
 
-//// HTTP users
+////  Users
 // Get HTTP method
 export default async function getUsers() {
   try {
@@ -45,3 +47,78 @@ export async function registerUser(user) {
 
 // Delete HTTP method
 // Put HTTP method
+
+//// Artifacts
+// Get HTTP method
+export async function getArtifacts() {
+  try {
+    const res = await fetch("http://localhost:5000/artifacts");
+
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+//// Collections
+// Get HTTP method
+export async function getCollections() {
+  try {
+    const res = await fetch("http://localhost:5000/collections");
+
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+//// Timelines
+// Get HTTP method
+export async function getTimelines() {
+  try {
+    const res = await fetch("http://localhost:5000/timelines");
+
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+//// Empires
+// Get HTTP method
+export async function getEmpires() {
+  try {
+    const res = await fetch("http://localhost:5000/empires");
+
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+//// Figures
+// Get HTTP method
+export async function getFigures() {
+  try {
+    const res = await fetch("http://localhost:5000/figures");
+
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}

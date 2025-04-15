@@ -6,6 +6,8 @@ import {
 } from "@tanstack/react-query";
 import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
+import Layout from "./components/Layout";
 
 const Register = lazy(() => import("./pages/Register"));
 const Login = lazy(() => import("./pages/Login"));
@@ -32,20 +34,97 @@ function App() {
           <Routes>
             <Route path="/" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />}>
-              <Route path="admin-moderation" element={<AdminModeration />} />
+
+            <Route
+              path="/"
+              element={
+                <PrivateRoute>
+                  <Layout />
+                </PrivateRoute>
+              }
+            >
               <Route
-                path="admin-user-management"
-                element={<AdminUserManagement />}
+                path="/home"
+                element={
+                  <PrivateRoute>
+                    <Home />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/dashboard"
+                element={
+                  <PrivateRoute>
+                    <Dashboard />
+                  </PrivateRoute>
+                }
+              >
+                <Route
+                  path="admin-moderation"
+                  element={
+                    <PrivateRoute>
+                      <AdminModeration />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="admin-user-management"
+                  element={
+                    <PrivateRoute>
+                      <AdminUserManagement />
+                    </PrivateRoute>
+                  }
+                />
+              </Route>
+              <Route
+                path="/explore"
+                element={
+                  <PrivateRoute>
+                    <Explore />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/submit-content"
+                element={
+                  <PrivateRoute>
+                    <SubmitContent />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/notifications"
+                element={
+                  <PrivateRoute>
+                    <Notifications />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/bookmarks"
+                element={
+                  <PrivateRoute>
+                    <Bookmarks />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/timeline"
+                element={
+                  <PrivateRoute>
+                    <TimelineViewer />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/settings"
+                element={
+                  <PrivateRoute>
+                    <Settings />
+                  </PrivateRoute>
+                }
               />
             </Route>
-            <Route path="/explore" element={<Explore />} />
-            <Route path="/submit-content" element={<SubmitContent />} />
-            <Route path="/notifications" element={<Notifications />} />
-            <Route path="/bookmarks" element={<Bookmarks />} />
-            <Route path="/timeline" element={<TimelineViewer />} />
-            <Route path="/settings" element={<Settings />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
