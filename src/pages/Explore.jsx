@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   getArtifacts,
   getCollections,
@@ -8,8 +8,10 @@ import {
   getFigures,
   getTimelines,
 } from "../services";
+import { useEffect, useState } from "react";
 
 function Explore() {
+  const [activeTab, setActiveTab] = useState("all");
   const navigate = useNavigate();
 
   // Get artifacts
@@ -70,6 +72,24 @@ function Explore() {
     console.log("figures", figuresData);
   }
 
+  // Tabs changing
+  function handleTab(e) {
+    const tabName = e.target.textContent;
+    setActiveTab(tabName.toLowerCase());
+  }
+
+  // Scroll to ID section
+  const location = useLocation();
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
+
   // HTTP loading and error
   if (
     artifactsIsLoading ||
@@ -98,69 +118,121 @@ function Explore() {
       </div>
 
       <div className="explore__filters">
-        <button className="filter-btn active">All</button>
-        <button className="filter-btn">Empires</button>
-        <button className="filter-btn">Figures</button>
-        <button className="filter-btn">Artifacts</button>
-        <button className="filter-btn">Timelines</button>
-        <button className="filter-btn">Collections</button>
+        <button
+          onClick={(e) => handleTab(e)}
+          className={`filter-btn ${activeTab === "all" ? "active" : ""}`}
+        >
+          All
+        </button>
+        <button
+          onClick={(e) => handleTab(e)}
+          className={`filter-btn ${activeTab === "empires" ? "active" : ""}`}
+        >
+          Empires
+        </button>
+        <button
+          onClick={(e) => handleTab(e)}
+          className={`filter-btn ${activeTab === "figures" ? "active" : ""}`}
+        >
+          Figures
+        </button>
+        <button
+          onClick={(e) => handleTab(e)}
+          className={`filter-btn ${activeTab === "artifacts" ? "active" : ""}`}
+        >
+          Artifacts
+        </button>
+        <button
+          onClick={(e) => handleTab(e)}
+          className={`filter-btn ${activeTab === "timelines" ? "active" : ""}`}
+        >
+          Timelines
+        </button>
+        <button
+          onClick={(e) => handleTab(e)}
+          className={`filter-btn ${
+            activeTab === "collections" ? "active" : ""
+          }`}
+        >
+          Collections
+        </button>
       </div>
 
-      <h2>Artifacts</h2>
-      <div className="explore__grid">
-        {artifactsData.map((artifact) => (
-          <div key={artifact.id} className="explore__card">
-            <h3>{artifact.title}</h3>
-            <p>{artifact.description}</p>
-            <button className="btn">Learn more</button>
+      {(activeTab === "artifacts" || activeTab === "all") && (
+        <div id="artifacts">
+          <h2>Artifacts</h2>
+          <div className="explore__grid">
+            {artifactsData.map((artifact) => (
+              <div key={artifact.id} className="explore__card">
+                <h3>{artifact.title}</h3>
+                <p>{artifact.description}</p>
+                <button className="btn">Learn more</button>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
 
-      <h2>Collections</h2>
-      <div className="explore__grid">
-        {collectionsData.map((collection) => (
-          <div key={collection.id} className="explore__card">
-            <h3>{collection.title}</h3>
-            <p>{collection.description}</p>
-            <button className="btn">Learn more</button>
+      {(activeTab === "collections" || activeTab === "all") && (
+        <div id="collections">
+          <h2>Collections</h2>
+          <div className="explore__grid">
+            {collectionsData.map((collection) => (
+              <div key={collection.id} className="explore__card">
+                <h3>{collection.title}</h3>
+                <p>{collection.description}</p>
+                <button className="btn">Learn more</button>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
 
-      <h2>Timelines</h2>
-      <div className="explore__grid">
-        {timelinesData.map((timeline) => (
-          <div key={timeline.id} className="explore__card">
-            <h3>{timeline.title}</h3>
-            <button className="btn">Learn more</button>
+      {(activeTab === "timelines" || activeTab === "all") && (
+        <div id="timelines">
+          <h2>Timelines</h2>
+          <div className="explore__grid">
+            {timelinesData.map((timeline) => (
+              <div key={timeline.id} className="explore__card">
+                <h3>{timeline.title}</h3>
+                <button className="btn">Learn more</button>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
 
-      <h2>Empires</h2>
-      <div className="explore__grid">
-        {empiresData.map((empire) => (
-          <div key={empire.id} className="explore__card">
-            <h3>{empire.title}</h3>
-            <p>{empire.description}</p>
+      {(activeTab === "empires" || activeTab === "all") && (
+        <div id="empires">
+          <h2>Empires</h2>
+          <div className="explore__grid">
+            {empiresData.map((empire) => (
+              <div key={empire.id} className="explore__card">
+                <h3>{empire.title}</h3>
+                <p>{empire.description}</p>
 
-            <button className="btn">Learn more</button>
+                <button className="btn">Learn more</button>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
 
-      <h2>Figures</h2>
-      <div className="explore__grid">
-        {figuresData.map((figure) => (
-          <div key={figure.id} className="explore__card">
-            <h3>{figure.name}</h3>
-            <p>{figure.region}</p>
+      {(activeTab === "figures" || activeTab === "all") && (
+        <div id="figures">
+          <h2>Figures</h2>
+          <div className="explore__grid">
+            {figuresData.map((figure) => (
+              <div key={figure.id} className="explore__card">
+                <h3>{figure.name}</h3>
+                <p>{figure.region}</p>
 
-            <button className="btn">Learn more</button>
+                <button className="btn">Learn more</button>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
 
       <button onClick={testHTTPdata}>TEST HTTP DATA</button>
     </section>

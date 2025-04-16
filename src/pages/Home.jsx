@@ -138,16 +138,16 @@ function Home() {
         <div className="categories">
           <h2>Browse Categories</h2>
           <div className="category-links">
-            <NavLink to="/explore" className="cat">
+            <NavLink to="/explore#empires" className="cat">
               Empires
             </NavLink>
-            <NavLink to="/explore" className="cat">
+            <NavLink to="/explore#figures" className="cat">
               Figures
             </NavLink>
-            <NavLink to="/explore" className="cat">
+            <NavLink to="/explore#artifacts" className="cat">
               Artifacts
             </NavLink>
-            <NavLink to="/explore" className="cat">
+            <NavLink to="/explore#timelines" className="cat">
               Timelines
             </NavLink>
           </div>

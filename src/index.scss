@@ -5,6 +5,7 @@
 @import "./scss/pages/explore.scss";
 @import "./scss/layout.scss";
 @import "./scss/sidebar.scss";
+@import "./scss/helpers.scss";
 
 *,
 *::before,
@@ -13,4 +14,7 @@
 }
 body {
   margin: 0;
+}
+html {
+  scroll-behavior: smooth;
 }
