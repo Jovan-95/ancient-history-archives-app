@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useQuery } from "@tanstack/react-query";
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   getArtifacts,
   getCollections,
@@ -166,7 +166,9 @@ function Explore() {
               <div key={artifact.id} className="explore__card">
                 <h3>{artifact.title}</h3>
                 <p>{artifact.description}</p>
-                <button className="btn">Learn more</button>
+                <NavLink to={`/explore/artifact/${artifact.id}`}>
+                  <button className="btn">Learn more</button>
+                </NavLink>
               </div>
             ))}
           </div>
@@ -181,7 +183,9 @@ function Explore() {
               <div key={collection.id} className="explore__card">
                 <h3>{collection.title}</h3>
                 <p>{collection.description}</p>
-                <button className="btn">Learn more</button>
+                <NavLink to={`/explore/collections/${collection.id}`}>
+                  <button className="btn">Learn more</button>
+                </NavLink>
               </div>
             ))}
           </div>
@@ -233,6 +237,11 @@ function Explore() {
           </div>
         </div>
       )}
+
+      {/* Outlet se koristi samo ako se u APP.jsx nestuje ruta */}
+      {/* <div>
+        <Outlet />
+      </div> */}
 
       <button onClick={testHTTPdata}>TEST HTTP DATA</button>
     </section>

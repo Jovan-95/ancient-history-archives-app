@@ -8,6 +8,8 @@ import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import Layout from "./components/Layout";
+import SingleArtifact from "./pages/single-pages/SingleArtifact";
+import SingleCollection from "./pages/single-pages/SingleCollection";
 
 const Register = lazy(() => import("./pages/Register"));
 const Login = lazy(() => import("./pages/Login"));
@@ -84,6 +86,25 @@ function App() {
                   </PrivateRoute>
                 }
               />
+
+              {/* Single page routes */}
+              <Route
+                path="/explore/artifact/:id"
+                element={
+                  <PrivateRoute>
+                    <SingleArtifact />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/explore/collections/:id"
+                element={
+                  <PrivateRoute>
+                    <SingleCollection />
+                  </PrivateRoute>
+                }
+              />
+
               <Route
                 path="/submit-content"
                 element={
@@ -135,5 +156,5 @@ function App() {
 export default App;
 
 //// Notes
-// Item Detail Page, route and connect with type and id
-// Profile Page, route and connect with id
+// Finish single pages for the rest of explore types
+// Later in project, Create Profile Page, route and connect with id
