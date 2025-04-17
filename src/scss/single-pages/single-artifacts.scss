@@ -35,3 +35,31 @@
     }
   }
 }
+.comment-wrapper {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.01);
+  }
+
+  .type-id,
+  .comment-id,
+  .user-id {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 0.25rem;
+  }
+
+  .comment-text {
+    font-size: 1rem;
+    color: #222;
+    margin-top: 0.5rem;
+    line-height: 1.5;
+  }
+}

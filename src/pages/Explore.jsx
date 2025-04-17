@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 
 function Explore() {
   const [activeTab, setActiveTab] = useState("all");
-  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Get artifacts
   const {
@@ -199,7 +199,9 @@ function Explore() {
             {timelinesData.map((timeline) => (
               <div key={timeline.id} className="explore__card">
                 <h3>{timeline.title}</h3>
-                <button className="btn">Learn more</button>
+                <NavLink to={`/explore/timelines/${timeline.id}`}>
+                  <button className="btn">Learn more</button>
+                </NavLink>
               </div>
             ))}
           </div>
@@ -214,8 +216,9 @@ function Explore() {
               <div key={empire.id} className="explore__card">
                 <h3>{empire.title}</h3>
                 <p>{empire.description}</p>
-
-                <button className="btn">Learn more</button>
+                <NavLink to={`/explore/empires/${empire.id}`}>
+                  <button className="btn">Learn more</button>
+                </NavLink>
               </div>
             ))}
           </div>
@@ -230,8 +233,9 @@ function Explore() {
               <div key={figure.id} className="explore__card">
                 <h3>{figure.name}</h3>
                 <p>{figure.region}</p>
-
-                <button className="btn">Learn more</button>
+                <NavLink to={`/explore/figures/${figure.id}`}>
+                  <button className="btn">Learn more</button>
+                </NavLink>
               </div>
             ))}
           </div>
@@ -239,9 +243,9 @@ function Explore() {
       )}
 
       {/* Outlet se koristi samo ako se u APP.jsx nestuje ruta */}
-      {/* <div>
+      <div>
         <Outlet />
-      </div> */}
+      </div>
 
       <button onClick={testHTTPdata}>TEST HTTP DATA</button>
     </section>

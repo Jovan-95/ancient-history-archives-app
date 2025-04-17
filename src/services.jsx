@@ -122,3 +122,18 @@ export async function getFigures() {
     console.log(err);
   }
 }
+
+//// Comments
+// Get HTTP method
+export async function getComments() {
+  try {
+    const res = await fetch("http://localhost:5000/comments");
+
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}

@@ -10,6 +10,9 @@ import PrivateRoute from "./components/PrivateRoute";
 import Layout from "./components/Layout";
 import SingleArtifact from "./pages/single-pages/SingleArtifact";
 import SingleCollection from "./pages/single-pages/SingleCollection";
+import SingleTimelines from "./pages/single-pages/SingleTimelines";
+import SingleEmpire from "./pages/single-pages/SingleEmpire";
+import SingleFigure from "./pages/single-pages/SingleFigure";
 
 const Register = lazy(() => import("./pages/Register"));
 const Login = lazy(() => import("./pages/Login"));
@@ -85,9 +88,27 @@ function App() {
                     <Explore />
                   </PrivateRoute>
                 }
-              />
+              >
+                {/* dependent single page (use outlet) inside explore */}
+                <Route
+                  path="/explore/empires/:id"
+                  element={
+                    <PrivateRoute>
+                      <SingleEmpire />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/explore/figures/:id"
+                  element={
+                    <PrivateRoute>
+                      <SingleFigure />
+                    </PrivateRoute>
+                  }
+                />
+              </Route>
 
-              {/* Single page routes */}
+              {/*  independent single page routes */}
               <Route
                 path="/explore/artifact/:id"
                 element={
@@ -101,6 +122,14 @@ function App() {
                 element={
                   <PrivateRoute>
                     <SingleCollection />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/explore/timelines/:id"
+                element={
+                  <PrivateRoute>
+                    <SingleTimelines />
                   </PrivateRoute>
                 }
               />

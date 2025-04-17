@@ -119,6 +119,20 @@
       "userId": 1,
       "text": "Unbelievable scale of craftsmanship.",
       "createdAt": "2025-04-14T09:30:00Z"
+    },
+    {
+      "id": 3,
+      "artifactId": 2,
+      "userId": 1,
+      "text": "Amazing works.",
+      "createdAt": "2025-03-14T09:30:00Z"
+    },
+    {
+      "id": 4,
+      "artifactId": 2,
+      "userId": 1,
+      "text": "Burried for so long.",
+      "createdAt": "2025-05-14T09:30:00Z"
     }
   ],
   "empires": [
