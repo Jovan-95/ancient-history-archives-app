@@ -48,7 +48,7 @@ function Register() {
     alert("You registration is successfull!");
 
     // POST HTTP call and register new user with default role
-    registerUser({ ...userObj, role: "Researcher" });
+    registerUser({ ...userObj, role: "Researcher", bookmarks: [], likes: [] });
 
     navigate("/login");
 

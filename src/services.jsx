@@ -137,3 +137,22 @@ export async function getComments() {
     console.log(err);
   }
 }
+
+// Post HTTP method
+export async function postComment(comment) {
+  try {
+    const res = await fetch("http://localhost:5000/comments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(comment),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}

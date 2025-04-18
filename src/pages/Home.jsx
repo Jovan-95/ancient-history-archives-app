@@ -1,15 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { useQuery } from "@tanstack/react-query";
-import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { getArtifacts, getCollections, getTimelines } from "../services";
-import { useState } from "react";
 
 function Home() {
-  // Temporary test for logged user
-  const loggedUser = useSelector((state) => state.auth.loggedInUsers);
-  // console.log("Currently logged user test:", loggedUser);
-
   const navigate = useNavigate();
 
   // Get artifacts

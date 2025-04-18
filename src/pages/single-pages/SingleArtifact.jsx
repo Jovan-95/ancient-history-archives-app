@@ -1,13 +1,18 @@
 /* eslint-disable no-unused-vars */
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import { getArtifacts, getComments } from "../../services";
+import { getArtifacts, getComments, postComment } from "../../services";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function SingleArtifact() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const [commentText, setCommentText] = useState("");
+  const [nickname, setNickname] = useState("");
 
-  // Get artifacts
+  // ReactQuery Get artifacts
   const {
     data: artifactsData,
     isLoading: artifactsIsLoading,
@@ -17,7 +22,7 @@ function SingleArtifact() {
     queryFn: getArtifacts,
   });
 
-  // Get comments
+  // ReactQuery Get comments
   const {
     data: commentsData,
     isLoading: commentsIsLoading,
@@ -26,6 +31,20 @@ function SingleArtifact() {
     queryKey: ["comments"],
     queryFn: getComments,
   });
+
+  // HTTP ReactQuery POST method calling
+  const commentMutation = useMutation({
+    mutationFn: postComment,
+    onSuccess: () => {
+      // Automatski refresh komentara posle uspešnog posta
+      queryClient.invalidateQueries({ queryKey: ["comments"] });
+      setCommentText("");
+      setNickname("");
+    },
+  });
+
+  // Temporary test for logged user
+  const loggedUser = useSelector((state) => state.auth.loggedInUser);
 
   // HTTP loading and error
   if (artifactsIsLoading || commentsIsLoading) return <p>Loading...</p>;
@@ -39,6 +58,24 @@ function SingleArtifact() {
     (comment) => comment.artifactId === Number(singleArtifact.id)
   );
 
+  // Comment posting
+  function handleCommentPosting() {
+    // console.log("Currently logged user:", loggedUser);
+
+    // Post HTTP request form services and object sending
+    commentMutation.mutate({
+      nickname: nickname,
+      text: commentText,
+      artifactId: Number(singleArtifact.id),
+      userId: loggedUser.id,
+      createdAt: new Date().toISOString(),
+    });
+  }
+
+  // Bookmark this artifact
+  function handleBookmark() {
+    console.log("Bookmark!", singleArtifact);
+  }
   return (
     <>
       <div className="single-page">
@@ -59,11 +96,26 @@ function SingleArtifact() {
           <p>
             <strong>Type ID : {singleArtifact.id}</strong>{" "}
           </p>
+          <p>
+            <strong>Likes : {singleArtifact.likes}</strong>{" "}
+          </p>
         </div>
-        <button onClick={() => navigate("/explore")} className="btn">
-          Back
-        </button>
+        <div>
+          <button className="btn btn--cta">Like</button>
+          <button onClick={handleBookmark} className="btn btn--cta ml-4">
+            Bookmark
+          </button>
+
+          <button
+            onClick={() => navigate("/explore")}
+            className="btn btn--cta ml-4"
+          >
+            Back
+          </button>
+        </div>
       </div>
+
+      {/* Listing comments section */}
       <div className="single-page">
         <p className="single-page__text">
           <strong>Comments:</strong>
@@ -80,12 +132,43 @@ function SingleArtifact() {
               <div className="user-id">
                 <strong>User ID : {comment.userId}</strong>
               </div>
+              <div className="user-id">
+                <strong>Nickname : {comment.nickname}</strong>
+              </div>
               <div className="comment-text">{comment.text}</div>
               <div className="comment-id">
                 <strong>{comment.createdAt}</strong>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Posting comment section */}
+        <div className="comment-post">
+          <h2 className="comment-post__title">Post a comment:</h2>
+
+          <div className="comment-post__group">
+            <label className="comment-post__label">Nickname:</label>
+            <input
+              onChange={(e) => setNickname(e.target.value)}
+              value={nickname}
+              type="text"
+              className="comment-post__input"
+            />
+          </div>
+
+          <div className="comment-post__group">
+            <label className="comment-post__label">Your Comment:</label>
+            <textarea
+              onChange={(e) => setCommentText(e.target.value)}
+              value={commentText}
+              className="comment-post__textarea"
+            />
+          </div>
+
+          <button onClick={handleCommentPosting} className="comment-post__btn">
+            Post comment
+          </button>
         </div>
       </div>
     </>
