@@ -1,7 +1,14 @@
 /* eslint-disable no-unused-vars */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import { getCollections, getComments, postComment } from "../../services";
+import getUsers, {
+  addBookmarkToUserCollection,
+  addLikeToCollection,
+  addLikeToUserCollection,
+  getCollections,
+  getComments,
+  postComment,
+} from "../../services";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -32,6 +39,16 @@ function SingleCollection() {
     queryFn: getComments,
   });
 
+  // ReactQuery Get users
+  const {
+    data: usersData,
+    isLoading: usersIsLoading,
+    error: usersError,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: getUsers,
+  });
+
   // HTTP ReactQuery POST method calling
   const commentMutation = useMutation({
     mutationFn: postComment,
@@ -43,12 +60,42 @@ function SingleCollection() {
     },
   });
 
+  // HTTP ReactQuery PATCH method (bookmark)
+  const { mutate: bookmarkCollection, isPending: bookmarkIsPending } =
+    useMutation({
+      mutationFn: ({ userId, updatedBookmarks }) =>
+        addBookmarkToUserCollection(userId, updatedBookmarks),
+      onSuccess: () => {
+        queryClient.invalidateQueries(["users"]); // osvežava users podatke
+      },
+    });
+
+  // HTTP ReactQuery PATCH method (like)
+  const { mutate: likeCollection, isPending: likeIsPending } = useMutation({
+    mutationFn: ({ userId, updatedLikes }) =>
+      addLikeToUserCollection(userId, updatedLikes),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["users"]); // osvežava users podatke
+    },
+  });
+
+  // HTTP ReactQuery PATCH method for artifact object edit (increase like)
+  const { mutate: likeCollectionIncrease } = useMutation({
+    mutationFn: ({ collectionId, updatedLikesNum }) =>
+      addLikeToCollection(collectionId, updatedLikesNum),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["collections"]);
+    },
+  });
+
   // Temporary test for logged user
   const loggedUser = useSelector((state) => state.auth.loggedInUser);
 
   // HTTP loading and error
-  if (collectionsIsLoading || commentsIsLoading) return <p>Loading...</p>;
-  if (collectionsError || commentsError) return <p>Error loading data.</p>;
+  if (collectionsIsLoading || commentsIsLoading || usersIsLoading)
+    return <p>Loading...</p>;
+  if (collectionsError || commentsError || usersError)
+    return <p>Error loading data.</p>;
 
   // After HTTP loads we determine correct ID
   const singleCollection = collectionsData.find(
@@ -74,6 +121,62 @@ function SingleCollection() {
     });
   }
 
+  // Finding logged user on backend for editing
+  const patchedUser = usersData.find((user) => user.id === loggedUser.id);
+
+  // Bookmarks
+  function handleBookmark() {
+    // Check for already bookmarked (duplicates)
+    const alreadyBookmarked = patchedUser.bookmarksCollections.find(
+      (bookmark) => bookmark === singleCollection.id
+    );
+
+    // Prevent duplicates bookmarks
+    if (alreadyBookmarked) {
+      return alert("You already bookmarked this one!");
+    }
+
+    const updatedBookmarks = [
+      ...patchedUser.bookmarksCollections,
+      singleCollection.id,
+    ];
+
+    // PATCH call
+    bookmarkCollection({
+      userId: patchedUser.id,
+      updatedBookmarks,
+    });
+  }
+
+  // Like
+  function handleLike() {
+    // Check for already Liked (duplicates)
+    const alreadyLiked = patchedUser.likesCollections.find(
+      (like) => like === singleCollection.id
+    );
+
+    // Prevent duplicates Liked
+    if (alreadyLiked) {
+      return alert("You already liked this one!");
+    }
+
+    const updatedLikes = [...patchedUser.likesCollections, singleCollection.id];
+
+    // PATCH call
+    likeCollection({
+      userId: patchedUser.id,
+      updatedLikes,
+    });
+
+    const updatedLikesNum = singleCollection.likes + 1;
+
+    // PATCH call
+    likeCollectionIncrease({
+      collectionId: singleCollection.id,
+      updatedLikesNum,
+    });
+  }
+
   return (
     <>
       <div className="single-page">
@@ -82,10 +185,24 @@ function SingleCollection() {
         </div>
         <div className="single-page__content">
           <p className="single-page__text">{singleCollection.description}</p>
+          <div className="single-page__text">
+            Likes: {singleCollection.likes}
+          </div>
         </div>
-        <button onClick={() => navigate("/explore")} className="btn">
-          Back
-        </button>
+        <div>
+          <button onClick={handleLike} className="btn btn--cta">
+            Like
+          </button>
+          <button onClick={handleBookmark} className="btn btn--cta ml-4">
+            Bookmark
+          </button>
+          <button
+            onClick={() => navigate("/explore")}
+            className="btn btn--cta ml-4"
+          >
+            Back
+          </button>
+        </div>
       </div>
 
       {/* Listing comments section */}

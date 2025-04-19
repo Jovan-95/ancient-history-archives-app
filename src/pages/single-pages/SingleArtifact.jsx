@@ -1,7 +1,14 @@
 /* eslint-disable no-unused-vars */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import { getArtifacts, getComments, postComment } from "../../services";
+import getUsers, {
+  addBookmarkToUserArtifact,
+  addLikeToArtifact,
+  addLikeToUserArtifact,
+  getArtifacts,
+  getComments,
+  postComment,
+} from "../../services";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -32,7 +39,17 @@ function SingleArtifact() {
     queryFn: getComments,
   });
 
-  // HTTP ReactQuery POST method calling
+  // ReactQuery Get users
+  const {
+    data: usersData,
+    isLoading: usersIsLoading,
+    error: usersError,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: getUsers,
+  });
+
+  // HTTP ReactQuery POST method
   const commentMutation = useMutation({
     mutationFn: postComment,
     onSuccess: () => {
@@ -43,12 +60,42 @@ function SingleArtifact() {
     },
   });
 
-  // Temporary test for logged user
+  // HTTP ReactQuery PATCH method (bookmark)
+  const { mutate: bookmarkArtifact, isPending: bookmarkIsPending } =
+    useMutation({
+      mutationFn: ({ userId, updatedBookmarks }) =>
+        addBookmarkToUserArtifact(userId, updatedBookmarks),
+      onSuccess: () => {
+        queryClient.invalidateQueries(["users"]); // osvežava users podatke
+      },
+    });
+
+  // HTTP ReactQuery PATCH method (like)
+  const { mutate: likeArtifact, isPending: likeIsPending } = useMutation({
+    mutationFn: ({ userId, updatedLikes }) =>
+      addLikeToUserArtifact(userId, updatedLikes),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["users"]); // osvežava users podatke
+    },
+  });
+
+  // HTTP ReactQuery PATCH method for artifact object edit (increase like)
+  const { mutate: likeArtifactIncrease } = useMutation({
+    mutationFn: ({ artifactsId, updatedLikesNum }) =>
+      addLikeToArtifact(artifactsId, updatedLikesNum),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["artifacts"]);
+    },
+  });
+
+  // Logged user from local storage
   const loggedUser = useSelector((state) => state.auth.loggedInUser);
 
   // HTTP loading and error
-  if (artifactsIsLoading || commentsIsLoading) return <p>Loading...</p>;
-  if (artifactsError || commentsError) return <p>Error loading data.</p>;
+  if (artifactsIsLoading || commentsIsLoading || usersIsLoading)
+    return <p>Loading...</p>;
+  if (artifactsError || commentsError || usersError)
+    return <p>Error loading data.</p>;
 
   // After HTTP loads we determine correct ID
   const singleArtifact = artifactsData.find((artifact) => artifact.id === id);
@@ -62,7 +109,7 @@ function SingleArtifact() {
   function handleCommentPosting() {
     // console.log("Currently logged user:", loggedUser);
 
-    // Post HTTP request form services and object sending
+    // Post HTTP method calling
     commentMutation.mutate({
       nickname: nickname,
       text: commentText,
@@ -72,9 +119,67 @@ function SingleArtifact() {
     });
   }
 
-  // Bookmark this artifact
+  // Finding logged user on backend for editing
+  const patchedUser = usersData.find((user) => user.id === loggedUser.id);
+
+  // Bookmark artifact
   function handleBookmark() {
-    console.log("Bookmark!", singleArtifact);
+    // console.log("Bookmark!", singleArtifact);
+    // console.log("Users", usersData);
+    // console.log("Current user", patchedUser);
+
+    // Check for already bookmarked (duplicates)
+    const alreadyBookmarked = patchedUser.bookmarksArtifacts.find(
+      (bookmark) => bookmark === singleArtifact.id
+    );
+
+    // Prevent duplicates bookmarks
+    if (alreadyBookmarked) {
+      return alert("You already bookmarked this one!");
+    }
+
+    // We keep artifactId and use it on other page to list artifact object
+    const updatedBookmarks = [
+      ...patchedUser.bookmarksArtifacts,
+      singleArtifact.id,
+    ];
+
+    // Patch method calling
+    bookmarkArtifact({
+      userId: patchedUser.id,
+      updatedBookmarks,
+    });
+  }
+
+  // Like artifact
+  function handleLike() {
+    // Check for already liked (duplicates)
+    const alreadyLiked = patchedUser.likesArtifacts.find(
+      (like) => like === singleArtifact.id
+    );
+
+    // Prevent duplicates bookmarks
+    if (alreadyLiked) {
+      return alert("You already liked this one!");
+    }
+
+    // We keep artifactId and use it on other page to list artifact object
+    const updatedLikes = [...patchedUser.likesArtifacts, singleArtifact.id];
+
+    // Patch method calling
+    likeArtifact({
+      userId: patchedUser.id,
+      updatedLikes,
+    });
+
+    const updatedLikesNum = singleArtifact.likes + 1;
+    console.log(updatedLikesNum);
+
+    // Patch method calling
+    likeArtifactIncrease({
+      artifactsId: singleArtifact.id,
+      updatedLikesNum,
+    });
   }
   return (
     <>
@@ -101,7 +206,9 @@ function SingleArtifact() {
           </p>
         </div>
         <div>
-          <button className="btn btn--cta">Like</button>
+          <button onClick={handleLike} className="btn btn--cta">
+            Like
+          </button>
           <button onClick={handleBookmark} className="btn btn--cta ml-4">
             Bookmark
           </button>

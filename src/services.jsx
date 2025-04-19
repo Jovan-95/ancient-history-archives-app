@@ -45,6 +45,85 @@ export async function registerUser(user) {
   }
 }
 
+// Patch HTTP method for partialy editing user object (bookmarkArtifact)
+export async function addBookmarkToUserArtifact(userId, updatedBookmarksArray) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ bookmarksArtifacts: updatedBookmarksArray }),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// Patch HTTP method for partialy editing user object (likesArtifact)
+export async function addLikeToUserArtifact(userId, updatedLikesArray) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ likesArtifacts: updatedLikesArray }),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// Patch HTTP method for partialy editing user object (bookmarkCollections)
+export async function addBookmarkToUserCollection(
+  userId,
+  updatedBookmarksArray
+) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ bookmarksCollections: updatedBookmarksArray }),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// Patch HTTP method for partialy editing user object (likesCollections)
+export async function addLikeToUserCollection(userId, updatedLikesArray) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ likesCollections: updatedLikesArray }),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 // Delete HTTP method
 // Put HTTP method
 
@@ -63,6 +142,25 @@ export async function getArtifacts() {
   }
 }
 
+// Patch HTTP method for partialy editing artifact object (likes)
+export async function addLikeToArtifact(artifactsId, updatedLikesNum) {
+  try {
+    const res = await fetch(`http://localhost:5000/artifacts/${artifactsId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ likes: updatedLikesNum }),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 //// Collections
 // Get HTTP method
 export async function getCollections() {
@@ -72,6 +170,28 @@ export async function getCollections() {
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
     // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// Patch HTTP method for partialy editing collection object (likes)
+export async function addLikeToCollection(collectionId, updatedLikesNum) {
+  try {
+    const res = await fetch(
+      `http://localhost:5000/collections/${collectionId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ likes: updatedLikesNum }),
+      }
+    );
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    console.log(data);
     return data;
   } catch (err) {
     console.log(err);
