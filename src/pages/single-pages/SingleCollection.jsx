@@ -79,7 +79,7 @@ function SingleCollection() {
     },
   });
 
-  // HTTP ReactQuery PATCH method for artifact object edit (increase like)
+  // HTTP ReactQuery PATCH method for collection object edit (increase like)
   const { mutate: likeCollectionIncrease } = useMutation({
     mutationFn: ({ collectionId, updatedLikesNum }) =>
       addLikeToCollection(collectionId, updatedLikesNum),

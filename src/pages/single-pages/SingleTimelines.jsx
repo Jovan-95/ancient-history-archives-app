@@ -1,7 +1,14 @@
 /* eslint-disable no-unused-vars */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import { getComments, getTimelines, postComment } from "../../services";
+import getUsers, {
+  addBookmarkToUserTimeline,
+  addLikeToTimelines,
+  addLikeToUserTimelines,
+  getComments,
+  getTimelines,
+  postComment,
+} from "../../services";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -32,6 +39,16 @@ function SingleTimelines() {
     queryFn: getComments,
   });
 
+  // ReactQuery Get users
+  const {
+    data: usersData,
+    isLoading: usersIsLoading,
+    error: usersError,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: getUsers,
+  });
+
   // HTTP ReactQuery POST method calling
   const commentMutation = useMutation({
     mutationFn: postComment,
@@ -43,12 +60,42 @@ function SingleTimelines() {
     },
   });
 
+  // HTTP ReactQuery PATCH method (bookmark)
+  const { mutate: bookmarkTimeline, isPending: bookmarkIsPending } =
+    useMutation({
+      mutationFn: ({ userId, updatedBookmarks }) =>
+        addBookmarkToUserTimeline(userId, updatedBookmarks),
+      onSuccess: () => {
+        queryClient.invalidateQueries(["users"]); // osvežava users podatke
+      },
+    });
+
+  // HTTP ReactQuery PATCH method (like)
+  const { mutate: likeTimeline, isPending: likeIsPending } = useMutation({
+    mutationFn: ({ userId, updatedLikes }) =>
+      addLikeToUserTimelines(userId, updatedLikes),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["users"]); // osvežava users podatke
+    },
+  });
+
+  // HTTP ReactQuery PATCH method for timleine object edit (increase like)
+  const { mutate: likeTimelineIncrease } = useMutation({
+    mutationFn: ({ timelineId, updatedLikesNum }) =>
+      addLikeToTimelines(timelineId, updatedLikesNum),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["timelines"]);
+    },
+  });
+
   // Temporary test for logged user
   const loggedUser = useSelector((state) => state.auth.loggedInUser);
 
   // HTTP loading and error
-  if (timelinesIsLoading || commentsIsLoading) return <p>Loading...</p>;
-  if (timelinesError || commentsError) return <p>Error loading data.</p>;
+  if (timelinesIsLoading || commentsIsLoading || usersIsLoading)
+    return <p>Loading...</p>;
+  if (timelinesError || commentsError || usersError)
+    return <p>Error loading data.</p>;
 
   // Finding clicked timeline card through comparation with param ID
   const singleTimeline = timelinesData.find((timeline) => timeline.id === id);
@@ -72,6 +119,62 @@ function SingleTimelines() {
     });
   }
 
+  // Finding logged user on backend for editing
+  const patchedUser = usersData.find((user) => user.id === loggedUser.id);
+
+  // Bookmarks
+  function handleBookmark() {
+    // Check for already bookmarked (duplicates)
+    const alreadyBookmarked = patchedUser.bookmarksTimelines.find(
+      (bookmark) => bookmark === singleTimeline.id
+    );
+
+    // Prevent duplicates bookmarks
+    if (alreadyBookmarked) {
+      return alert("You already bookmarked this one!");
+    }
+
+    const updatedBookmarks = [
+      ...patchedUser.bookmarksTimelines,
+      singleTimeline.id,
+    ];
+
+    // PATCH call
+    bookmarkTimeline({
+      userId: patchedUser.id,
+      updatedBookmarks,
+    });
+  }
+
+  // Like
+  function handleLike() {
+    // Check for already Liked (duplicates)
+    const alreadyLiked = patchedUser.likesTimelines.find(
+      (like) => like === singleTimeline.id
+    );
+
+    // Prevent duplicates Liked
+    if (alreadyLiked) {
+      return alert("You already liked this one!");
+    }
+
+    const updatedLikes = [...patchedUser.likesTimelines, singleTimeline.id];
+
+    // PATCH call
+    likeTimeline({
+      userId: patchedUser.id,
+      updatedLikes,
+    });
+
+    const updatedLikesNum = singleTimeline.likes + 1;
+
+    // PATCH call
+    likeTimelineIncrease({
+      timelineId: singleTimeline.id,
+      updatedLikesNum,
+    });
+  }
+
   return (
     <>
       <div className="single-page">
@@ -87,12 +190,23 @@ function SingleTimelines() {
             ))}
           </div>
           <p className="single-page__text">
-            <strong>Discovered:</strong> {singleTimeline.createdBy}
+            <strong>Likes:</strong> {singleTimeline.likes}
           </p>
         </div>
-        <button onClick={() => navigate("/explore")} className="btn">
-          Back
-        </button>
+        <div>
+          <button onClick={handleLike} className="btn btn--cta">
+            Like
+          </button>
+          <button onClick={handleBookmark} className="btn btn--cta ml-4">
+            Bookmark
+          </button>
+          <button
+            onClick={() => navigate("/explore")}
+            className="btn btn--cta ml-4"
+          >
+            Back
+          </button>
+        </div>
       </div>
 
       {/* Listing comments section */}

@@ -124,6 +124,44 @@ export async function addLikeToUserCollection(userId, updatedLikesArray) {
   }
 }
 
+// Patch HTTP method for partialy editing user object (bookmarkTimelines)
+export async function addBookmarkToUserTimeline(userId, updatedBookmarksArray) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ bookmarksTimelines: updatedBookmarksArray }),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// Patch HTTP method for partialy editing user object (likesTimelines)
+export async function addLikeToUserTimelines(userId, updatedLikesArray) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ likesTimelines: updatedLikesArray }),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 // Delete HTTP method
 // Put HTTP method
 
@@ -207,6 +245,25 @@ export async function getTimelines() {
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
     // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// Patch HTTP method for partialy editing timeline object (likes)
+export async function addLikeToTimelines(timelineId, updatedLikesNum) {
+  try {
+    const res = await fetch(`http://localhost:5000/timelines/${timelineId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ likes: updatedLikesNum }),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    console.log(data);
     return data;
   } catch (err) {
     console.log(err);

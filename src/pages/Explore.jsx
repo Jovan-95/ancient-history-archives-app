@@ -208,6 +208,10 @@ function Explore() {
         </div>
       )}
 
+      <div>
+        <h2>Explore - single pages:</h2>
+      </div>
+
       {(activeTab === "empires" || activeTab === "all") && (
         <div id="empires">
           <h2>Empires</h2>

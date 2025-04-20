@@ -8,13 +8,9 @@
       "region": "Egypt",
       "imageUrl": "/images/rosetta.jpg",
       "collectionId": 1,
-      "likes": 92,
+      "likes": 93,
       "views": 540,
-      "tags": [
-        "language",
-        "inscription",
-        "translation"
-      ],
+      "tags": ["language", "inscription", "translation"],
       "createdAt": "2023-06-14T10:00:00Z"
     },
     {
@@ -27,11 +23,7 @@
       "collectionId": 2,
       "likes": 122,
       "views": 890,
-      "tags": [
-        "funerary",
-        "china",
-        "army"
-      ],
+      "tags": ["funerary", "china", "army"],
       "createdAt": "2023-07-22T12:30:00Z"
     },
     {
@@ -44,11 +36,7 @@
       "collectionId": 4,
       "likes": 10,
       "views": 620,
-      "tags": [
-        "law",
-        "inscription",
-        "babylon"
-      ],
+      "tags": ["law", "inscription", "babylon"],
       "createdAt": "2023-08-10T14:00:00Z"
     },
     {
@@ -61,11 +49,7 @@
       "collectionId": 5,
       "likes": 10,
       "views": 730,
-      "tags": [
-        "fertility",
-        "prehistoric",
-        "figurine"
-      ],
+      "tags": ["fertility", "prehistoric", "figurine"],
       "createdAt": "2023-09-15T16:30:00Z"
     }
   ],
@@ -119,7 +103,8 @@
           "title": "Colosseum Completed"
         }
       ],
-      "createdBy": 1
+      "createdBy": 1,
+      "likes": 1
     },
     {
       "id": "2",
@@ -134,7 +119,8 @@
           "title": "Reign of Tutankhamun"
         }
       ],
-      "createdBy": 2
+      "createdBy": 2,
+      "likes": 2
     }
   ],
   "comments": [
@@ -270,9 +256,7 @@
       "email": "buff@example.com",
       "password": "buff123",
       "role": "Researcher",
-      "favorites": [
-        1
-      ],
+      "favorites": [1],
       "bio": "Ancient history enthusiast and amateur archaeologist.",
       "avatar": "/avatars/user1.png"
     },
@@ -282,9 +266,7 @@
       "email": "jane@example.com",
       "password": "jane456",
       "role": "Curator",
-      "favorites": [
-        2
-      ],
+      "favorites": [2],
       "bio": "Museum curator with a passion for East Asian artifacts.",
       "avatar": "/avatars/user2.png"
     },
@@ -295,22 +277,10 @@
       "password": "111111",
       "confirmPassword": "111111",
       "role": "Researcher",
-      "bookmarksArtifacts": [
-        "1",
-        "2"
-      ],
-      "likesArtifacts": [
-        "1",
-        "2"
-      ],
-      "bookmarksCollections": [
-        "1",
-        "4"
-      ],
-      "likesCollections": [
-        "1",
-        "4"
-      ],
+      "bookmarksArtifacts": [],
+      "likesArtifacts": [],
+      "bookmarksCollections": [],
+      "likesCollections": [],
       "bookmarksTimelines": [],
       "likesTimelines": []
     }
