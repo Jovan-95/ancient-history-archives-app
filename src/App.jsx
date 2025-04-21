@@ -13,12 +13,14 @@ import SingleCollection from "./pages/single-pages/SingleCollection";
 import SingleTimelines from "./pages/single-pages/SingleTimelines";
 import SingleEmpire from "./pages/single-pages/SingleEmpire";
 import SingleFigure from "./pages/single-pages/SingleFigure";
+import SingleProfile from "./pages/single-pages/SingleProfile";
 
 const Register = lazy(() => import("./pages/Register"));
 const Login = lazy(() => import("./pages/Login"));
 const Home = lazy(() => import("./pages/Home"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Explore = lazy(() => import("./pages/Explore"));
+const Profile = lazy(() => import("./pages/Profile"));
 const SubmitContent = lazy(() => import("./pages/SubmitContent"));
 const Notifications = lazy(() => import("./pages/Notifications"));
 const Bookmarks = lazy(() => import("./pages/Bookmarks"));
@@ -130,6 +132,24 @@ function App() {
                 element={
                   <PrivateRoute>
                     <SingleTimelines />
+                  </PrivateRoute>
+                }
+              />
+
+              <Route
+                path="/profile"
+                element={
+                  <PrivateRoute>
+                    <Profile />
+                  </PrivateRoute>
+                }
+              />
+
+              <Route
+                path="/profile/:id"
+                element={
+                  <PrivateRoute>
+                    <SingleProfile />
                   </PrivateRoute>
                 }
               />

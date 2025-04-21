@@ -33,7 +33,9 @@ function Login() {
     if (user) {
       console.log("Logged user:", user);
       alert("Credentials are matching!");
-      dispatch(addLoggedUser({ ...loginUserObj, id: user.id }));
+      dispatch(
+        addLoggedUser({ ...loginUserObj, id: user.id, username: user.username })
+      );
       navigate("/home");
     } else {
       alert("Wrong credentials!");

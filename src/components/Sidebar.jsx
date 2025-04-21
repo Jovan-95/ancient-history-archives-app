@@ -8,6 +8,7 @@ function Sidebar() {
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/dashboard">Dashboard</NavLink>
         <NavLink to="/explore">Explore</NavLink>
+        <NavLink to="/profile">Profile</NavLink>
         <NavLink to="/submit-content">Submit</NavLink>
         <NavLink to="/notifications">Notifications</NavLink>
         <NavLink to="/bookmarks">Bookmarks</NavLink>
