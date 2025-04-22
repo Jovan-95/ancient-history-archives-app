@@ -64,8 +64,51 @@ export async function addBookmarkToUserArtifact(userId, updatedBookmarksArray) {
   }
 }
 
+//// Patch HTTP method remove elements from user object array
+export async function removeArtifactFromBookmarks(
+  userId,
+  updatedBookmarksArray
+) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ bookmarksArtifacts: updatedBookmarksArray }),
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 // Patch HTTP method for partialy editing user object (likesArtifact)
 export async function addLikeToUserArtifact(userId, updatedLikesArray) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ likesArtifacts: updatedLikesArray }),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+//// Patch HTTP method remove elements from user object array
+export async function removeArtifactFromLikes(userId, updatedLikesArray) {
   try {
     const res = await fetch(`http://localhost:5000/users/${userId}`, {
       method: "PATCH",
@@ -105,6 +148,30 @@ export async function addBookmarkToUserCollection(
   }
 }
 
+//// Patch HTTP method remove elements from user object array(collections)
+export async function removeCollectionFromBookmarks(
+  userId,
+  updatedBookmarksArray
+) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ bookmarksCollections: updatedBookmarksArray }),
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 // Patch HTTP method for partialy editing user object (likesCollections)
 export async function addLikeToUserCollection(userId, updatedLikesArray) {
   try {
@@ -118,6 +185,27 @@ export async function addLikeToUserCollection(userId, updatedLikesArray) {
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
     // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+//// Patch HTTP method remove elements from user object array(collections)
+export async function removeCollectionFromLikes(userId, updatedLikesArray) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ likesCollections: updatedLikesArray }),
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log(data);
     return data;
   } catch (err) {
     console.log(err);
@@ -143,6 +231,30 @@ export async function addBookmarkToUserTimeline(userId, updatedBookmarksArray) {
   }
 }
 
+//// Patch HTTP method remove elements from user object array(collections)
+export async function removeTimelineFromBookmarks(
+  userId,
+  updatedBookmarksArray
+) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ bookmarksTimelines: updatedBookmarksArray }),
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 // Patch HTTP method for partialy editing user object (likesTimelines)
 export async function addLikeToUserTimelines(userId, updatedLikesArray) {
   try {
@@ -156,6 +268,27 @@ export async function addLikeToUserTimelines(userId, updatedLikesArray) {
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
     // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+//// Patch HTTP method remove elements from user object array(collections)
+export async function removeTimelineFromLikes(userId, updatedLikesArray) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ likesTimelines: updatedLikesArray }),
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log(data);
     return data;
   } catch (err) {
     console.log(err);
