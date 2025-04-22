@@ -9,3 +9,11 @@
 .ml-4 {
   margin-left: 16px;
 }
+
+img {
+  cursor: pointer;
+  transition: 0.3s;
+}
+img:hover {
+  scale: 1.1;
+}

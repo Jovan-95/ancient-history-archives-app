@@ -295,6 +295,27 @@ export async function removeTimelineFromLikes(userId, updatedLikesArray) {
   }
 }
 
+//// Patch HTTP method change user avatar
+export async function changeUserAvatar(userId, avatarImg) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ avatar: avatarImg }),
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 // Delete HTTP method
 // Put HTTP method
 

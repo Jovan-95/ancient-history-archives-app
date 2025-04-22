@@ -2,6 +2,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import getUsers, {
+  changeUserAvatar,
   getArtifacts,
   getCollections,
   getTimelines,
@@ -13,11 +14,19 @@ import getUsers, {
   removeTimelineFromLikes,
 } from "../services";
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 
 function Profile() {
   // Logged user from redux
   const loggedUser = useSelector((state) => state.auth.loggedInUser);
   const queryClient = useQueryClient();
+  const [avatarImg, setAvatarImg] = useState();
+  const [showAvatars, setShowAvatars] = useState(false);
+  const avatarOptions = [
+    "/images/boy-1.jpg",
+    "/images/boy-2.jpg",
+    "/images/girl-1.jpg",
+  ];
 
   // ReactQuery Get users
   const {
@@ -113,6 +122,14 @@ function Profile() {
     },
   });
 
+  // Patch HTTP method Avatar change
+  const { mutate: changeAvatar } = useMutation({
+    mutationFn: ({ userId, avatarImg }) => changeUserAvatar(userId, avatarImg),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["users"]); // osvežava users podatke
+    },
+  });
+
   // HTTP loading and error
   if (
     usersIsLoading ||
@@ -159,7 +176,7 @@ function Profile() {
 
   // Removing artifact from bookmarks array
   function handleRemoveBookmarksFromUserArtifacts(artifact) {
-    console.log(artifact.id);
+    console.log("test", avatarImg);
 
     // Patch method calling
     bookmarkArtifact({
@@ -220,13 +237,61 @@ function Profile() {
     });
   }
 
+  // Avatar change function
+  function handleAvatarChange() {
+    // Patch method call
+    changeAvatar({
+      userId: user.id,
+      avatarImg: avatarImg,
+    });
+    setShowAvatars(false);
+  }
+
   return (
     <>
       <div className="profile-page">
         <section className="current-user">
           <h2>Your Profile</h2>
           <div className="user-info">
-            <img src="/images/avatar.png" alt="Profile picture" />
+            <div>
+              <img
+                className={!showAvatars ? "d-block" : "d-none"}
+                src={user.avatar}
+                alt="Profile picture"
+              />
+              <div className={showAvatars ? "d-block" : "d-none"}></div>
+              <button
+                className={!showAvatars ? "d-block " : "d-none"}
+                onClick={() => setShowAvatars(true)}
+              >
+                Change avatar
+              </button>
+              <div>
+                {avatarImg ? (
+                  <button
+                    className={showAvatars ? "d-block btn" : "d-none"}
+                    onClick={handleAvatarChange}
+                  >
+                    Save
+                  </button>
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
+
+            <div className={showAvatars ? "d-block" : "d-none"}>
+              {avatarOptions.map((img) => (
+                <img
+                  key={img}
+                  src={img}
+                  onClick={() => setAvatarImg(img)}
+                  className={avatarImg === img ? "selected" : ""}
+                  alt="Choose avatar"
+                />
+              ))}
+            </div>
+
             <div>
               <p className="username-text">
                 <strong>Username: </strong> {user.username}

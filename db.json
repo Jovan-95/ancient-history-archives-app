@@ -8,13 +8,9 @@
       "region": "Egypt",
       "imageUrl": "/images/rosetta.jpg",
       "collectionId": 1,
-      "likes": 97,
+      "likes": 98,
       "views": 540,
-      "tags": [
-        "language",
-        "inscription",
-        "translation"
-      ],
+      "tags": ["language", "inscription", "translation"],
       "createdAt": "2023-06-14T10:00:00Z"
     },
     {
@@ -27,11 +23,7 @@
       "collectionId": 2,
       "likes": 123,
       "views": 890,
-      "tags": [
-        "funerary",
-        "china",
-        "army"
-      ],
+      "tags": ["funerary", "china", "army"],
       "createdAt": "2023-07-22T12:30:00Z"
     },
     {
@@ -44,11 +36,7 @@
       "collectionId": 4,
       "likes": 11,
       "views": 620,
-      "tags": [
-        "law",
-        "inscription",
-        "babylon"
-      ],
+      "tags": ["law", "inscription", "babylon"],
       "createdAt": "2023-08-10T14:00:00Z"
     },
     {
@@ -61,11 +49,7 @@
       "collectionId": 5,
       "likes": 10,
       "views": 730,
-      "tags": [
-        "fertility",
-        "prehistoric",
-        "figurine"
-      ],
+      "tags": ["fertility", "prehistoric", "figurine"],
       "createdAt": "2023-09-15T16:30:00Z"
     }
   ],
@@ -280,21 +264,20 @@
       "email": "jane@example.com",
       "password": "jane456",
       "role": "Curator",
-      "favorites": [
-        2
-      ],
+      "favorites": [2],
       "bio": "Museum curator with a passion for East Asian artifacts.",
-      "avatar": "/avatars/user2.png"
+      "avatar": "/images/girl-1.jpg"
     },
     {
       "id": "64fd",
       "username": "JV95",
       "email": "vuksanovicjovan@hotmail.com",
+      "avatar": "/images/boy-1.jpg",
       "password": "111111",
       "confirmPassword": "111111",
       "role": "Researcher",
       "bookmarksArtifacts": [],
-      "likesArtifacts": [],
+      "likesArtifacts": ["1"],
       "bookmarksCollections": [],
       "likesCollections": [],
       "bookmarksTimelines": [],
@@ -304,13 +287,12 @@
       "id": "0066",
       "username": "test",
       "email": "test@gmail.com",
+      "avatar": "/images/boy-2.jpg",
       "password": "222222",
       "confirmPassword": "222222",
       "role": "Researcher",
       "bookmarksArtifacts": [],
-      "likesArtifacts": [
-        "1"
-      ],
+      "likesArtifacts": ["1"],
       "bookmarksCollections": [],
       "likesCollections": [],
       "bookmarksTimelines": [],

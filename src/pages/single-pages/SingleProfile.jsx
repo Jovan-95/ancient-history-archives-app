@@ -17,18 +17,18 @@ function SingleProfile() {
     queryFn: getUsers,
   });
 
-  const singleUser = usersData.find((user) => user.id === id);
-
   // HTTP loading and error
   if (usersIsLoading) return <p>Loading...</p>;
   if (usersError) return <p>Error loading data.</p>;
+
+  const singleUser = usersData.find((user) => user.id === id);
 
   return (
     <div className="profile-page">
       <section className="current-user">
         <h2>{singleUser.username}'s profile</h2>
         <div className="user-info">
-          <img src="/images/avatar.png" alt="Profile picture" />
+          <img src={singleUser.avatar} alt="Profile picture" />
           <div>
             <p className="username-text">
               <strong>Username: </strong> {singleUser.username}
