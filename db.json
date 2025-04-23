@@ -275,25 +275,13 @@
   ],
   "users": [
     {
-      "id": "2",
-      "username": "curatorJane",
-      "email": "jane@example.com",
-      "password": "jane456",
-      "role": "Curator",
-      "favorites": [
-        2
-      ],
-      "bio": "Museum curator with a passion for East Asian artifacts.",
-      "avatar": "/images/girl-1.jpg"
-    },
-    {
       "id": "64fd",
       "username": "JV95",
       "email": "vuksanovicjovan@hotmail.com",
       "avatar": "/images/boy-1.jpg",
       "password": "111111",
       "confirmPassword": "111111",
-      "role": "Researcher",
+      "role": "Admin",
       "bookmarksArtifacts": [],
       "likesArtifacts": [
         "1"

@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import getUsers, {
   changeUserAvatar,
+  deleteUser,
   getArtifacts,
   getCollections,
   getTimelines,
@@ -15,6 +16,7 @@ import getUsers, {
 } from "../services";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import Modal from "../components/Modal";
 
 function Profile() {
   // Logged user from redux
@@ -22,6 +24,9 @@ function Profile() {
   const queryClient = useQueryClient();
   const [avatarImg, setAvatarImg] = useState();
   const [showAvatars, setShowAvatars] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [targetDeletedUser, setTargetDeletedUser] = useState("");
+
   const avatarOptions = [
     "/images/boy-1.jpg",
     "/images/boy-2.jpg",
@@ -127,6 +132,26 @@ function Profile() {
     mutationFn: ({ userId, avatarImg }) => changeUserAvatar(userId, avatarImg),
     onSuccess: () => {
       queryClient.invalidateQueries(["users"]); // osvežava users podatke
+    },
+  });
+
+  // Delete HTTP method delete user
+  const deleteMutation = useMutation({
+    mutationFn: deleteUser,
+    onMutate: (variables) => {
+      // Optimistic update: odmah uklanjamo post sa UI
+      const previousUsers = queryClient.getQueryData(["users"]);
+      queryClient.setQueryData(["users"], (oldData) => {
+        return oldData.filter((user) => user.id !== variables);
+      });
+      return { previousUsers };
+    },
+    onError: (err, variables, context) => {
+      // Ako se nešto desi sa DELETE-om, vraćamo prethodno stanje
+      queryClient.setQueryData(["users"], context.previousUsers);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["users"]); // refetch!
     },
   });
 
@@ -247,6 +272,16 @@ function Profile() {
     setShowAvatars(false);
   }
 
+  // Open remove user modal
+  function handleOpenRemoveModal(user) {
+    setIsOpen(true);
+    setTargetDeletedUser(user);
+  }
+
+  // Delete user
+  function handleDeleteUser() {
+    deleteMutation.mutate(targetDeletedUser.id);
+  }
   return (
     <>
       <div className="profile-page">
@@ -437,9 +472,26 @@ function Profile() {
                     {" "}
                     <button className="btn btn--cta">More</button>
                   </NavLink>
+                  <button
+                    onClick={() => handleOpenRemoveModal(el)}
+                    className="btn btn--cta ml-4"
+                  >
+                    Remove profile
+                  </button>
                 </div>
               </div>
             ))}
+            <div className={isOpen ? "d-block" : "d-none"}>
+              <Modal>
+                <p>Are you sure you want to remove this user?</p>
+                <button onClick={handleDeleteUser} className="btn">
+                  Remove this user?
+                </button>
+                <button onClick={() => setIsOpen(false)} className="btn ml-4">
+                  Cancel
+                </button>
+              </Modal>
+            </div>
           </div>
         </section>
       </div>

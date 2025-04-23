@@ -317,6 +317,22 @@ export async function changeUserAvatar(userId, avatarImg) {
 }
 
 // Delete HTTP method
+export async function deleteUser(userId) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 // Put HTTP method
 
 //// Artifacts
