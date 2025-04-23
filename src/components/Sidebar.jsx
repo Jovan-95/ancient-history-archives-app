@@ -1,6 +1,21 @@
-import { NavLink } from "react-router-dom";
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+import { useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { logoutUser } from "../redux/authSlice";
+import Modal from "./Modal";
+import { useState } from "react";
 
 function Sidebar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+
+  function handleLogout() {
+    console.log("Logout");
+    dispatch(logoutUser());
+    navigate("/login");
+  }
   return (
     <aside className="sidebar">
       <h2>History App</h2>
@@ -14,6 +29,30 @@ function Sidebar() {
         <NavLink to="/bookmarks">Bookmarks</NavLink>
         <NavLink to="/timeline">Timeline</NavLink>
       </nav>
+      <div
+        style={{
+          marginTop: "100px",
+        }}
+      >
+        <button className="btn" onClick={() => setIsOpen(true)}>
+          Logout?
+        </button>
+      </div>
+      <div className={isOpen ? "d-block" : "d-none"}>
+        <Modal>
+          <p style={{ color: "#000" }}>Are you sure you want to logout?</p>
+          <button className="btn" onClick={handleLogout}>
+            Logout
+          </button>
+          <button
+            onClick={() => setIsOpen(false)}
+            style={{ marginLeft: "32px" }}
+            className="btn"
+          >
+            Cancel
+          </button>
+        </Modal>
+      </div>
     </aside>
   );
 }

@@ -40,6 +40,12 @@ function SingleProfile() {
               <strong>Role: </strong>
               {singleUser.role}
             </p>
+            <button
+              onClick={() => navigate("/profile")}
+              className="btn btn--cta"
+            >
+              Back
+            </button>
           </div>
         </div>
       </section>
