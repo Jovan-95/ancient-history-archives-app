@@ -333,7 +333,25 @@ export async function deleteUser(userId) {
   }
 }
 
-// Put HTTP method
+// Put (edit) HTTP method
+export async function editUser(user) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${user.id}`, {
+      method: "PUT", // HTTP method for updating data
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    console.log("Updated POST:", data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 //// Artifacts
 // Get HTTP method

@@ -8,7 +8,7 @@
       "region": "Egypt",
       "imageUrl": "/images/rosetta.jpg",
       "collectionId": 1,
-      "likes": 98,
+      "likes": 99,
       "views": 540,
       "tags": [
         "language",
@@ -278,18 +278,14 @@
       "id": "64fd",
       "username": "JV95",
       "email": "vuksanovicjovan@hotmail.com",
-      "avatar": "/images/boy-1.jpg",
       "password": "111111",
-      "confirmPassword": "111111",
-      "role": "Admin",
       "bookmarksArtifacts": [],
-      "likesArtifacts": [
-        "1"
-      ],
+      "likesArtifacts": [],
       "bookmarksCollections": [],
       "likesCollections": [],
       "bookmarksTimelines": [],
-      "likesTimelines": []
+      "likesTimelines": [],
+      "avatar": "/images/boy-2.jpg"
     },
     {
       "id": "0066",
@@ -303,6 +299,48 @@
       "likesArtifacts": [
         "1"
       ],
+      "bookmarksCollections": [],
+      "likesCollections": [],
+      "bookmarksTimelines": [],
+      "likesTimelines": []
+    },
+    {
+      "id": "14b0",
+      "username": "user16516",
+      "email": "user@gmail.com",
+      "password": "333333",
+      "confirmPassword": "333333",
+      "role": "Researcher",
+      "bookmarksArtifacts": [],
+      "likesArtifacts": [],
+      "bookmarksCollections": [],
+      "likesCollections": [],
+      "bookmarksTimelines": [],
+      "likesTimelines": []
+    },
+    {
+      "id": "9061",
+      "username": "smesko",
+      "email": "smesko@gmail.com",
+      "password": "444444",
+      "confirmPassword": "444444",
+      "role": "Researcher",
+      "bookmarksArtifacts": [],
+      "likesArtifacts": [],
+      "bookmarksCollections": [],
+      "likesCollections": [],
+      "bookmarksTimelines": [],
+      "likesTimelines": []
+    },
+    {
+      "id": "3407",
+      "username": "bok",
+      "email": "bok@gmail.com",
+      "password": "555555",
+      "confirmPassword": "555555",
+      "role": "Researcher",
+      "bookmarksArtifacts": [],
+      "likesArtifacts": [],
       "bookmarksCollections": [],
       "likesCollections": [],
       "bookmarksTimelines": [],

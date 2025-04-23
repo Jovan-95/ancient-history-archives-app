@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import getUsers, {
   changeUserAvatar,
   deleteUser,
+  editUser,
   getArtifacts,
   getCollections,
   getTimelines,
@@ -25,7 +26,14 @@ function Profile() {
   const [avatarImg, setAvatarImg] = useState();
   const [showAvatars, setShowAvatars] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [openEditModal, setOpenModal] = useState(false);
   const [targetDeletedUser, setTargetDeletedUser] = useState("");
+
+  // Edit user fields
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState(loggedUser.email);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const avatarOptions = [
     "/images/boy-1.jpg",
@@ -155,6 +163,29 @@ function Profile() {
     },
   });
 
+  // PUT HTTP method edit user
+  const editMutation = useMutation({
+    mutationFn: editUser,
+    onMutate: async (updatedUser) => {
+      await queryClient.cancelQueries(["users"]);
+      const previousUser = queryClient.getQueryData(["users"]);
+
+      queryClient.setQueryData(["users"], (old) =>
+        old.map((user) =>
+          user.id === updatedUser.id ? { ...user, ...updatedUser } : user
+        )
+      );
+
+      return { previousUser };
+    },
+    onError: (err, updatedPost, context) => {
+      queryClient.setQueryData(["users"], context.previousUser);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["users"]);
+    },
+  });
+
   // HTTP loading and error
   if (
     usersIsLoading ||
@@ -171,38 +202,36 @@ function Profile() {
 
   // Create new array with user bookmark artifact
   const userBookmarkedArtifacts = artifactsData.filter((artifact) =>
-    user.bookmarksArtifacts.includes(String(artifact.id))
+    user.bookmarksArtifacts?.includes(String(artifact.id))
   );
 
   // Create new array with user liked artifact
   const userLikedArtifacts = artifactsData.filter((artifact) =>
-    user.likesArtifacts.includes(String(artifact.id))
+    user.likesArtifacts?.includes(String(artifact.id))
   );
 
   // Create new array with user bookmark collections
   const userBookmarkedCollections = collectionsData.filter((collection) =>
-    user.bookmarksCollections.includes(String(collection.id))
+    user.bookmarksCollections?.includes(String(collection.id))
   );
 
   // Create new array with user like collections
   const userLikedCollections = collectionsData.filter((collection) =>
-    user.likesCollections.includes(String(collection.id))
+    user.likesCollections?.includes(String(collection.id))
   );
 
   // Create new array with user bookmark timelines
   const userBookmarkedTimelines = timelinesData.filter((timeline) =>
-    user.bookmarksTimelines.includes(String(timeline.id))
+    user.bookmarksTimelines?.includes(String(timeline.id))
   );
 
   // Create new array with user like timelines
   const userLikedTimelines = timelinesData.filter((timeline) =>
-    user.likesTimelines.includes(String(timeline.id))
+    user.likesTimelines?.includes(String(timeline.id))
   );
 
   // Removing artifact from bookmarks array
   function handleRemoveBookmarksFromUserArtifacts(artifact) {
-    console.log("test", avatarImg);
-
     // Patch method calling
     bookmarkArtifact({
       userId: user.id,
@@ -282,6 +311,36 @@ function Profile() {
   function handleDeleteUser() {
     deleteMutation.mutate(targetDeletedUser.id);
   }
+
+  // open modal edit user (profile)
+  function openEditProfileModal() {
+    setOpenModal(true);
+  }
+
+  // Edit user (profile)
+  function handleSaveChanges() {
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    editMutation.mutate({
+      id: user.id,
+      username,
+      email,
+      password, // ili hashuj ako ideš ozbiljno
+      bookmarksArtifacts: [],
+      likesArtifacts: [],
+      bookmarksCollections: [],
+      likesCollections: [],
+      bookmarksTimelines: [],
+      likesTimelines: [],
+      avatar: "/images/boy-2.jpg",
+    });
+
+    setOpenModal(false);
+  }
+
   return (
     <>
       <div className="profile-page">
@@ -338,6 +397,83 @@ function Profile() {
                 <strong>Role: </strong>
                 {user.role}
               </p>
+              <div>
+                {" "}
+                <button onClick={openEditProfileModal} className="btn">
+                  Edit profile
+                </button>
+              </div>
+              <div className={openEditModal ? "d-block" : "d-none"}>
+                <Modal>
+                  <div>
+                    <form className="auth-form">
+                      <div className="auth-field">
+                        <label className="auth-label">Username</label>
+                        <input
+                          value={username}
+                          onChange={(e) => setUsername(e.target.value)}
+                          type="text"
+                          name="username"
+                          className="auth-input"
+                        />
+                      </div>
+
+                      <div className="auth-field">
+                        <label className="auth-label">Email</label>
+                        <input
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          type="email"
+                          name="email"
+                          className="auth-input"
+                        />
+                      </div>
+
+                      <div className="auth-field">
+                        <label className="auth-label">Password</label>
+                        <input
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          type="password"
+                          name="password"
+                          className="auth-input"
+                        />
+                      </div>
+
+                      <div className="auth-field">
+                        <label className="auth-label">Confirm Password</label>
+                        <input
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          type="password"
+                          name="confirmPassword"
+                          className="auth-input"
+                        />
+                      </div>
+                    </form>
+                  </div>
+                  <div
+                    style={{
+                      marginTop: "16px",
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <button
+                      onClick={handleSaveChanges}
+                      className="btn btn--cta"
+                    >
+                      Save changes
+                    </button>
+                    <button
+                      onClick={() => setOpenModal(false)}
+                      className="btn ml-4"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </Modal>
+              </div>
             </div>
           </div>
         </section>
@@ -456,6 +592,11 @@ function Profile() {
             {/* <!-- Kartice drugih korisnika --> */}
             {usersData.map((el) => (
               <div key={el.id} className="user-card">
+                {user.id === el.id ? (
+                  <h2 style={{ color: "green" }}>Your profile!</h2>
+                ) : (
+                  ""
+                )}
                 <div>
                   <strong>Username:</strong> {el.username}
                 </div>
@@ -467,6 +608,7 @@ function Profile() {
                   {" "}
                   <strong>Role:</strong> {el.role}
                 </div>
+
                 <div>
                   <NavLink to={`/profile/${el.id}`}>
                     {" "}
