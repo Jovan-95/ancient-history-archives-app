@@ -276,7 +276,7 @@
   "users": [
     {
       "id": "64fd",
-      "username": "Jovuk95",
+      "username": "Jovan",
       "email": "vuksanovicjovan@hotmail.com",
       "password": "111111",
       "role": "Admin",
@@ -314,20 +314,6 @@
       "likesArtifacts": [
         "1"
       ],
-      "bookmarksCollections": [],
-      "likesCollections": [],
-      "bookmarksTimelines": [],
-      "likesTimelines": []
-    },
-    {
-      "id": "14b0",
-      "username": "user16516",
-      "email": "user@gmail.com",
-      "password": "333333",
-      "confirmPassword": "333333",
-      "role": "Researcher",
-      "bookmarksArtifacts": [],
-      "likesArtifacts": [],
       "bookmarksCollections": [],
       "likesCollections": [],
       "bookmarksTimelines": [],
