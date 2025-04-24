@@ -316,6 +316,27 @@ export async function changeUserAvatar(userId, avatarImg) {
   }
 }
 
+//// Patch HTTP method Edit user
+export async function editUser(userId, editedObj) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(editedObj),
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 // Delete HTTP method
 export async function deleteUser(userId) {
   try {
@@ -334,24 +355,6 @@ export async function deleteUser(userId) {
 }
 
 // Put (edit) HTTP method
-export async function editUser(user) {
-  try {
-    const res = await fetch(`http://localhost:5000/users/${user.id}`, {
-      method: "PUT", // HTTP method for updating data
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
-
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    console.log("Updated POST:", data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-}
 
 //// Artifacts
 // Get HTTP method

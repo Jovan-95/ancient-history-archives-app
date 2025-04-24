@@ -143,6 +143,14 @@ function Profile() {
     },
   });
 
+  // Patch HTTP method Edit user
+  const { mutate: editUserFormFields } = useMutation({
+    mutationFn: ({ userId, editedObj }) => editUser(userId, editedObj),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["users"]); // osvežava users podatke
+    },
+  });
+
   // Delete HTTP method delete user
   const deleteMutation = useMutation({
     mutationFn: deleteUser,
@@ -160,29 +168,6 @@ function Profile() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["users"]); // refetch!
-    },
-  });
-
-  // PUT HTTP method edit user
-  const editMutation = useMutation({
-    mutationFn: editUser,
-    onMutate: async (updatedUser) => {
-      await queryClient.cancelQueries(["users"]);
-      const previousUser = queryClient.getQueryData(["users"]);
-
-      queryClient.setQueryData(["users"], (old) =>
-        old.map((user) =>
-          user.id === updatedUser.id ? { ...user, ...updatedUser } : user
-        )
-      );
-
-      return { previousUser };
-    },
-    onError: (err, updatedPost, context) => {
-      queryClient.setQueryData(["users"], context.previousUser);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(["users"]);
     },
   });
 
@@ -323,19 +308,13 @@ function Profile() {
       alert("Passwords do not match!");
       return;
     }
-
-    editMutation.mutate({
-      id: user.id,
-      username,
-      email,
-      password, // ili hashuj ako ideš ozbiljno
-      bookmarksArtifacts: [],
-      likesArtifacts: [],
-      bookmarksCollections: [],
-      likesCollections: [],
-      bookmarksTimelines: [],
-      likesTimelines: [],
-      avatar: "/images/boy-2.jpg",
+    editUserFormFields({
+      userId: user.id,
+      editedObj: {
+        username,
+        email,
+        password,
+      },
     });
 
     setOpenModal(false);

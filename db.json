@@ -8,7 +8,7 @@
       "region": "Egypt",
       "imageUrl": "/images/rosetta.jpg",
       "collectionId": 1,
-      "likes": 99,
+      "likes": 100,
       "views": 540,
       "tags": [
         "language",
@@ -59,7 +59,7 @@
       "region": "Europe",
       "imageUrl": "/images/venus.jpg",
       "collectionId": 5,
-      "likes": 10,
+      "likes": 11,
       "views": 730,
       "tags": [
         "fertility",
@@ -82,7 +82,7 @@
       "title": "Ancient China",
       "description": "Key archaeological findings from Chinese history.",
       "createdBy": 2,
-      "likes": 0
+      "likes": 1
     },
     {
       "id": "3",
@@ -136,7 +136,7 @@
         }
       ],
       "createdBy": 2,
-      "likes": 3
+      "likes": 4
     }
   ],
   "comments": [
@@ -276,16 +276,31 @@
   "users": [
     {
       "id": "64fd",
-      "username": "JV95",
+      "username": "Jovuk95",
       "email": "vuksanovicjovan@hotmail.com",
       "password": "111111",
-      "bookmarksArtifacts": [],
-      "likesArtifacts": [],
-      "bookmarksCollections": [],
-      "likesCollections": [],
-      "bookmarksTimelines": [],
-      "likesTimelines": [],
-      "avatar": "/images/boy-2.jpg"
+      "role": "Admin",
+      "bookmarksArtifacts": [
+        "1",
+        "4"
+      ],
+      "likesArtifacts": [
+        "1",
+        "4"
+      ],
+      "bookmarksCollections": [
+        "2"
+      ],
+      "likesCollections": [
+        "2"
+      ],
+      "bookmarksTimelines": [
+        "2"
+      ],
+      "likesTimelines": [
+        "2"
+      ],
+      "avatar": "/images/boy-1.jpg"
     },
     {
       "id": "0066",
