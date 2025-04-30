@@ -390,6 +390,25 @@ export async function addLikeToArtifact(artifactsId, updatedLikesNum) {
   }
 }
 
+// Post HTTP method for adding new artifact
+export async function addArtifact(artifact) {
+  try {
+    const res = await fetch("http://localhost:5000/artifacts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(artifact),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 //// Collections
 // Get HTTP method
 export async function getCollections() {
@@ -421,6 +440,25 @@ export async function addLikeToCollection(collectionId, updatedLikesNum) {
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
     console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// Post HTTP method for adding new collection
+export async function addCollection(collection) {
+  try {
+    const res = await fetch("http://localhost:5000/collections", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(collection),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    // console.log(data);
     return data;
   } catch (err) {
     console.log(err);

@@ -67,6 +67,26 @@
         "figurine"
       ],
       "createdAt": "2023-09-15T16:30:00Z"
+    },
+    {
+      "id": "1746007496946",
+      "title": "test",
+      "description": "test",
+      "period": "test",
+      "region": "test",
+      "userId": "64fd",
+      "createdAt": "2025-04-30T10:04:56.946Z",
+      "likes": "1"
+    },
+    {
+      "id": "1746013861683",
+      "title": "test2",
+      "description": "test2",
+      "period": "test2",
+      "region": "test2",
+      "userId": "64fd",
+      "createdAt": "2025-04-30T11:51:01.683Z",
+      "likes": "1"
     }
   ],
   "collections": [
@@ -102,7 +122,16 @@
       "id": "5",
       "title": "European Prehistory",
       "description": "Figurines and tools from ancient Europe.",
-      "createdBy": 2
+      "createdBy": 2,
+      "likes": null
+    },
+    {
+      "id": "1746014013171",
+      "title": "NEW",
+      "description": "NEW",
+      "userId": "64fd",
+      "createdAt": "2025-04-30T11:53:33.171Z",
+      "likes": "1"
     }
   ],
   "timelines": [
@@ -239,6 +268,30 @@
       "collectionId": 3,
       "userId": "64fd",
       "createdAt": "2025-04-21T09:19:13.239Z"
+    },
+    {
+      "id": "81ab",
+      "nickname": "test",
+      "text": "test",
+      "artifactId": 1746007496946,
+      "userId": "64fd",
+      "createdAt": "2025-04-30T10:05:07.273Z"
+    },
+    {
+      "id": "6a27",
+      "nickname": "test",
+      "text": "test",
+      "collectionId": 5,
+      "userId": "64fd",
+      "createdAt": "2025-04-30T11:51:53.739Z"
+    },
+    {
+      "id": "36e8",
+      "nickname": "NEW",
+      "text": "NEW",
+      "collectionId": 1746014013171,
+      "userId": "64fd",
+      "createdAt": "2025-04-30T11:53:43.595Z"
     }
   ],
   "empires": [
@@ -286,13 +339,16 @@
       ],
       "likesArtifacts": [
         "1",
-        "4"
+        "4",
+        "1746007496946",
+        "1746013861683"
       ],
       "bookmarksCollections": [
         "2"
       ],
       "likesCollections": [
-        "2"
+        "5",
+        "1746014013171"
       ],
       "bookmarksTimelines": [
         "2"
@@ -300,7 +356,7 @@
       "likesTimelines": [
         "2"
       ],
-      "avatar": "/images/boy-1.jpg"
+      "avatar": "/images/boy-2.jpg"
     },
     {
       "id": "0066",
@@ -325,20 +381,6 @@
       "email": "smesko@gmail.com",
       "password": "444444",
       "confirmPassword": "444444",
-      "role": "Researcher",
-      "bookmarksArtifacts": [],
-      "likesArtifacts": [],
-      "bookmarksCollections": [],
-      "likesCollections": [],
-      "bookmarksTimelines": [],
-      "likesTimelines": []
-    },
-    {
-      "id": "3407",
-      "username": "bok",
-      "email": "bok@gmail.com",
-      "password": "555555",
-      "confirmPassword": "555555",
       "role": "Researcher",
       "bookmarksArtifacts": [],
       "likesArtifacts": [],
