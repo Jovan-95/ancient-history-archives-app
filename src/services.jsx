@@ -499,6 +499,25 @@ export async function addLikeToTimelines(timelineId, updatedLikesNum) {
   }
 }
 
+// Post HTTP method for adding new timeline
+export async function addTimeline(timeline) {
+  try {
+    const res = await fetch("http://localhost:5000/timelines", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(timeline),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 //// Empires
 // Get HTTP method
 export async function getEmpires() {
@@ -514,12 +533,50 @@ export async function getEmpires() {
   }
 }
 
+// Post HTTP method for adding new empire
+export async function addEmpire(empire) {
+  try {
+    const res = await fetch("http://localhost:5000/empires", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(empire),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 //// Figures
 // Get HTTP method
 export async function getFigures() {
   try {
     const res = await fetch("http://localhost:5000/figures");
 
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// Post HTTP method for adding new figure
+export async function addFigures(figure) {
+  try {
+    const res = await fetch("http://localhost:5000/figures", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(figure),
+    });
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
     // console.log(data);

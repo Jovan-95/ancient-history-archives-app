@@ -1,6 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { useSelector } from "react-redux";
-import { addArtifact, addCollection } from "../services";
+import {
+  addArtifact,
+  addCollection,
+  addEmpire,
+  addFigures,
+  addTimeline,
+} from "../services";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
@@ -14,6 +20,8 @@ function SubmitContent() {
   const [region, setRegion] = useState("");
 
   const [activeTab, setActiveTab] = useState("");
+
+  const [eventObj, setEventObj] = useState({ year: "", title: "" });
 
   // HTTP ReactQuery POST method
   const addArtifactMutation = useMutation({
@@ -36,6 +44,36 @@ function SubmitContent() {
       queryClient.invalidateQueries({ queryKey: ["collections"] });
       setTitle("");
       setDesc("");
+    },
+  });
+
+  // HTTP ReactQuery POST method
+  const addTimelineMutation = useMutation({
+    mutationFn: addTimeline,
+    onSuccess: () => {
+      // Automatski refresh komentara posle uspešnog posta
+      queryClient.invalidateQueries({ queryKey: ["timelines"] });
+      setTitle("");
+    },
+  });
+
+  // HTTP ReactQuery POST method
+  const addEmpireMutation = useMutation({
+    mutationFn: addEmpire,
+    onSuccess: () => {
+      // Automatski refresh komentara posle uspešnog posta
+      queryClient.invalidateQueries({ queryKey: ["empires"] });
+      setTitle("");
+    },
+  });
+
+  // HTTP ReactQuery POST method
+  const addFigureMutation = useMutation({
+    mutationFn: addFigures,
+    onSuccess: () => {
+      // Automatski refresh komentara posle uspešnog posta
+      queryClient.invalidateQueries({ queryKey: ["figures"] });
+      setTitle("");
     },
   });
 
@@ -65,6 +103,45 @@ function SubmitContent() {
     });
   }
 
+  function handleTimelineSubmit() {
+    const newTimelineObj = {
+      title: title,
+      id: Date.now().toString(),
+      userId: loggedUser.id,
+      createdAt: new Date().toISOString(),
+      likes: [],
+      events: [{ year: eventObj.year, title: eventObj.title }],
+    };
+    // Post HTTP method calling
+    addTimelineMutation.mutate(newTimelineObj);
+  }
+
+  function handleEmpireSubmit() {
+    addEmpireMutation.mutate({
+      name: title,
+      description: desc,
+      era: period,
+      region: region,
+      id: Date.now().toString(),
+      userId: loggedUser.id,
+      createdAt: new Date().toISOString(),
+      likes: [],
+    });
+  }
+
+  function handleFigureSubmit() {
+    addFigureMutation.mutate({
+      name: title,
+      knownFor: desc,
+      era: period,
+      region: region,
+      id: Date.now().toString(),
+      userId: loggedUser.id,
+      createdAt: new Date().toISOString(),
+      likes: [],
+    });
+  }
+
   function handleFormShowing(e) {
     const tabName = e.target.textContent;
     setActiveTab(tabName.toLowerCase());
@@ -83,10 +160,16 @@ function SubmitContent() {
         <button onClick={(e) => handleFormShowing(e)} className="btn ml-4">
           Create Timeline
         </button>
+        <button onClick={(e) => handleFormShowing(e)} className="btn ml-4">
+          Create Empire
+        </button>
+        <button onClick={(e) => handleFormShowing(e)} className="btn ml-4">
+          Create Figure
+        </button>
       </div>
       {/* Artifacts form */}
       {activeTab === "create artifact" && (
-        <div className="artifact-form-wrapper">
+        <div className="form-wrapper">
           <h3>New Artifact</h3>
           <form className="auth-form">
             <div className="auth-field">
@@ -138,7 +221,7 @@ function SubmitContent() {
       )}
       {/* Collections form */}
       {activeTab === "create collection" && (
-        <div className="artifact-form-wrapper">
+        <div className="form-wrapper">
           <h3>New Collection</h3>
           <form className="auth-form">
             <div className="auth-field">
@@ -160,6 +243,152 @@ function SubmitContent() {
 
             <button
               onClick={handleCollectionSubmit}
+              type="submit"
+              className="btn btn--auth"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      )}
+      {/* Timelines form */}
+      {activeTab === "create timeline" && (
+        <div className="form-wrapper">
+          <h3>New Timeline</h3>
+          <form className="auth-form">
+            <div className="auth-field">
+              <label className="auth-label">Title</label>
+              <input
+                onChange={(e) => setTitle(e.target.value)}
+                type="text"
+                className="auth-input"
+              />
+            </div>
+
+            <div className="auth-field">
+              <label className="auth-label">Year</label>
+              <input
+                onChange={(e) =>
+                  setEventObj({ ...eventObj, year: e.target.value })
+                }
+                type="number"
+                className="auth-input"
+              />
+              <label className="auth-label">Event</label>
+
+              <input
+                onChange={(e) =>
+                  setEventObj({ ...eventObj, title: e.target.value })
+                }
+                type="text"
+                className="auth-input"
+              />
+            </div>
+
+            <button
+              onClick={handleTimelineSubmit}
+              type="submit"
+              className="btn btn--auth"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      )}
+      {/* Empire form */}
+      {activeTab === "create empire" && (
+        <div className="form-wrapper">
+          <h3>New Empire</h3>
+          <form className="auth-form">
+            <div className="auth-field">
+              <label className="auth-label">Title</label>
+              <input
+                onChange={(e) => setTitle(e.target.value)}
+                type="text"
+                className="auth-input"
+              />
+            </div>
+            <div className="comment-post__group">
+              <label className="comment-post__label">Description:</label>
+              <textarea
+                onChange={(e) => setDesc(e.target.value)}
+                className="comment-post__textarea"
+              />
+            </div>
+
+            <div className="auth-field">
+              <label className="auth-label">Period</label>
+              <input
+                onChange={(e) => setPeriod(e.target.value)}
+                type="text"
+                name="email"
+                className="auth-input"
+              />
+            </div>
+
+            <div className="auth-field">
+              <label className="auth-label">Region</label>
+              <input
+                onChange={(e) => setRegion(e.target.value)}
+                type="text"
+                name="password"
+                className="auth-input"
+              />
+            </div>
+
+            <button
+              onClick={handleEmpireSubmit}
+              type="submit"
+              className="btn btn--auth"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      )}
+      {/* Figure form */}
+      {activeTab === "create figure" && (
+        <div className="form-wrapper">
+          <h3>New Figure</h3>
+          <form className="auth-form">
+            <div className="auth-field">
+              <label className="auth-label">Title</label>
+              <input
+                onChange={(e) => setTitle(e.target.value)}
+                type="text"
+                className="auth-input"
+              />
+            </div>
+            <div className="comment-post__group">
+              <label className="comment-post__label">Description:</label>
+              <textarea
+                onChange={(e) => setDesc(e.target.value)}
+                className="comment-post__textarea"
+              />
+            </div>
+
+            <div className="auth-field">
+              <label className="auth-label">Period</label>
+              <input
+                onChange={(e) => setPeriod(e.target.value)}
+                type="text"
+                name="email"
+                className="auth-input"
+              />
+            </div>
+
+            <div className="auth-field">
+              <label className="auth-label">Region</label>
+              <input
+                onChange={(e) => setRegion(e.target.value)}
+                type="text"
+                name="password"
+                className="auth-input"
+              />
+            </div>
+
+            <button
+              onClick={handleFigureSubmit}
               type="submit"
               className="btn btn--auth"
             >

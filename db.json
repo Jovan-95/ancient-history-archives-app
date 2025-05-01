@@ -67,26 +67,6 @@
         "figurine"
       ],
       "createdAt": "2023-09-15T16:30:00Z"
-    },
-    {
-      "id": "1746007496946",
-      "title": "test",
-      "description": "test",
-      "period": "test",
-      "region": "test",
-      "userId": "64fd",
-      "createdAt": "2025-04-30T10:04:56.946Z",
-      "likes": "1"
-    },
-    {
-      "id": "1746013861683",
-      "title": "test2",
-      "description": "test2",
-      "period": "test2",
-      "region": "test2",
-      "userId": "64fd",
-      "createdAt": "2025-04-30T11:51:01.683Z",
-      "likes": "1"
     }
   ],
   "collections": [
@@ -124,14 +104,6 @@
       "description": "Figurines and tools from ancient Europe.",
       "createdBy": 2,
       "likes": null
-    },
-    {
-      "id": "1746014013171",
-      "title": "NEW",
-      "description": "NEW",
-      "userId": "64fd",
-      "createdAt": "2025-04-30T11:53:33.171Z",
-      "likes": "1"
     }
   ],
   "timelines": [
@@ -166,6 +138,19 @@
       ],
       "createdBy": 2,
       "likes": 4
+    },
+    {
+      "id": "1746093170547",
+      "title": "Kosovo",
+      "userId": "64fd",
+      "createdAt": "2025-05-01T09:52:50.547Z",
+      "likes": "1",
+      "events": [
+        {
+          "year": "1389",
+          "title": "Kosovo battle"
+        }
+      ]
     }
   ],
   "comments": [
@@ -292,6 +277,14 @@
       "collectionId": 1746014013171,
       "userId": "64fd",
       "createdAt": "2025-04-30T11:53:43.595Z"
+    },
+    {
+      "id": "72d1",
+      "nickname": "jovuk",
+      "text": "Greatest battle",
+      "timelineId": 1746093170547,
+      "userId": "64fd",
+      "createdAt": "2025-05-01T09:53:11.651Z"
     }
   ],
   "empires": [
@@ -308,6 +301,16 @@
       "region": "China",
       "era": "206 BC – 220 AD",
       "description": "A golden age in Chinese history of cultural and technological advancements."
+    },
+    {
+      "id": "1746095503176",
+      "name": "Serbian Empire",
+      "description": "The most dominant power in the Balkans.",
+      "era": "1346",
+      "region": "Balkan",
+      "userId": "64fd",
+      "createdAt": "2025-05-01T10:31:43.176Z",
+      "likes": []
     }
   ],
   "figures": [
@@ -324,6 +327,16 @@
       "era": "69–30 BC",
       "region": "Egypt",
       "knownFor": "Last active ruler of the Ptolemaic Kingdom of Egypt."
+    },
+    {
+      "id": "1746095731376",
+      "name": "Tsar Dusan",
+      "knownFor": "Created Serbian Empire",
+      "era": "14th century",
+      "region": "Balkans",
+      "userId": "64fd",
+      "createdAt": "2025-05-01T10:35:31.376Z",
+      "likes": []
     }
   ],
   "users": [
@@ -351,10 +364,12 @@
         "1746014013171"
       ],
       "bookmarksTimelines": [
-        "2"
+        "2",
+        "1746093170547"
       ],
       "likesTimelines": [
-        "2"
+        "2",
+        "1746093170547"
       ],
       "avatar": "/images/boy-2.jpg"
     },
