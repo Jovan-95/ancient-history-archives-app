@@ -65,24 +65,23 @@ function App() {
                     <Dashboard />
                   </PrivateRoute>
                 }
-              >
-                <Route
-                  path="admin-moderation"
-                  element={
-                    <PrivateRoute>
-                      <AdminModeration />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path="admin-user-management"
-                  element={
-                    <PrivateRoute>
-                      <AdminUserManagement />
-                    </PrivateRoute>
-                  }
-                />
-              </Route>
+              />
+              <Route
+                path="admin/admin-moderation"
+                element={
+                  <PrivateRoute>
+                    <AdminModeration />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="admin/admin-user-management"
+                element={
+                  <PrivateRoute>
+                    <AdminUserManagement />
+                  </PrivateRoute>
+                }
+              />
               <Route
                 path="/explore"
                 element={
@@ -170,7 +169,7 @@ function App() {
                   </PrivateRoute>
                 }
               />
-              <Route
+              {/* <Route
                 path="/bookmarks"
                 element={
                   <PrivateRoute>
@@ -185,15 +184,15 @@ function App() {
                     <TimelineViewer />
                   </PrivateRoute>
                 }
-              />
-              <Route
+              /> */}
+              {/* <Route
                 path="/settings"
                 element={
                   <PrivateRoute>
                     <Settings />
                   </PrivateRoute>
                 }
-              />
+              /> */}
             </Route>
           </Routes>
         </Suspense>
@@ -203,7 +202,3 @@ function App() {
 }
 
 export default App;
-
-//// Notes
-// Finish single pages for the rest of explore types
-// Later in project, Create Profile Page, route and connect with id

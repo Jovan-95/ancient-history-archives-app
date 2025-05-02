@@ -77,7 +77,13 @@ function SubmitContent() {
     },
   });
 
-  function handleArtifactSubmit() {
+  function handleArtifactSubmit(e) {
+    e.preventDefault();
+    if (!title.trim() || !desc.trim()) {
+      alert("Please fill out all required fields.");
+      return;
+    }
+
     // Post HTTP method calling
     addArtifactMutation.mutate({
       title: title,
@@ -92,6 +98,11 @@ function SubmitContent() {
   }
 
   function handleCollectionSubmit() {
+    if (!title.trim() || !desc.trim()) {
+      alert("Please fill out all required fields.");
+      return;
+    }
+
     // Post HTTP method calling
     addCollectionMutation.mutate({
       title: title,
@@ -104,6 +115,11 @@ function SubmitContent() {
   }
 
   function handleTimelineSubmit() {
+    if (!title.trim()) {
+      alert("Please fill out all required fields.");
+      return;
+    }
+
     const newTimelineObj = {
       title: title,
       id: Date.now().toString(),
@@ -117,6 +133,11 @@ function SubmitContent() {
   }
 
   function handleEmpireSubmit() {
+    if (!title.trim() || !desc.trim()) {
+      alert("Please fill out all required fields.");
+      return;
+    }
+
     addEmpireMutation.mutate({
       name: title,
       description: desc,
@@ -130,6 +151,10 @@ function SubmitContent() {
   }
 
   function handleFigureSubmit() {
+    if (!title.trim() || !desc.trim()) {
+      alert("Please fill out all required fields.");
+      return;
+    }
     addFigureMutation.mutate({
       name: title,
       knownFor: desc,
@@ -176,6 +201,7 @@ function SubmitContent() {
               <label className="auth-label">Title</label>
               <input
                 onChange={(e) => setTitle(e.target.value)}
+                value={title}
                 type="text"
                 name="username"
                 className="auth-input"
@@ -185,6 +211,7 @@ function SubmitContent() {
               <label className="comment-post__label">Description:</label>
               <textarea
                 onChange={(e) => setDesc(e.target.value)}
+                value={desc}
                 className="comment-post__textarea"
               />
             </div>
@@ -193,6 +220,7 @@ function SubmitContent() {
               <label className="auth-label">Period</label>
               <input
                 onChange={(e) => setPeriod(e.target.value)}
+                value={period}
                 type="text"
                 name="email"
                 className="auth-input"
@@ -203,6 +231,7 @@ function SubmitContent() {
               <label className="auth-label">Region</label>
               <input
                 onChange={(e) => setRegion(e.target.value)}
+                value={region}
                 type="text"
                 name="password"
                 className="auth-input"
@@ -228,6 +257,7 @@ function SubmitContent() {
               <label className="auth-label">Title</label>
               <input
                 onChange={(e) => setTitle(e.target.value)}
+                value={title}
                 type="text"
                 name="username"
                 className="auth-input"
@@ -237,6 +267,7 @@ function SubmitContent() {
               <label className="comment-post__label">Description:</label>
               <textarea
                 onChange={(e) => setDesc(e.target.value)}
+                value={desc}
                 className="comment-post__textarea"
               />
             </div>
@@ -260,6 +291,7 @@ function SubmitContent() {
               <label className="auth-label">Title</label>
               <input
                 onChange={(e) => setTitle(e.target.value)}
+                value={title}
                 type="text"
                 className="auth-input"
               />
@@ -271,6 +303,7 @@ function SubmitContent() {
                 onChange={(e) =>
                   setEventObj({ ...eventObj, year: e.target.value })
                 }
+                value={eventObj.year}
                 type="number"
                 className="auth-input"
               />
@@ -280,6 +313,7 @@ function SubmitContent() {
                 onChange={(e) =>
                   setEventObj({ ...eventObj, title: e.target.value })
                 }
+                value={eventObj.title}
                 type="text"
                 className="auth-input"
               />
@@ -304,6 +338,7 @@ function SubmitContent() {
               <label className="auth-label">Title</label>
               <input
                 onChange={(e) => setTitle(e.target.value)}
+                value={title}
                 type="text"
                 className="auth-input"
               />
@@ -312,6 +347,7 @@ function SubmitContent() {
               <label className="comment-post__label">Description:</label>
               <textarea
                 onChange={(e) => setDesc(e.target.value)}
+                value={desc}
                 className="comment-post__textarea"
               />
             </div>
@@ -320,6 +356,7 @@ function SubmitContent() {
               <label className="auth-label">Period</label>
               <input
                 onChange={(e) => setPeriod(e.target.value)}
+                value={period}
                 type="text"
                 name="email"
                 className="auth-input"
@@ -330,6 +367,7 @@ function SubmitContent() {
               <label className="auth-label">Region</label>
               <input
                 onChange={(e) => setRegion(e.target.value)}
+                value={region}
                 type="text"
                 name="password"
                 className="auth-input"
@@ -355,6 +393,7 @@ function SubmitContent() {
               <label className="auth-label">Title</label>
               <input
                 onChange={(e) => setTitle(e.target.value)}
+                value={title}
                 type="text"
                 className="auth-input"
               />
@@ -363,6 +402,7 @@ function SubmitContent() {
               <label className="comment-post__label">Description:</label>
               <textarea
                 onChange={(e) => setDesc(e.target.value)}
+                value={desc}
                 className="comment-post__textarea"
               />
             </div>
@@ -371,6 +411,7 @@ function SubmitContent() {
               <label className="auth-label">Period</label>
               <input
                 onChange={(e) => setPeriod(e.target.value)}
+                value={period}
                 type="text"
                 name="email"
                 className="auth-input"
@@ -381,6 +422,7 @@ function SubmitContent() {
               <label className="auth-label">Region</label>
               <input
                 onChange={(e) => setRegion(e.target.value)}
+                value={region}
                 type="text"
                 name="password"
                 className="auth-input"

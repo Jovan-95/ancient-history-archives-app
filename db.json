@@ -67,6 +67,16 @@
         "figurine"
       ],
       "createdAt": "2023-09-15T16:30:00Z"
+    },
+    {
+      "id": "1746184093038",
+      "title": "NEW",
+      "description": "NEW",
+      "period": "1900",
+      "region": "Serbia",
+      "userId": "64fd",
+      "createdAt": "2025-05-02T11:08:13.038Z",
+      "likes": "1"
     }
   ],
   "collections": [
