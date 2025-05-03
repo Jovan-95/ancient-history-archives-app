@@ -109,27 +109,27 @@ function Explore() {
 
   // Create artifacts array with approved status only
   const approvedArtifactsData = artifactsData.filter(
-    (artifact) => artifact.status !== "pending"
+    (artifact) => artifact.status === "approved"
   );
 
   // Create collections array with approved status only
   const approvedCollectionsData = collectionsData.filter(
-    (collection) => collection.status !== "pending"
+    (collection) => collection.status === "approved"
   );
 
   // Create timelines array with approved status only
   const approvedTimelinesData = timelinesData.filter(
-    (timeline) => timeline.status !== "pending"
+    (timeline) => timeline.status === "approved"
   );
 
   // Create empires array with approved status only
   const approvedEmpiresData = empiresData.filter(
-    (empire) => empire.status !== "pending"
+    (empire) => empire.status === "approved"
   );
 
   // Create figures array with approved status only
   const approvedFiguresData = figuresData.filter(
-    (figure) => figure.status !== "pending"
+    (figure) => figure.status === "approved"
   );
   return (
     <section className="explore">

@@ -182,6 +182,45 @@ function AdminModeration() {
     });
   }
 
+  // Reject artifact
+  function handleRejectingArtifact(artifact) {
+    approvePendingArtifact({
+      id: artifact.id,
+      status: "rejected",
+    });
+  }
+
+  // Reject collection
+  function handleRejectingCollection(collection) {
+    approvePendingCollection({
+      id: collection.id,
+      status: "rejected",
+    });
+  }
+
+  // Reject timeline
+  function handleRejectingTimeline(timeline) {
+    approvePendingTimeline({
+      id: timeline.id,
+      status: "rejected",
+    });
+  }
+
+  // Reject figure
+  function handleRejectingFigure(figure) {
+    approvePendingFigure({
+      id: figure.id,
+      status: "rejected",
+    });
+  }
+
+  // Reject empire
+  function handleRejectingEmpire(empire) {
+    approvePendingEmpire({
+      id: empire.id,
+      status: "rejected",
+    });
+  }
   return (
     <div>
       <h1>Admin moderation</h1>
@@ -213,6 +252,8 @@ function AdminModeration() {
                         ? "text-yellow"
                         : artifact.status === "approved"
                         ? "text-green"
+                        : artifact.status === "rejected"
+                        ? "text-red"
                         : ""
                     }
                   >
@@ -232,7 +273,17 @@ function AdminModeration() {
                   >
                     Approve
                   </button>{" "}
-                  <button className="btn-reject">Reject</button>
+                  <button
+                    onClick={() => handleRejectingArtifact(artifact)}
+                    disabled={artifact.status === "rejected" ? true : false}
+                    className={
+                      artifact.status !== "rejected"
+                        ? "btn-reject"
+                        : "btn-disabled"
+                    }
+                  >
+                    Reject
+                  </button>
                 </td>
               </tr>
             ))}
@@ -267,6 +318,8 @@ function AdminModeration() {
                         ? "text-yellow"
                         : collection.status === "approved"
                         ? "text-green"
+                        : collection.status === "rejected"
+                        ? "text-red"
                         : ""
                     }
                   >
@@ -286,7 +339,17 @@ function AdminModeration() {
                   >
                     Approve
                   </button>{" "}
-                  <button className="btn-reject">Reject</button>
+                  <button
+                    onClick={() => handleRejectingCollection(collection)}
+                    disabled={collection.status === "rejected" ? true : false}
+                    className={
+                      collection.status !== "rejected"
+                        ? "btn-reject"
+                        : "btn-disabled"
+                    }
+                  >
+                    Reject
+                  </button>{" "}
                 </td>
               </tr>
             ))}
@@ -321,6 +384,8 @@ function AdminModeration() {
                         ? "text-yellow"
                         : timeline.status === "approved"
                         ? "text-green"
+                        : timeline.status === "rejected"
+                        ? "text-red"
                         : ""
                     }
                   >
@@ -340,7 +405,17 @@ function AdminModeration() {
                   >
                     Approve
                   </button>{" "}
-                  <button className="btn-reject">Reject</button>
+                  <button
+                    onClick={() => handleRejectingTimeline(timeline)}
+                    disabled={timeline.status === "rejected" ? true : false}
+                    className={
+                      timeline.status !== "rejected"
+                        ? "btn-reject"
+                        : "btn-disabled"
+                    }
+                  >
+                    Reject
+                  </button>{" "}
                 </td>
               </tr>
             ))}
@@ -375,6 +450,8 @@ function AdminModeration() {
                         ? "text-yellow"
                         : figure.status === "approved"
                         ? "text-green"
+                        : figure.status === "rejected"
+                        ? "text-red"
                         : ""
                     }
                   >
@@ -394,7 +471,17 @@ function AdminModeration() {
                   >
                     Approve
                   </button>{" "}
-                  <button className="btn-reject">Reject</button>
+                  <button
+                    onClick={() => handleRejectingFigure(figure)}
+                    disabled={figure.status === "rejected" ? true : false}
+                    className={
+                      figure.status !== "rejected"
+                        ? "btn-reject"
+                        : "btn-disabled"
+                    }
+                  >
+                    Reject
+                  </button>{" "}
                 </td>
               </tr>
             ))}
@@ -429,6 +516,8 @@ function AdminModeration() {
                         ? "text-yellow"
                         : empire.status === "approved"
                         ? "text-green"
+                        : empire.status === "rejected"
+                        ? "text-red"
                         : ""
                     }
                   >
@@ -448,7 +537,17 @@ function AdminModeration() {
                   >
                     Approve
                   </button>{" "}
-                  <button className="btn-reject">Reject</button>
+                  <button
+                    onClick={() => handleRejectingEmpire(empire)}
+                    disabled={empire.status === "rejected" ? true : false}
+                    className={
+                      empire.status !== "rejected"
+                        ? "btn-reject"
+                        : "btn-disabled"
+                    }
+                  >
+                    Reject
+                  </button>{" "}
                 </td>
               </tr>
             ))}
