@@ -15,7 +15,8 @@
         "inscription",
         "translation"
       ],
-      "createdAt": "2023-06-14T10:00:00Z"
+      "createdAt": "2023-06-14T10:00:00Z",
+      "status": "approved"
     },
     {
       "id": "2",
@@ -32,7 +33,8 @@
         "china",
         "army"
       ],
-      "createdAt": "2023-07-22T12:30:00Z"
+      "createdAt": "2023-07-22T12:30:00Z",
+      "status": "approved"
     },
     {
       "id": "3",
@@ -49,7 +51,8 @@
         "inscription",
         "babylon"
       ],
-      "createdAt": "2023-08-10T14:00:00Z"
+      "createdAt": "2023-08-10T14:00:00Z",
+      "status": "approved"
     },
     {
       "id": "4",
@@ -66,17 +69,19 @@
         "prehistoric",
         "figurine"
       ],
-      "createdAt": "2023-09-15T16:30:00Z"
+      "createdAt": "2023-09-15T16:30:00Z",
+      "status": "approved"
     },
     {
-      "id": "1746184093038",
-      "title": "NEW",
-      "description": "NEW",
-      "period": "1900",
-      "region": "Serbia",
+      "id": "1746263691882",
+      "title": "Great Sphinx of Giza",
+      "description": "The Great Sphinx of Giza is a limestone statue of a reclining sphinx, a mythical creature with the head of a human and the body of a lion.",
+      "period": "2500 BC",
+      "region": "Egypt",
       "userId": "64fd",
-      "createdAt": "2025-05-02T11:08:13.038Z",
-      "likes": "1"
+      "createdAt": "2025-05-03T09:14:51.882Z",
+      "likes": [],
+      "status": "approved"
     }
   ],
   "collections": [
@@ -85,35 +90,54 @@
       "title": "Egyptian Wonders",
       "description": "A collection of iconic Egyptian discoveries.",
       "createdBy": 1,
-      "likes": 2
+      "likes": 2,
+      "createdAt": "2023-06-14T10:00:00Z",
+      "status": "approved"
     },
     {
       "id": "2",
       "title": "Ancient China",
       "description": "Key archaeological findings from Chinese history.",
       "createdBy": 2,
-      "likes": 1
+      "likes": 1,
+      "createdAt": "2023-06-14T10:00:00Z",
+      "status": "approved"
     },
     {
       "id": "3",
       "title": "Serbian Tsardom",
       "description": "Serbian state on three seas.",
       "createdBy": 3,
-      "likes": 1
+      "likes": 1,
+      "createdAt": "2023-06-14T10:00:00Z",
+      "status": "approved"
     },
     {
       "id": "4",
       "title": "Mesopotamian Marvels",
       "description": "Artifacts from the cradle of civilization.",
       "createdBy": 1,
-      "likes": 1
+      "likes": 1,
+      "createdAt": "2023-06-14T10:00:00Z",
+      "status": "approved"
     },
     {
       "id": "5",
       "title": "European Prehistory",
       "description": "Figurines and tools from ancient Europe.",
       "createdBy": 2,
-      "likes": null
+      "likes": null,
+      "createdAt": "2023-06-14T10:00:00Z",
+      "status": "approved"
+    },
+    {
+      "id": "1746263477322",
+      "title": "Greek spears",
+      "description": "Ancient collection of greek spears from 500bc.",
+      "userId": "64fd",
+      "createdAt": "2025-05-03T09:11:17.322Z",
+      "likes": [],
+      "status": "approved"
     }
   ],
   "timelines": [
@@ -131,7 +155,9 @@
         }
       ],
       "createdBy": 1,
-      "likes": 2
+      "likes": 2,
+      "createdAt": "2023-06-14T10:00:00Z",
+      "status": "approved"
     },
     {
       "id": "2",
@@ -147,20 +173,23 @@
         }
       ],
       "createdBy": 2,
-      "likes": 4
+      "likes": 4,
+      "createdAt": "2023-06-14T10:00:00Z",
+      "status": "approved"
     },
     {
-      "id": "1746093170547",
-      "title": "Kosovo",
+      "id": "1746263278330",
+      "title": "Kosovo battle",
       "userId": "64fd",
-      "createdAt": "2025-05-01T09:52:50.547Z",
-      "likes": "1",
+      "createdAt": "2025-05-03T09:07:58.330Z",
+      "likes": [],
       "events": [
         {
           "year": "1389",
-          "title": "Kosovo battle"
+          "title": "Battle between Moravian Serbia and Ottoman empire"
         }
-      ]
+      ],
+      "status": "approved"
     }
   ],
   "comments": [
@@ -303,24 +332,40 @@
       "name": "Roman Empire",
       "region": "Europe, Mediterranean",
       "era": "27 BC - 476 AD",
-      "description": "Dominant Mediterranean empire known for law, architecture, and military power."
+      "description": "Dominant Mediterranean empire known for law, architecture, and military power.",
+      "status": "approved",
+      "createdAt": "2023-06-14T10:00:00Z"
     },
     {
       "id": "2",
       "name": "Han Dynasty",
       "region": "China",
       "era": "206 BC – 220 AD",
-      "description": "A golden age in Chinese history of cultural and technological advancements."
+      "description": "A golden age in Chinese history of cultural and technological advancements.",
+      "status": "approved",
+      "createdAt": "2023-06-14T10:00:00Z"
     },
     {
-      "id": "1746095503176",
+      "id": "1746261017741",
       "name": "Serbian Empire",
-      "description": "The most dominant power in the Balkans.",
-      "era": "1346",
-      "region": "Balkan",
+      "description": "The greatest power in the Balkans.",
+      "era": "14th century",
+      "region": "Balkans",
       "userId": "64fd",
-      "createdAt": "2025-05-01T10:31:43.176Z",
-      "likes": []
+      "createdAt": "2025-05-03T08:30:17.741Z",
+      "likes": [],
+      "status": "approved"
+    },
+    {
+      "id": "1746271447083",
+      "name": "Byzantine empire",
+      "description": "Rome after rome",
+      "era": "4th-14th century",
+      "region": "Balkans, Asia minor, middle east, egypt",
+      "userId": "64fd",
+      "createdAt": "2025-05-03T11:24:07.083Z",
+      "likes": [],
+      "status": "pending"
     }
   ],
   "figures": [
@@ -329,24 +374,40 @@
       "name": "Julius Caesar",
       "era": "100–44 BC",
       "region": "Rome",
-      "knownFor": "Military general and dictator of the Roman Republic."
+      "knownFor": "Military general and dictator of the Roman Republic.",
+      "createdAt": "2023-06-14T10:00:00Z",
+      "status": "approved"
     },
     {
       "id": "2",
       "name": "Cleopatra VII",
       "era": "69–30 BC",
       "region": "Egypt",
-      "knownFor": "Last active ruler of the Ptolemaic Kingdom of Egypt."
+      "knownFor": "Last active ruler of the Ptolemaic Kingdom of Egypt.",
+      "createdAt": "2023-06-14T10:00:00Z",
+      "status": "approved"
     },
     {
-      "id": "1746095731376",
+      "id": "1746263036891",
       "name": "Tsar Dusan",
-      "knownFor": "Created Serbian Empire",
+      "knownFor": "First Serbian Emperor",
       "era": "14th century",
       "region": "Balkans",
       "userId": "64fd",
-      "createdAt": "2025-05-01T10:35:31.376Z",
-      "likes": []
+      "createdAt": "2025-05-03T09:03:56.891Z",
+      "likes": [],
+      "status": "approved"
+    },
+    {
+      "id": "1746270898211",
+      "name": "Knez Lazar",
+      "knownFor": "Ruler who defended christianity.",
+      "era": "14th century",
+      "region": "Balkans",
+      "userId": "64fd",
+      "createdAt": "2025-05-03T11:14:58.211Z",
+      "likes": [],
+      "status": "approved"
     }
   ],
   "users": [

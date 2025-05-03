@@ -390,6 +390,25 @@ export async function addLikeToArtifact(artifactsId, updatedLikesNum) {
   }
 }
 
+// Patch HTTP method for partialy editing artifact object (status)
+export async function approveArtifact(id, status) {
+  try {
+    const res = await fetch(`http://localhost:5000/artifacts/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status: status }),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 // Post HTTP method for adding new artifact
 export async function addArtifact(artifact) {
   try {
@@ -437,6 +456,25 @@ export async function addLikeToCollection(collectionId, updatedLikesNum) {
         body: JSON.stringify({ likes: updatedLikesNum }),
       }
     );
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// Patch HTTP method for partialy editing collection object (status)
+export async function approveCollection(id, status) {
+  try {
+    const res = await fetch(`http://localhost:5000/collections/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status: status }),
+    });
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
     console.log(data);
@@ -499,6 +537,25 @@ export async function addLikeToTimelines(timelineId, updatedLikesNum) {
   }
 }
 
+// Patch HTTP method for partialy editing timeline object (status)
+export async function approveTimeline(id, status) {
+  try {
+    const res = await fetch(`http://localhost:5000/timelines/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status: status }),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 // Post HTTP method for adding new timeline
 export async function addTimeline(timeline) {
   try {
@@ -533,6 +590,25 @@ export async function getEmpires() {
   }
 }
 
+// Patch HTTP method for partialy editing empires object (status)
+export async function approveEmpire(id, status) {
+  try {
+    const res = await fetch(`http://localhost:5000/empires/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status: status }),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 // Post HTTP method for adding new empire
 export async function addEmpire(empire) {
   try {
@@ -561,6 +637,25 @@ export async function getFigures() {
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
     // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// Patch HTTP method for partialy editing empires object (status)
+export async function approveFigure(id, status) {
+  try {
+    const res = await fetch(`http://localhost:5000/figures/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status: status }),
+    });
+    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
+    const data = await res.json();
+    console.log(data);
     return data;
   } catch (err) {
     console.log(err);

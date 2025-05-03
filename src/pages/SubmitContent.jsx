@@ -94,6 +94,7 @@ function SubmitContent() {
       userId: loggedUser.id,
       createdAt: new Date().toISOString(),
       likes: [],
+      status: "pending",
     });
   }
 
@@ -111,6 +112,7 @@ function SubmitContent() {
       userId: loggedUser.id,
       createdAt: new Date().toISOString(),
       likes: [],
+      status: "pending",
     });
   }
 
@@ -127,6 +129,7 @@ function SubmitContent() {
       createdAt: new Date().toISOString(),
       likes: [],
       events: [{ year: eventObj.year, title: eventObj.title }],
+      status: "pending",
     };
     // Post HTTP method calling
     addTimelineMutation.mutate(newTimelineObj);
@@ -147,6 +150,7 @@ function SubmitContent() {
       userId: loggedUser.id,
       createdAt: new Date().toISOString(),
       likes: [],
+      status: "pending",
     });
   }
 
@@ -164,6 +168,7 @@ function SubmitContent() {
       userId: loggedUser.id,
       createdAt: new Date().toISOString(),
       likes: [],
+      status: "pending",
     });
   }
 

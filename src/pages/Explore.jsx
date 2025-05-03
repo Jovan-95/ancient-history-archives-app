@@ -12,7 +12,6 @@ import { useEffect, useState } from "react";
 
 function Explore() {
   const [activeTab, setActiveTab] = useState("all");
-  const [searchTerm, setSearchTerm] = useState("");
 
   // Get artifacts
   const {
@@ -107,6 +106,31 @@ function Explore() {
     figuresError
   )
     return <p>Error loading data.</p>;
+
+  // Create artifacts array with approved status only
+  const approvedArtifactsData = artifactsData.filter(
+    (artifact) => artifact.status !== "pending"
+  );
+
+  // Create collections array with approved status only
+  const approvedCollectionsData = collectionsData.filter(
+    (collection) => collection.status !== "pending"
+  );
+
+  // Create timelines array with approved status only
+  const approvedTimelinesData = timelinesData.filter(
+    (timeline) => timeline.status !== "pending"
+  );
+
+  // Create empires array with approved status only
+  const approvedEmpiresData = empiresData.filter(
+    (empire) => empire.status !== "pending"
+  );
+
+  // Create figures array with approved status only
+  const approvedFiguresData = figuresData.filter(
+    (figure) => figure.status !== "pending"
+  );
   return (
     <section className="explore">
       <div className="explore__header">
@@ -162,13 +186,27 @@ function Explore() {
         <div id="artifacts">
           <h2>Artifacts</h2>
           <div className="explore__grid">
-            {artifactsData.map((artifact) => (
+            {approvedArtifactsData.map((artifact) => (
               <div key={artifact.id} className="explore__card">
                 <h3>{artifact.title}</h3>
                 <p>{artifact.description}</p>
                 <NavLink to={`/explore/artifact/${artifact.id}`}>
                   <button className="btn">Learn more</button>
                 </NavLink>
+                <p>
+                  Status:{" "}
+                  <span
+                    className={
+                      artifact.status === "pending"
+                        ? "text-yellow"
+                        : artifact.status === "approved"
+                        ? "text-green"
+                        : ""
+                    }
+                  >
+                    {artifact.status}
+                  </span>
+                </p>
               </div>
             ))}
           </div>
@@ -179,13 +217,27 @@ function Explore() {
         <div id="collections">
           <h2>Collections</h2>
           <div className="explore__grid">
-            {collectionsData.map((collection) => (
+            {approvedCollectionsData.map((collection) => (
               <div key={collection.id} className="explore__card">
                 <h3>{collection.title}</h3>
                 <p>{collection.description}</p>
                 <NavLink to={`/explore/collections/${collection.id}`}>
                   <button className="btn">Learn more</button>
                 </NavLink>
+                <p>
+                  Status:{" "}
+                  <span
+                    className={
+                      collection.status === "pending"
+                        ? "text-yellow"
+                        : collection.status === "approved"
+                        ? "text-green"
+                        : ""
+                    }
+                  >
+                    {collection.status}
+                  </span>
+                </p>
               </div>
             ))}
           </div>
@@ -196,12 +248,26 @@ function Explore() {
         <div id="timelines">
           <h2>Timelines</h2>
           <div className="explore__grid">
-            {timelinesData.map((timeline) => (
+            {approvedTimelinesData.map((timeline) => (
               <div key={timeline.id} className="explore__card">
                 <h3>{timeline.title}</h3>
                 <NavLink to={`/explore/timelines/${timeline.id}`}>
                   <button className="btn">Learn more</button>
                 </NavLink>
+                <p>
+                  Status:{" "}
+                  <span
+                    className={
+                      timeline.status === "pending"
+                        ? "text-yellow"
+                        : timeline.status === "approved"
+                        ? "text-green"
+                        : ""
+                    }
+                  >
+                    {timeline.status}
+                  </span>
+                </p>
               </div>
             ))}
           </div>
@@ -216,13 +282,28 @@ function Explore() {
         <div id="empires">
           <h2>Empires</h2>
           <div className="explore__grid">
-            {empiresData.map((empire) => (
+            {approvedEmpiresData.map((empire) => (
               <div key={empire.id} className="explore__card">
-                <h3>{empire.title}</h3>
+                <h3>{empire.name}</h3>
+
                 <p>{empire.description}</p>
                 <NavLink to={`/explore/empires/${empire.id}`}>
                   <button className="btn">Learn more</button>
                 </NavLink>
+                <p>
+                  Status:{" "}
+                  <span
+                    className={
+                      empire.status === "pending"
+                        ? "text-yellow"
+                        : empire.status === "approved"
+                        ? "text-green"
+                        : ""
+                    }
+                  >
+                    {empire.status}
+                  </span>
+                </p>
               </div>
             ))}
           </div>
@@ -233,13 +314,27 @@ function Explore() {
         <div id="figures">
           <h2>Figures</h2>
           <div className="explore__grid">
-            {figuresData.map((figure) => (
+            {approvedFiguresData.map((figure) => (
               <div key={figure.id} className="explore__card">
                 <h3>{figure.name}</h3>
                 <p>{figure.region}</p>
                 <NavLink to={`/explore/figures/${figure.id}`}>
                   <button className="btn">Learn more</button>
                 </NavLink>
+                <p>
+                  Status:{" "}
+                  <span
+                    className={
+                      figure.status === "pending"
+                        ? "text-yellow"
+                        : figure.status === "approved"
+                        ? "text-green"
+                        : ""
+                    }
+                  >
+                    {figure.status}
+                  </span>
+                </p>
               </div>
             ))}
           </div>
