@@ -390,25 +390,6 @@ export async function addLikeToArtifact(artifactsId, updatedLikesNum) {
   }
 }
 
-// Patch HTTP method for partialy editing artifact object (status)
-export async function approveArtifact(id, status) {
-  try {
-    const res = await fetch(`http://localhost:5000/artifacts/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ status: status }),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-}
-
 // Post HTTP method for adding new artifact
 export async function addArtifact(artifact) {
   try {
@@ -422,6 +403,23 @@ export async function addArtifact(artifact) {
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
     // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// Delete HTTP method
+export async function deleteArtifact(id) {
+  try {
+    const res = await fetch(`http://localhost:5000/artifacts/${id}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log(data);
     return data;
   } catch (err) {
     console.log(err);
@@ -465,25 +463,6 @@ export async function addLikeToCollection(collectionId, updatedLikesNum) {
   }
 }
 
-// Patch HTTP method for partialy editing collection object (status)
-export async function approveCollection(id, status) {
-  try {
-    const res = await fetch(`http://localhost:5000/collections/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ status: status }),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-}
-
 // Post HTTP method for adding new collection
 export async function addCollection(collection) {
   try {
@@ -497,6 +476,23 @@ export async function addCollection(collection) {
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
     // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// Delete HTTP method
+export async function deleteCollection(id) {
+  try {
+    const res = await fetch(`http://localhost:5000/collections/${id}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log(data);
     return data;
   } catch (err) {
     console.log(err);
@@ -537,25 +533,6 @@ export async function addLikeToTimelines(timelineId, updatedLikesNum) {
   }
 }
 
-// Patch HTTP method for partialy editing timeline object (status)
-export async function approveTimeline(id, status) {
-  try {
-    const res = await fetch(`http://localhost:5000/timelines/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ status: status }),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-}
-
 // Post HTTP method for adding new timeline
 export async function addTimeline(timeline) {
   try {
@@ -575,6 +552,23 @@ export async function addTimeline(timeline) {
   }
 }
 
+// Delete HTTP method
+export async function deleteTimeline(id) {
+  try {
+    const res = await fetch(`http://localhost:5000/timelines/${id}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 //// Empires
 // Get HTTP method
 export async function getEmpires() {
@@ -584,25 +578,6 @@ export async function getEmpires() {
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
     // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-// Patch HTTP method for partialy editing empires object (status)
-export async function approveEmpire(id, status) {
-  try {
-    const res = await fetch(`http://localhost:5000/empires/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ status: status }),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    console.log(data);
     return data;
   } catch (err) {
     console.log(err);
@@ -628,6 +603,23 @@ export async function addEmpire(empire) {
   }
 }
 
+// Delete HTTP method
+export async function deleteEmpire(id) {
+  try {
+    const res = await fetch(`http://localhost:5000/empires/${id}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 //// Figures
 // Get HTTP method
 export async function getFigures() {
@@ -637,25 +629,6 @@ export async function getFigures() {
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
     // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-// Patch HTTP method for partialy editing empires object (status)
-export async function approveFigure(id, status) {
-  try {
-    const res = await fetch(`http://localhost:5000/figures/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ status: status }),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    console.log(data);
     return data;
   } catch (err) {
     console.log(err);
@@ -675,6 +648,23 @@ export async function addFigures(figure) {
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
     // console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// Delete HTTP method
+export async function deleteFigure(id) {
+  try {
+    const res = await fetch(`http://localhost:5000/figures/${id}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log(data);
     return data;
   } catch (err) {
     console.log(err);
@@ -713,4 +703,21 @@ export async function postComment(comment) {
   } catch (err) {
     console.log(err);
   }
+}
+
+/////////// Dynamic HTTP request for approving all data types
+export async function updateEntityStatus(endpoint, id, status) {
+  const res = await fetch(`http://localhost:5000/${endpoint}/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ status }),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Error updating ${endpoint}: ${res.statusText}`);
+  }
+
+  return await res.json();
 }

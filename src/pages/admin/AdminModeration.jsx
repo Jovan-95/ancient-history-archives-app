@@ -1,15 +1,16 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import getUsers, {
-  approveArtifact,
-  approveCollection,
-  approveEmpire,
-  approveFigure,
-  approveTimeline,
+  deleteArtifact,
+  deleteCollection,
+  deleteEmpire,
+  deleteFigure,
+  deleteTimeline,
   getArtifacts,
   getCollections,
   getEmpires,
   getFigures,
   getTimelines,
+  updateEntityStatus,
 } from "../../services";
 import { useSelector } from "react-redux";
 
@@ -78,45 +79,74 @@ function AdminModeration() {
     queryFn: getFigures,
   });
 
-  // Patch HTTP method calling
-  const { mutate: approvePendingArtifact } = useMutation({
-    mutationFn: ({ id, status }) => approveArtifact(id, status),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["artifacts"]); // osvežava users podatke
-    },
-  });
+  // Dynamic PATCH HTTP req for all data types
+  function useApproveEntity(endpoint) {
+    const queryClient = useQueryClient();
 
-  // Patch HTTP method calling
-  const { mutate: approvePendingCollection } = useMutation({
-    mutationFn: ({ id, status }) => approveCollection(id, status),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["collections"]); // osvežava users podatke
-    },
-  });
+    return useMutation({
+      mutationFn: ({ id, status }) => updateEntityStatus(endpoint, id, status),
+      onSuccess: () => {
+        queryClient.invalidateQueries([endpoint]);
+      },
+    });
+  }
+  const approveArtifact = useApproveEntity("artifacts");
+  const approveTimeline = useApproveEntity("timelines");
+  const approveCollection = useApproveEntity("collections");
+  const approveEmpire = useApproveEntity("empires");
+  const approveFigure = useApproveEntity("figures");
 
-  // Patch HTTP method calling
-  const { mutate: approvePendingTimeline } = useMutation({
-    mutationFn: ({ id, status }) => approveTimeline(id, status),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["timelines"]); // osvežava users podatke
-    },
-  });
+  function handleApprove(item, approveFn) {
+    approveFn({ id: item.id, status: "approved" });
+  }
 
-  // Patch HTTP method calling
-  const { mutate: approvePendingEmpire } = useMutation({
-    mutationFn: ({ id, status }) => approveEmpire(id, status),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["empires"]); // osvežava users podatke
-    },
-  });
+  function handleReject(item, approveFn) {
+    approveFn({ id: item.id, status: "rejected" });
+  }
 
-  // Patch HTTP method calling
-  const { mutate: approvePendingFigure } = useMutation({
-    mutationFn: ({ id, status }) => approveFigure(id, status),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["figures"]); // osvežava users podatke
-    },
-  });
+  // Dynamic Delete HTTP method ALL rejected
+  function useDeleteRejectedEntities(endpoint, deleteFn) {
+    return useMutation({
+      mutationFn: async () => {
+        const res = await fetch(`http://localhost:5000/${endpoint}`);
+        const data = await res.json();
+        const rejected = data.filter((item) => item.status === "rejected");
+
+        await Promise.all(rejected.map((item) => deleteFn(item.id)));
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries([endpoint]);
+      },
+      onError: (err) => {
+        console.error(`Failed to delete rejected ${endpoint}:`, err);
+      },
+    });
+  }
+  // Destructure
+  const { mutate: deleteRejectedArtifacts } = useDeleteRejectedEntities(
+    "artifacts",
+    deleteArtifact
+  );
+
+  const { mutate: deleteRejectedCollections } = useDeleteRejectedEntities(
+    "collections",
+    deleteCollection
+  );
+
+  const { mutate: deleteRejectedTimelines } = useDeleteRejectedEntities(
+    "timelines",
+    deleteTimeline
+  );
+
+  const { mutate: deleteRejectedEmpires } = useDeleteRejectedEntities(
+    "empires",
+    deleteEmpire
+  );
+
+  const { mutate: deleteRejectedFigures } = useDeleteRejectedEntities(
+    "figures",
+    deleteFigure
+  );
 
   // HTTP loading and error
   if (
@@ -143,83 +173,52 @@ function AdminModeration() {
 
   // Approve artifact
   function handleApprovingArtifact(artifact) {
-    approvePendingArtifact({
-      id: artifact.id,
-      status: "approved",
-    });
+    handleApprove(artifact, approveArtifact.mutate);
   }
 
   // Approve collection
   function handleApprovingCollection(collection) {
-    approvePendingCollection({
-      id: collection.id,
-      status: "approved",
-    });
+    handleApprove(collection, approveCollection.mutate);
   }
 
   // Approve timeline
   function handleApprovingTimeline(timeline) {
-    approvePendingTimeline({
-      id: timeline.id,
-      status: "approved",
-    });
+    handleApprove(timeline, approveTimeline.mutate);
   }
 
   // Approve empire
   function handleApprovingEmpire(empire) {
-    approvePendingEmpire({
-      id: empire.id,
-      status: "approved",
-    });
+    handleApprove(empire, approveEmpire.mutate);
   }
 
   // Approve figure
   function handleApprovingFigure(figure) {
-    console.log(figure);
-    approvePendingFigure({
-      id: figure.id,
-      status: "approved",
-    });
+    handleApprove(figure, approveFigure.mutate);
   }
 
   // Reject artifact
   function handleRejectingArtifact(artifact) {
-    approvePendingArtifact({
-      id: artifact.id,
-      status: "rejected",
-    });
+    handleReject(artifact, approveArtifact.mutate);
   }
 
   // Reject collection
   function handleRejectingCollection(collection) {
-    approvePendingCollection({
-      id: collection.id,
-      status: "rejected",
-    });
+    handleReject(collection, approveCollection.mutate);
   }
 
   // Reject timeline
   function handleRejectingTimeline(timeline) {
-    approvePendingTimeline({
-      id: timeline.id,
-      status: "rejected",
-    });
+    handleReject(timeline, approveTimeline.mutate);
   }
 
   // Reject figure
   function handleRejectingFigure(figure) {
-    approvePendingFigure({
-      id: figure.id,
-      status: "rejected",
-    });
+    handleReject(figure, approveFigure.mutate);
   }
 
   // Reject empire
   function handleRejectingEmpire(empire) {
-    approvePendingEmpire({
-      id: empire.id,
-      status: "rejected",
-    });
+    handleReject(empire, approveEmpire.mutate);
   }
   return (
     <div>
@@ -289,6 +288,9 @@ function AdminModeration() {
             ))}
           </tbody>
         </table>
+        <button onClick={deleteRejectedArtifacts} className="btn-reject">
+          Clear all rejected
+        </button>
       </div>
 
       <div className="admin-table">
@@ -355,6 +357,9 @@ function AdminModeration() {
             ))}
           </tbody>
         </table>
+        <button onClick={deleteRejectedCollections} className="btn-reject">
+          Clear all rejected
+        </button>
       </div>
 
       <div className="admin-table">
@@ -421,6 +426,9 @@ function AdminModeration() {
             ))}
           </tbody>
         </table>
+        <button onClick={deleteRejectedTimelines} className="btn-reject">
+          Clear all rejected
+        </button>
       </div>
 
       <div className="admin-table">
@@ -487,6 +495,9 @@ function AdminModeration() {
             ))}
           </tbody>
         </table>
+        <button onClick={deleteRejectedFigures} className="btn-reject">
+          Clear all rejected
+        </button>
       </div>
 
       <div className="admin-table">
@@ -553,6 +564,9 @@ function AdminModeration() {
             ))}
           </tbody>
         </table>
+        <button onClick={deleteRejectedEmpires} className="btn-reject">
+          Clear all rejected
+        </button>
       </div>
     </div>
   );

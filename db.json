@@ -52,36 +52,7 @@
         "babylon"
       ],
       "createdAt": "2023-08-10T14:00:00Z",
-      "status": "rejected"
-    },
-    {
-      "id": "4",
-      "title": "Venus of Willendorf",
-      "description": "A famous Paleolithic figurine symbolizing fertility.",
-      "period": "Upper Paleolithic",
-      "region": "Europe",
-      "imageUrl": "/images/venus.jpg",
-      "collectionId": 5,
-      "likes": 11,
-      "views": 730,
-      "tags": [
-        "fertility",
-        "prehistoric",
-        "figurine"
-      ],
-      "createdAt": "2023-09-15T16:30:00Z",
-      "status": "rejected"
-    },
-    {
-      "id": "1746263691882",
-      "title": "Great Sphinx of Giza",
-      "description": "The Great Sphinx of Giza is a limestone statue of a reclining sphinx, a mythical creature with the head of a human and the body of a lion.",
-      "period": "2500 BC",
-      "region": "Egypt",
-      "userId": "64fd",
-      "createdAt": "2025-05-03T09:14:51.882Z",
-      "likes": [],
-      "status": "rejected"
+      "status": "approved"
     }
   ],
   "collections": [
@@ -111,33 +82,6 @@
       "likes": 1,
       "createdAt": "2023-06-14T10:00:00Z",
       "status": "approved"
-    },
-    {
-      "id": "4",
-      "title": "Mesopotamian Marvels",
-      "description": "Artifacts from the cradle of civilization.",
-      "createdBy": 1,
-      "likes": 1,
-      "createdAt": "2023-06-14T10:00:00Z",
-      "status": "approved"
-    },
-    {
-      "id": "5",
-      "title": "European Prehistory",
-      "description": "Figurines and tools from ancient Europe.",
-      "createdBy": 2,
-      "likes": null,
-      "createdAt": "2023-06-14T10:00:00Z",
-      "status": "rejected"
-    },
-    {
-      "id": "1746263477322",
-      "title": "Greek spears",
-      "description": "Ancient collection of greek spears from 500bc.",
-      "userId": "64fd",
-      "createdAt": "2025-05-03T09:11:17.322Z",
-      "likes": [],
-      "status": "rejected"
     }
   ],
   "timelines": [
@@ -354,29 +298,7 @@
       "userId": "64fd",
       "createdAt": "2025-05-03T08:30:17.741Z",
       "likes": [],
-      "status": "rejected"
-    },
-    {
-      "id": "1746271447083",
-      "name": "Byzantine empire",
-      "description": "Rome after rome",
-      "era": "4th-14th century",
-      "region": "Balkans, Asia minor, middle east, egypt",
-      "userId": "64fd",
-      "createdAt": "2025-05-03T11:24:07.083Z",
-      "likes": [],
-      "status": "rejected"
-    },
-    {
-      "id": "1746283469975",
-      "name": "Macedon ",
-      "description": "Greatest Greek kingdom",
-      "era": "4th century BC",
-      "region": "From Balkans to India",
-      "userId": "64fd",
-      "createdAt": "2025-05-03T14:44:29.975Z",
-      "likes": [],
-      "status": "pending"
+      "status": "approved"
     }
   ],
   "figures": [
@@ -397,28 +319,6 @@
       "knownFor": "Last active ruler of the Ptolemaic Kingdom of Egypt.",
       "createdAt": "2023-06-14T10:00:00Z",
       "status": "approved"
-    },
-    {
-      "id": "1746263036891",
-      "name": "Tsar Dusan",
-      "knownFor": "First Serbian Emperor",
-      "era": "14th century",
-      "region": "Balkans",
-      "userId": "64fd",
-      "createdAt": "2025-05-03T09:03:56.891Z",
-      "likes": [],
-      "status": "rejected"
-    },
-    {
-      "id": "1746270898211",
-      "name": "Knez Lazar",
-      "knownFor": "Ruler who defended christianity.",
-      "era": "14th century",
-      "region": "Balkans",
-      "userId": "64fd",
-      "createdAt": "2025-05-03T11:14:58.211Z",
-      "likes": [],
-      "status": "rejected"
     },
     {
       "id": "1746283402575",
