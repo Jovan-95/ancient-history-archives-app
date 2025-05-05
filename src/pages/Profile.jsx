@@ -2,9 +2,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import getUsers, {
-  changeUserAvatar,
-  deleteUser,
-  editUser,
   getArtifacts,
   getCollections,
   getTimelines,
