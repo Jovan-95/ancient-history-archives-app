@@ -29,3 +29,27 @@ img:hover {
 .text-red {
   color: red;
 }
+
+select {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  color: #333;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+
+  &:focus {
+    outline: none;
+    border-color: #5a67d8; // primer: plava nijansa
+    box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.3);
+  }
+
+  &:hover {
+    border-color: #888;
+  }
+}

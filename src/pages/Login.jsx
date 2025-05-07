@@ -8,6 +8,7 @@ import getUsers from "../services";
 
 function Login() {
   const [loginUserObj, setLoginUserObj] = useState({ email: "", password: "" });
+  const loggedUser = useSelector((state) => state.auth.loggedInUser);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,18 +31,28 @@ function Login() {
         user.password === loginUserObj.password
     );
 
+    if (!user) {
+      alert("Wrong credentials!");
+      return;
+    }
+
+    if (user.status === "banned") {
+      alert("You are banned!");
+      return;
+    }
+
     if (user) {
       console.log("Logged user:", user);
       alert("Credentials are matching!");
       dispatch(
-        addLoggedUser({ ...loginUserObj, id: user.id, username: user.username })
+        addLoggedUser({
+          ...loginUserObj,
+          id: user.id,
+          username: user.username,
+        })
       );
       navigate("/home");
-    } else {
-      alert("Wrong credentials!");
     }
-
-    console.log(user);
   }
 
   function goToRegister() {

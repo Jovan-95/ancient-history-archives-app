@@ -26,7 +26,7 @@
       "region": "China",
       "imageUrl": "/images/terracotta.jpg",
       "collectionId": 2,
-      "likes": 123,
+      "likes": 124,
       "views": 890,
       "tags": [
         "funerary",
@@ -61,7 +61,7 @@
       "title": "Egyptian Wonders",
       "description": "A collection of iconic Egyptian discoveries.",
       "createdBy": 1,
-      "likes": 2,
+      "likes": 3,
       "createdAt": "2023-06-14T10:00:00Z",
       "status": "approved"
     },
@@ -124,7 +124,7 @@
     {
       "id": "1746263278330",
       "title": "Kosovo battle",
-      "userId": "64fd",
+      "userId": null,
       "createdAt": "2025-05-03T09:07:58.330Z",
       "likes": [],
       "events": [
@@ -234,7 +234,7 @@
       "nickname": "JV95",
       "text": "Serbiaaa",
       "collectionId": 3,
-      "userId": "64fd",
+      "userId": null,
       "createdAt": "2025-04-21T09:19:13.239Z"
     },
     {
@@ -242,7 +242,7 @@
       "nickname": "test",
       "text": "test",
       "artifactId": 1746007496946,
-      "userId": "64fd",
+      "userId": null,
       "createdAt": "2025-04-30T10:05:07.273Z"
     },
     {
@@ -250,7 +250,7 @@
       "nickname": "test",
       "text": "test",
       "collectionId": 5,
-      "userId": "64fd",
+      "userId": null,
       "createdAt": "2025-04-30T11:51:53.739Z"
     },
     {
@@ -258,7 +258,7 @@
       "nickname": "NEW",
       "text": "NEW",
       "collectionId": 1746014013171,
-      "userId": "64fd",
+      "userId": null,
       "createdAt": "2025-04-30T11:53:43.595Z"
     },
     {
@@ -266,8 +266,16 @@
       "nickname": "jovuk",
       "text": "Greatest battle",
       "timelineId": 1746093170547,
-      "userId": "64fd",
+      "userId": null,
       "createdAt": "2025-05-01T09:53:11.651Z"
+    },
+    {
+      "id": "6416",
+      "nickname": "juhnlohulo",
+      "text": "huohuohu",
+      "artifactId": 1,
+      "userId": null,
+      "createdAt": "2025-05-06T11:21:17.248Z"
     }
   ],
   "empires": [
@@ -295,8 +303,19 @@
       "description": "The greatest power in the Balkans.",
       "era": "14th century",
       "region": "Balkans",
-      "userId": "64fd",
+      "userId": null,
       "createdAt": "2025-05-03T08:30:17.741Z",
+      "likes": [],
+      "status": "approved"
+    },
+    {
+      "id": "1746530123449",
+      "name": "Greek",
+      "description": "Test",
+      "era": "14th century",
+      "region": "Balkans",
+      "userId": null,
+      "createdAt": "2025-05-06T11:15:23.449Z",
       "likes": [],
       "status": "approved"
     }
@@ -326,46 +345,13 @@
       "knownFor": "Greatest conqueror ever",
       "era": "4th century BC",
       "region": "Macedonia",
-      "userId": "64fd",
+      "userId": null,
       "createdAt": "2025-05-03T14:43:22.575Z",
       "likes": [],
-      "status": "pending"
+      "status": "approved"
     }
   ],
   "users": [
-    {
-      "id": "64fd",
-      "username": "Jovan",
-      "email": "vuksanovicjovan@hotmail.com",
-      "password": "111111",
-      "role": "Admin",
-      "bookmarksArtifacts": [
-        "1",
-        "4"
-      ],
-      "likesArtifacts": [
-        "1",
-        "4",
-        "1746007496946",
-        "1746013861683"
-      ],
-      "bookmarksCollections": [
-        "2"
-      ],
-      "likesCollections": [
-        "5",
-        "1746014013171"
-      ],
-      "bookmarksTimelines": [
-        "2",
-        "1746093170547"
-      ],
-      "likesTimelines": [
-        "2",
-        "1746093170547"
-      ],
-      "avatar": "/images/boy-2.jpg"
-    },
     {
       "id": "0066",
       "username": "test",
@@ -373,7 +359,7 @@
       "avatar": "/images/boy-2.jpg",
       "password": "222222",
       "confirmPassword": "222222",
-      "role": "Researcher",
+      "role": "Reader",
       "bookmarksArtifacts": [],
       "likesArtifacts": [
         "1"
@@ -381,21 +367,38 @@
       "bookmarksCollections": [],
       "likesCollections": [],
       "bookmarksTimelines": [],
-      "likesTimelines": []
+      "likesTimelines": [],
+      "status": "banned"
     },
     {
-      "id": "9061",
-      "username": "smesko",
+      "id": "eb09",
+      "username": "Jovan",
+      "email": "vuksanovicjovan@hotmail.com",
+      "password": "111111",
+      "confirmPassword": "111111",
+      "role": "Admin",
+      "bookmarksArtifacts": [],
+      "likesArtifacts": [],
+      "bookmarksCollections": [],
+      "likesCollections": [],
+      "bookmarksTimelines": [],
+      "likesTimelines": [],
+      "status": ""
+    },
+    {
+      "id": "4889",
+      "username": "Smesko",
       "email": "smesko@gmail.com",
-      "password": "444444",
-      "confirmPassword": "444444",
+      "password": "333333",
+      "confirmPassword": "333333",
       "role": "Researcher",
       "bookmarksArtifacts": [],
       "likesArtifacts": [],
       "bookmarksCollections": [],
       "likesCollections": [],
       "bookmarksTimelines": [],
-      "likesTimelines": []
+      "likesTimelines": [],
+      "status": "banned"
     }
   ]
 }

@@ -57,6 +57,7 @@ function Register() {
       likesCollections: [],
       bookmarksTimelines: [],
       likesTimelines: [],
+      status: "",
     });
 
     navigate("/login");

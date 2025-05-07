@@ -337,6 +337,48 @@ export async function editUser(userId, editedObj) {
   }
 }
 
+//// Patch HTTP method change user role
+export async function changeUserRole(id, role) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ role: role }),
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+//// Patch HTTP method change user status (ban, unban)
+export async function changeUserStatus(id, status) {
+  try {
+    const res = await fetch(`http://localhost:5000/users/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ status: status }),
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 // Delete HTTP method
 export async function deleteUser(userId) {
   try {
