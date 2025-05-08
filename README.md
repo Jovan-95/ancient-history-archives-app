@@ -7,3 +7,5 @@ Setup projekta i instalacija svih paketa:
 5. npm install sass
 6. npm run server
 7. npm run dev
+
+Test
