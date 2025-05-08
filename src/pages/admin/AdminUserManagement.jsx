@@ -15,6 +15,8 @@ function AdminUserManagement() {
   const [role, setRole] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [isOpenBanModal, setIsOpenBanModal] = useState(false);
+  const [isOpenApproveModal, setIsOpenApproveModal] = useState(false);
   const [user, setUser] = useState("");
   const [targetDeletedUser, setTargetDeletedUser] = useState("");
 
@@ -103,14 +105,49 @@ function AdminUserManagement() {
     setIsOpenDeleteModal(false);
   }
 
-  // Ban/unban user
-  function handleUserStatus(user) {
+  // Ban modal
+  function handleBanModal(user) {
+    if (user.id === loggedUser.id) {
+      alert("You can't ban yourself.");
+      return;
+    }
+    setUser(user);
+    setIsOpenBanModal((prev) => !prev);
+  }
+
+  // Ban user
+  function handleUserStatus() {
     userStatusChangingMutation({
       id: user.id,
       status: "banned",
     });
+    setIsOpenBanModal(false);
+    // console.log(user);
   }
 
+  // Unban user
+  function handleUnbanUser() {
+    userStatusChangingMutation({
+      id: user.id,
+      status: "active",
+    });
+    setIsOpenBanModal(false);
+  }
+
+  // Approve user modal
+  function handleApproveModal(user) {
+    setIsOpenApproveModal((prev) => !prev);
+
+    setUser(user);
+  }
+
+  function approveUser() {
+    userStatusChangingMutation({
+      id: user.id,
+      status: "active",
+    });
+    setIsOpenApproveModal(false);
+  }
   return (
     <>
       <div className="admin-table">
@@ -138,13 +175,19 @@ function AdminUserManagement() {
                 </td>
                 <td>
                   <button
+                    onClick={() => handleApproveModal(user)}
+                    className="btn btn-approve"
+                  >
+                    Approve
+                  </button>
+                  <button
                     onClick={() => handleOpenRemoveModal(user)}
-                    className="btn btn-reject"
+                    className="btn btn-reject ml-4"
                   >
                     Delete
                   </button>
                   <button
-                    onClick={() => handleUserStatus(user)}
+                    onClick={() => handleBanModal(user)}
                     className="btn btn--cta ml-4"
                   >
                     Ban
@@ -160,6 +203,7 @@ function AdminUserManagement() {
             ))}
           </tbody>
         </table>
+        {/* change role */}
         <div className={isOpen ? "d-block" : "d-none"}>
           <Modal>
             <p>Are you sure you want to change role for this user?</p>
@@ -188,7 +232,7 @@ function AdminUserManagement() {
           </Modal>
         </div>
 
-        {/* Commented delete functionality */}
+        {/* delete functionality */}
         <div className={isOpenDeleteModal ? "d-block" : "d-none"}>
           <Modal>
             <p>Are you sure you want to remove this user?</p>
@@ -197,6 +241,45 @@ function AdminUserManagement() {
             </button>
             <button
               onClick={() => setIsOpenDeleteModal(false)}
+              className="btn ml-4"
+            >
+              Cancel
+            </button>
+          </Modal>
+        </div>
+
+        {/* ban functionality */}
+        <div className={isOpenBanModal ? "d-block" : "d-none"}>
+          <Modal>
+            <p>Are you sure you want to ban this user?</p>
+            <button onClick={handleUserStatus} className="btn btn-reject">
+              Ban this user?
+            </button>
+            {user.status === "banned" ? (
+              <button onClick={handleUnbanUser} className="btn btn--cta ml-4">
+                Unban user?
+              </button>
+            ) : (
+              ""
+            )}
+            <button
+              onClick={() => setIsOpenBanModal(false)}
+              className="btn ml-4"
+            >
+              Cancel
+            </button>
+          </Modal>
+        </div>
+
+        {/* approve user registration */}
+        <div className={isOpenApproveModal ? "d-block" : "d-none"}>
+          <Modal>
+            <p>Are you sure you want to approve this user?</p>
+            <button onClick={approveUser} className="btn btn-approve">
+              Approve this user?
+            </button>
+            <button
+              onClick={() => setIsOpenApproveModal(false)}
               className="btn ml-4"
             >
               Cancel

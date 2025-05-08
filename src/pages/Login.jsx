@@ -41,6 +41,11 @@ function Login() {
       return;
     }
 
+    if (user.status === "pending") {
+      alert("Your registration is waiting for approval!");
+      return;
+    }
+
     if (user) {
       console.log("Logged user:", user);
       alert("Credentials are matching!");
