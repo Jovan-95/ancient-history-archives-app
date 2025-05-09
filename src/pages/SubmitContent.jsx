@@ -9,6 +9,11 @@ import {
 } from "../services";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import {
+  showSuccessToast,
+  showErrorToast,
+  showInfoToast,
+} from "../components/Toast";
 
 function SubmitContent() {
   const loggedUser = useSelector((state) => state.auth.loggedInUser);
@@ -80,7 +85,7 @@ function SubmitContent() {
   function handleArtifactSubmit(e) {
     e.preventDefault();
     if (!title.trim() || !desc.trim()) {
-      alert("Please fill out all required fields.");
+      showErrorToast("Please fill out all required fields.");
       return;
     }
 
@@ -96,11 +101,14 @@ function SubmitContent() {
       likes: [],
       status: "pending",
     });
+    showSuccessToast("Artifact is submited!");
   }
 
-  function handleCollectionSubmit() {
+  function handleCollectionSubmit(e) {
+    e.preventDefault();
+
     if (!title.trim() || !desc.trim()) {
-      alert("Please fill out all required fields.");
+      showErrorToast("Please fill out all required fields.");
       return;
     }
 
@@ -114,11 +122,14 @@ function SubmitContent() {
       likes: [],
       status: "pending",
     });
+    showSuccessToast("Collection is submited!");
   }
 
-  function handleTimelineSubmit() {
+  function handleTimelineSubmit(e) {
+    e.preventDefault();
+
     if (!title.trim()) {
-      alert("Please fill out all required fields.");
+      showErrorToast("Please fill out all required fields.");
       return;
     }
 
@@ -133,11 +144,14 @@ function SubmitContent() {
     };
     // Post HTTP method calling
     addTimelineMutation.mutate(newTimelineObj);
+    showSuccessToast("Timeline is submited!");
   }
 
-  function handleEmpireSubmit() {
+  function handleEmpireSubmit(e) {
+    e.preventDefault();
+
     if (!title.trim() || !desc.trim()) {
-      alert("Please fill out all required fields.");
+      showErrorToast("Please fill out all required fields.");
       return;
     }
 
@@ -152,11 +166,14 @@ function SubmitContent() {
       likes: [],
       status: "pending",
     });
+    showSuccessToast("Empire is submited!");
   }
 
-  function handleFigureSubmit() {
+  function handleFigureSubmit(e) {
+    e.preventDefault();
+
     if (!title.trim() || !desc.trim()) {
-      alert("Please fill out all required fields.");
+      showErrorToast("Please fill out all required fields.");
       return;
     }
     addFigureMutation.mutate({
@@ -170,6 +187,7 @@ function SubmitContent() {
       likes: [],
       status: "pending",
     });
+    showSuccessToast("Figure is submited!");
   }
 
   function handleFormShowing(e) {

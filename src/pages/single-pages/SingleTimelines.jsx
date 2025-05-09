@@ -1,6 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
+import {
+  showSuccessToast,
+  showErrorToast,
+  showInfoToast,
+} from "../../components/Toast";
 import getUsers, {
   addBookmarkToUserTimeline,
   addLikeToTimelines,
@@ -131,7 +136,7 @@ function SingleTimelines() {
 
     // Prevent duplicates bookmarks
     if (alreadyBookmarked) {
-      return alert("You already bookmarked this one!");
+      return showInfoToast("You already bookmarked this one!");
     }
 
     const updatedBookmarks = [
@@ -144,6 +149,7 @@ function SingleTimelines() {
       userId: patchedUser.id,
       updatedBookmarks,
     });
+    showSuccessToast("Item bookmarked!");
   }
 
   // Like
@@ -155,7 +161,7 @@ function SingleTimelines() {
 
     // Prevent duplicates Liked
     if (alreadyLiked) {
-      return alert("You already liked this one!");
+      return showInfoToast("You already liked this one!");
     }
 
     const updatedLikes = [...patchedUser.likesTimelines, singleTimeline.id];
@@ -173,6 +179,7 @@ function SingleTimelines() {
       timelineId: singleTimeline.id,
       updatedLikesNum,
     });
+    showSuccessToast("Item liked!");
   }
 
   return (

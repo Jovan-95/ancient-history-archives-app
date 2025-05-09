@@ -8,7 +8,7 @@
       "region": "Egypt",
       "imageUrl": "/images/rosetta.jpg",
       "collectionId": 1,
-      "likes": 100,
+      "likes": 103,
       "views": 540,
       "tags": [
         "language",
@@ -34,7 +34,7 @@
         "army"
       ],
       "createdAt": "2023-07-22T12:30:00Z",
-      "status": "approved"
+      "status": "rejected"
     },
     {
       "id": "3",
@@ -52,7 +52,7 @@
         "babylon"
       ],
       "createdAt": "2023-08-10T14:00:00Z",
-      "status": "rejected"
+      "status": "approved"
     }
   ],
   "collections": [
@@ -61,7 +61,7 @@
       "title": "Egyptian Wonders",
       "description": "A collection of iconic Egyptian discoveries.",
       "createdBy": 1,
-      "likes": 3,
+      "likes": 4,
       "createdAt": "2023-06-14T10:00:00Z",
       "status": "approved"
     },
@@ -99,7 +99,7 @@
         }
       ],
       "createdBy": 1,
-      "likes": 2,
+      "likes": 3,
       "createdAt": "2023-06-14T10:00:00Z",
       "status": "approved"
     },
@@ -318,6 +318,17 @@
       "createdAt": "2025-05-06T11:15:23.449Z",
       "likes": [],
       "status": "approved"
+    },
+    {
+      "id": "1746787281833",
+      "name": "Oly Babylon",
+      "description": "First big city",
+      "era": "3000bc",
+      "region": "Mesopotamia",
+      "userId": "eb09",
+      "createdAt": "2025-05-09T10:41:21.833Z",
+      "likes": [],
+      "status": "pending"
     }
   ],
   "figures": [
@@ -349,6 +360,17 @@
       "createdAt": "2025-05-03T14:43:22.575Z",
       "likes": [],
       "status": "approved"
+    },
+    {
+      "id": "1746787371881",
+      "name": "Knez Lazar",
+      "knownFor": "Legendary warrior king",
+      "era": "14th century",
+      "region": "Moravian Serbia",
+      "userId": "eb09",
+      "createdAt": "2025-05-09T10:42:51.881Z",
+      "likes": [],
+      "status": "pending"
     }
   ],
   "users": [
@@ -368,11 +390,11 @@
       "likesCollections": [],
       "bookmarksTimelines": [],
       "likesTimelines": [],
-      "status": "active"
+      "status": "banned"
     },
     {
       "id": "eb09",
-      "username": "Jovan",
+      "username": "Jovan-95",
       "email": "vuksanovicjovan@hotmail.com",
       "password": "111111",
       "confirmPassword": "111111",
@@ -383,7 +405,8 @@
       "likesCollections": [],
       "bookmarksTimelines": [],
       "likesTimelines": [],
-      "status": "active"
+      "status": "active",
+      "avatar": "/images/boy-1.jpg"
     },
     {
       "id": "4889",

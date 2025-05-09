@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../services";
+import { showSuccessToast, showErrorToast } from "../components/Toast";
 
 function Register() {
   const navigate = useNavigate();
@@ -27,25 +28,25 @@ function Register() {
       userObj.password === "" ||
       userObj.confirmPassword === ""
     )
-      return alert("Fill all fields!");
+      return showErrorToast("Fill all fields!");
 
     if (userObj.username.length < 3) {
-      return alert("Username is too short!");
+      return showErrorToast("Username is too short!");
     }
 
     if (!validateEmail(userObj.email)) {
-      return alert("Invalid Email!");
+      return showErrorToast("Invalid Email!");
     }
 
     if (userObj.password.length < 6) {
-      return alert("Password is to short!");
+      return showErrorToast("Password is to short!");
     }
 
     if (userObj.password !== userObj.confirmPassword) {
-      return alert("Passwords are not matching!");
+      return showErrorToast("Passwords are not matching!");
     }
 
-    alert("You registration is successfull!");
+    showSuccessToast("You registration is successfull!");
 
     // POST HTTP call and register new user with default role
     registerUser({

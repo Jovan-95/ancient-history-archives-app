@@ -5,6 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { addLoggedUser } from "../redux/authSlice";
 import { useQuery } from "@tanstack/react-query";
 import getUsers from "../services";
+import {
+  showSuccessToast,
+  showErrorToast,
+  showInfoToast,
+} from "../components/Toast";
 
 function Login() {
   const [loginUserObj, setLoginUserObj] = useState({ email: "", password: "" });
@@ -32,23 +37,23 @@ function Login() {
     );
 
     if (!user) {
-      alert("Wrong credentials!");
+      showErrorToast("Wrong credentials!");
       return;
     }
 
     if (user.status === "banned") {
-      alert("You are banned!");
+      showErrorToast("You are banned!");
       return;
     }
 
     if (user.status === "pending") {
-      alert("Your registration is waiting for approval!");
+      showInfoToast("Your registration is waiting for approval!");
       return;
     }
 
     if (user) {
       console.log("Logged user:", user);
-      alert("Credentials are matching!");
+      showSuccessToast("Credentials are matching!");
       dispatch(
         addLoggedUser({
           ...loginUserObj,

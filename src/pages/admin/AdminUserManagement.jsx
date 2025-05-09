@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import getUsers, {
@@ -7,6 +8,11 @@ import getUsers, {
 } from "../../services";
 import { useState } from "react";
 import Modal from "../../components/Modal";
+import {
+  showSuccessToast,
+  showErrorToast,
+  showInfoToast,
+} from "../../components/Toast";
 
 /* eslint-disable no-unused-vars */
 function AdminUserManagement() {
@@ -92,7 +98,7 @@ function AdminUserManagement() {
   // Open remove user modal
   function handleOpenRemoveModal(user) {
     if (user.id === loggedUser.id) {
-      alert("You can't delete yourself.");
+      showInfoToast("You can't delete yourself.");
       return;
     }
     setIsOpenDeleteModal(true);
@@ -103,12 +109,13 @@ function AdminUserManagement() {
   function handleUserDelete() {
     deleteMutation.mutate(targetDeletedUser.id);
     setIsOpenDeleteModal(false);
+    showInfoToast("User deleted!");
   }
 
   // Ban modal
   function handleBanModal(user) {
     if (user.id === loggedUser.id) {
-      alert("You can't ban yourself.");
+      showInfoToast("You can't ban yourself.");
       return;
     }
     setUser(user);
@@ -123,6 +130,7 @@ function AdminUserManagement() {
     });
     setIsOpenBanModal(false);
     // console.log(user);
+    showInfoToast("User banned!");
   }
 
   // Unban user
@@ -132,6 +140,7 @@ function AdminUserManagement() {
       status: "active",
     });
     setIsOpenBanModal(false);
+    showInfoToast("User unbanned!");
   }
 
   // Approve user modal
@@ -147,6 +156,7 @@ function AdminUserManagement() {
       status: "active",
     });
     setIsOpenApproveModal(false);
+    showSuccessToast("User approved!");
   }
   return (
     <>

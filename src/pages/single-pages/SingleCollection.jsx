@@ -1,6 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
+import {
+  showSuccessToast,
+  showErrorToast,
+  showInfoToast,
+} from "../../components/Toast";
 import getUsers, {
   addBookmarkToUserCollection,
   addLikeToCollection,
@@ -133,7 +138,7 @@ function SingleCollection() {
 
     // Prevent duplicates bookmarks
     if (alreadyBookmarked) {
-      return alert("You already bookmarked this one!");
+      return showInfoToast("You already bookmarked this one!");
     }
 
     const updatedBookmarks = [
@@ -146,6 +151,7 @@ function SingleCollection() {
       userId: patchedUser.id,
       updatedBookmarks,
     });
+    showSuccessToast("Item bookmarked!");
   }
 
   // Like
@@ -157,7 +163,7 @@ function SingleCollection() {
 
     // Prevent duplicates Liked
     if (alreadyLiked) {
-      return alert("You already liked this one!");
+      return showInfoToast("You already liked this one!");
     }
 
     const updatedLikes = [...patchedUser.likesCollections, singleCollection.id];
@@ -175,6 +181,7 @@ function SingleCollection() {
       collectionId: singleCollection.id,
       updatedLikesNum,
     });
+    showSuccessToast("Item liked!");
   }
 
   return (

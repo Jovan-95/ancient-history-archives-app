@@ -15,6 +15,11 @@ import getUsers, {
 import { useState } from "react";
 import ProfileCard from "../components/profile-components/ProfileCard";
 import UserCard from "../components/profile-components/UserCard";
+import {
+  showSuccessToast,
+  showErrorToast,
+  showInfoToast,
+} from "../components/Toast";
 
 function Profile() {
   // Logged user from redux
@@ -170,6 +175,7 @@ function Profile() {
         (id) => id !== String(artifact.id)
       ),
     });
+    showSuccessToast("Bookmark removed!");
   }
 
   // Removing collection from bookmarks array
@@ -180,6 +186,7 @@ function Profile() {
         (id) => id !== String(collection.id)
       ),
     });
+    showSuccessToast("Bookmark removed!");
   }
 
   // Removing timeline from bookmarks array
@@ -190,6 +197,7 @@ function Profile() {
         (id) => id !== String(timeline.id)
       ),
     });
+    showSuccessToast("Bookmark removed!");
   }
 
   // Removing artifact from likes array
@@ -200,6 +208,7 @@ function Profile() {
         (id) => id !== String(artifact.id)
       ),
     });
+    showSuccessToast("Like removed!");
   }
 
   // Removing collection from likes array
@@ -210,6 +219,7 @@ function Profile() {
         (id) => id !== String(collection.id)
       ),
     });
+    showSuccessToast("Like removed!");
   }
 
   // Removing timeline from likes array
@@ -220,6 +230,7 @@ function Profile() {
         (id) => id !== String(timeline.id)
       ),
     });
+    showSuccessToast("Like removed!");
   }
 
   return (

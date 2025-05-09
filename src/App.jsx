@@ -14,6 +14,8 @@ import SingleTimelines from "./pages/single-pages/SingleTimelines";
 import SingleEmpire from "./pages/single-pages/SingleEmpire";
 import SingleFigure from "./pages/single-pages/SingleFigure";
 import SingleProfile from "./pages/single-pages/SingleProfile";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const Register = lazy(() => import("./pages/Register"));
 const Login = lazy(() => import("./pages/Login"));
@@ -38,6 +40,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Suspense fallback={<h2>Loading...</h2>}>
+          <ToastContainer position="top-right" autoClose={3000} />
+
           <Routes>
             <Route path="/" element={<Register />} />
             <Route path="/login" element={<Login />} />

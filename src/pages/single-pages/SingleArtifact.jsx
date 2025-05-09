@@ -1,6 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
+import {
+  showSuccessToast,
+  showErrorToast,
+  showInfoToast,
+} from "../../components/Toast";
 import getUsers, {
   addBookmarkToUserArtifact,
   addLikeToArtifact,
@@ -135,7 +140,7 @@ function SingleArtifact() {
 
     // Prevent duplicates bookmarks
     if (alreadyBookmarked) {
-      return alert("You already bookmarked this one!");
+      return showInfoToast("You already bookmarked this one!");
     }
 
     // We keep artifactId and use it on other page to list artifact object
@@ -149,6 +154,7 @@ function SingleArtifact() {
       userId: patchedUser.id,
       updatedBookmarks,
     });
+    showSuccessToast("Item bookmarked!");
   }
 
   // Like artifact
@@ -160,7 +166,7 @@ function SingleArtifact() {
 
     // Prevent duplicates bookmarks
     if (alreadyLiked) {
-      return alert("You already liked this one!");
+      return showInfoToast("You already liked this one!");
     }
 
     // We keep artifactId and use it on other page to list artifact object
@@ -180,6 +186,7 @@ function SingleArtifact() {
       artifactsId: singleArtifact.id,
       updatedLikesNum,
     });
+    showSuccessToast("Item liked!");
   }
   return (
     <>

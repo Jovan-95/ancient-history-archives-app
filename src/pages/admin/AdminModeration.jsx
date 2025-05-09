@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import getUsers, {
   deleteArtifact,
@@ -13,6 +14,11 @@ import getUsers, {
   updateEntityStatus,
 } from "../../services";
 import { useSelector } from "react-redux";
+import {
+  showSuccessToast,
+  showErrorToast,
+  showInfoToast,
+} from "../../components/Toast";
 
 /* eslint-disable no-unused-vars */
 function AdminModeration() {
@@ -116,6 +122,7 @@ function AdminModeration() {
       },
       onSuccess: () => {
         queryClient.invalidateQueries([endpoint]);
+        showSuccessToast("All rejected items are deleted!");
       },
       onError: (err) => {
         console.error(`Failed to delete rejected ${endpoint}:`, err);
@@ -174,51 +181,61 @@ function AdminModeration() {
   // Approve artifact
   function handleApprovingArtifact(artifact) {
     handleApprove(artifact, approveArtifact.mutate);
+    showSuccessToast("item approved!");
   }
 
   // Approve collection
   function handleApprovingCollection(collection) {
     handleApprove(collection, approveCollection.mutate);
+    showSuccessToast("item approved!");
   }
 
   // Approve timeline
   function handleApprovingTimeline(timeline) {
     handleApprove(timeline, approveTimeline.mutate);
+    showSuccessToast("item approved!");
   }
 
   // Approve empire
   function handleApprovingEmpire(empire) {
     handleApprove(empire, approveEmpire.mutate);
+    showSuccessToast("item approved!");
   }
 
   // Approve figure
   function handleApprovingFigure(figure) {
     handleApprove(figure, approveFigure.mutate);
+    showSuccessToast("item approved!");
   }
 
   // Reject artifact
   function handleRejectingArtifact(artifact) {
     handleReject(artifact, approveArtifact.mutate);
+    showErrorToast("Item rejected!");
   }
 
   // Reject collection
   function handleRejectingCollection(collection) {
     handleReject(collection, approveCollection.mutate);
+    showErrorToast("Item rejected!");
   }
 
   // Reject timeline
   function handleRejectingTimeline(timeline) {
     handleReject(timeline, approveTimeline.mutate);
+    showErrorToast("Item rejected!");
   }
 
   // Reject figure
   function handleRejectingFigure(figure) {
     handleReject(figure, approveFigure.mutate);
+    showErrorToast("Item rejected!");
   }
 
   // Reject empire
   function handleRejectingEmpire(empire) {
     handleReject(empire, approveEmpire.mutate);
+    showErrorToast("Item rejected!");
   }
   return (
     <div>

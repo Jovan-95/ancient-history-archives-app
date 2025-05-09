@@ -1,0 +1,48 @@
+.notifications-page {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+
+  h2 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: #333;
+  }
+
+  .notification {
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    color: #222;
+    background-color: #f9f9f9;
+    border-left: 6px solid;
+
+    &.success {
+      border-color: #28a745;
+      background-color: #e6f4ea;
+    }
+
+    &.error {
+      border-color: #dc3545;
+      background-color: #fdecea;
+    }
+
+    &.info {
+      border-color: #007bff;
+      background-color: #e7f1fc;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    small {
+      display: block;
+      margin-top: 0.5rem;
+      color: #666;
+      font-size: 0.85rem;
+    }
+  }
+}

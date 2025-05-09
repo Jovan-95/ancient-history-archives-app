@@ -4,6 +4,11 @@ import Modal from "../Modal";
 import { useSelector } from "react-redux";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { changeUserAvatar, editUser } from "../../services";
+import {
+  showSuccessToast,
+  showErrorToast,
+  showInfoToast,
+} from "../../components/Toast";
 
 function ProfileCard({
   showAvatars,
@@ -51,7 +56,7 @@ function ProfileCard({
   // Edit user (profile)
   function handleSaveChanges() {
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+      showErrorToast("Passwords do not match!");
       return;
     }
     editUserFormFields({
@@ -64,6 +69,7 @@ function ProfileCard({
     });
 
     setOpenModal(false);
+    showSuccessToast("Changes are saved!");
   }
 
   // Avatar change function
@@ -74,6 +80,7 @@ function ProfileCard({
       avatarImg: avatarImg,
     });
     setShowAvatars(false);
+    showSuccessToast("Avatar is changed!");
   }
   return (
     <section className="current-user">
