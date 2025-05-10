@@ -19,12 +19,22 @@ const notificationsSlice = createSlice({
         JSON.stringify(state.notifications)
       );
     },
+    removeNotification: (state, action) => {
+      state.notifications = state.notifications.filter(
+        (note) => note.timestamp !== action.payload.timestamp
+      );
+    },
     clearNotifications: (state) => {
       state.notifications = [];
       localStorage.removeItem("notifications");
     },
   },
 });
-export const { addNotification, clearNotifications } =
+export const { addNotification, removeNotification, clearNotifications } =
   notificationsSlice.actions;
 export default notificationsSlice.reducer;
+
+// removeUser: (state, action) => {
+//   state.users = state.users.filter((user) => user.id !== action.payload.id);
+//   localStorage.setItem("users", JSON.stringify(state.users)); // Update localStorage
+// },

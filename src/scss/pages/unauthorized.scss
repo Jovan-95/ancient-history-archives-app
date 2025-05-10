@@ -1,0 +1,41 @@
+// Unauthorized page styling
+
+.unauthorized {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8d7da; // Light red background for the error page
+  color: #721c24; // Dark red color for text
+
+  .container {
+    text-align: center;
+
+    h1 {
+      font-size: 4rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #721c24;
+    }
+
+    p {
+      font-size: 1.5rem;
+      color: #721c24;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #f5c6cb;
+      border: none;
+      color: #721c24;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #f1a7a1;
+      }
+    }
+  }
+}

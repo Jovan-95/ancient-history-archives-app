@@ -34,7 +34,7 @@
         "army"
       ],
       "createdAt": "2023-07-22T12:30:00Z",
-      "status": "rejected"
+      "status": "approved"
     },
     {
       "id": "3",
@@ -390,7 +390,7 @@
       "likesCollections": [],
       "bookmarksTimelines": [],
       "likesTimelines": [],
-      "status": "banned"
+      "status": "active"
     },
     {
       "id": "eb09",

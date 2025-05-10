@@ -7,6 +7,8 @@ import {
 import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
+import PermissionRoute from "./components/PermissionRoute";
+import PublicRoute from "./components/PublicRoute";
 import Layout from "./components/Layout";
 import SingleArtifact from "./pages/single-pages/SingleArtifact";
 import SingleCollection from "./pages/single-pages/SingleCollection";
@@ -27,6 +29,8 @@ const SubmitContent = lazy(() => import("./pages/SubmitContent"));
 const Notifications = lazy(() => import("./pages/Notifications"));
 const Bookmarks = lazy(() => import("./pages/Bookmarks"));
 const TimelineViewer = lazy(() => import("./pages/TimelineViewer"));
+const Unauthorized = lazy(() => import("./pages/Unauthorized"));
+
 const Settings = lazy(() => import("./pages/Settings"));
 const AdminModeration = lazy(() => import("./pages/admin/AdminModeration"));
 const AdminUserManagement = lazy(() =>
@@ -43,8 +47,23 @@ function App() {
           <ToastContainer position="top-right" autoClose={3000} />
 
           <Routes>
-            <Route path="/" element={<Register />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/unauthorized" element={<Unauthorized />} />
+            <Route
+              path="/"
+              element={
+                <PublicRoute>
+                  <Register />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <PublicRoute>
+                  <Login />
+                </PublicRoute>
+              }
+            />
 
             <Route
               path="/"
@@ -62,19 +81,21 @@ function App() {
                   </PrivateRoute>
                 }
               />
-              <Route
+              {/* <Route
                 path="/dashboard"
                 element={
                   <PrivateRoute>
                     <Dashboard />
                   </PrivateRoute>
                 }
-              />
+              /> */}
               <Route
                 path="admin/admin-moderation"
                 element={
                   <PrivateRoute>
-                    <AdminModeration />
+                    <PermissionRoute allowedRoles={["Admin", "Researcher"]}>
+                      <AdminModeration />
+                    </PermissionRoute>
                   </PrivateRoute>
                 }
               />
@@ -82,7 +103,9 @@ function App() {
                 path="admin/admin-user-management"
                 element={
                   <PrivateRoute>
-                    <AdminUserManagement />
+                    <PermissionRoute allowedRoles={["Admin", "Researcher"]}>
+                      <AdminUserManagement />
+                    </PermissionRoute>
                   </PrivateRoute>
                 }
               />
@@ -161,7 +184,9 @@ function App() {
                 path="/submit-content"
                 element={
                   <PrivateRoute>
-                    <SubmitContent />
+                    <PermissionRoute allowedRoles={["Admin", "Researcher"]}>
+                      <SubmitContent />
+                    </PermissionRoute>
                   </PrivateRoute>
                 }
               />

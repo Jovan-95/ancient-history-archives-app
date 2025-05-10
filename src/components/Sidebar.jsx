@@ -21,7 +21,7 @@ function Sidebar() {
       <h2>History App</h2>
       <nav>
         <NavLink to="/home">Home</NavLink>
-        <NavLink to="/dashboard">Dashboard</NavLink>
+        {/* <NavLink to="/dashboard">Dashboard</NavLink> */}
         <NavLink to="/explore">Explore</NavLink>
         <NavLink to="/profile">Profile</NavLink>
         <NavLink to="/submit-content">Submit</NavLink>
@@ -40,7 +40,7 @@ function Sidebar() {
         }}
       >
         <button className="btn" onClick={() => setIsOpen(true)}>
-          Logout?
+          Logout
         </button>
       </div>
       <div className={isOpen ? "d-block" : "d-none"}>
