@@ -4,7 +4,9 @@ import { useSelector } from "react-redux";
 import getUsers, {
   changeUserRole,
   changeUserStatus,
+  deleteComment,
   deleteUser,
+  getComments,
 } from "../../services";
 import { useState } from "react";
 import Modal from "../../components/Modal";
@@ -25,6 +27,8 @@ function AdminUserManagement() {
   const [isOpenApproveModal, setIsOpenApproveModal] = useState(false);
   const [user, setUser] = useState("");
   const [targetDeletedUser, setTargetDeletedUser] = useState("");
+  const [isCommentsModal, setIsCommentsModal] = useState(false);
+  const [comment, setComment] = useState("");
 
   // ReactQuery Get users
   const {
@@ -34,6 +38,16 @@ function AdminUserManagement() {
   } = useQuery({
     queryKey: ["users"],
     queryFn: getUsers,
+  });
+
+  // ReactQuery Get users
+  const {
+    data: commentsData,
+    isLoading: commentsIsLoading,
+    error: commentsError,
+  } = useQuery({
+    queryKey: ["comments"],
+    queryFn: getComments,
   });
 
   // Patch HTTP method calling
@@ -72,9 +86,29 @@ function AdminUserManagement() {
     },
   });
 
+  // Delete HTTP method delete user
+  const deleteCommentMutation = useMutation({
+    mutationFn: deleteComment,
+    onMutate: (variables) => {
+      // Optimistic update: odmah uklanjamo post sa UI
+      const previousComments = queryClient.getQueryData(["comments"]);
+      queryClient.setQueryData(["comments"], (oldData) => {
+        return oldData.filter((comment) => comment.id !== variables);
+      });
+      return { previousComments };
+    },
+    onError: (err, variables, context) => {
+      // Ako se nešto desi sa DELETE-om, vraćamo prethodno stanje
+      queryClient.setQueryData(["comments"], context.previousComments);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["comments"]); // refetch!
+    },
+  });
+
   // HTTP loading and error
-  if (usersIsLoading) return <p>Loading...</p>;
-  if (usersError) return <p>Error loading data.</p>;
+  if (usersIsLoading || commentsIsLoading) return <p>Loading...</p>;
+  if (usersError || commentsError) return <p>Error loading data.</p>;
 
   // Finding logged user on backend by comparing with logged user from redux
   // const user = usersData.find((user) => user.id === loggedUser.id);
@@ -150,6 +184,7 @@ function AdminUserManagement() {
     setUser(user);
   }
 
+  // Approve user
   function approveUser() {
     userStatusChangingMutation({
       id: user.id,
@@ -157,6 +192,18 @@ function AdminUserManagement() {
     });
     setIsOpenApproveModal(false);
     showSuccessToast("User approved!");
+  }
+
+  // Delete comment modal
+  function handleDeleteCommentModal(comment) {
+    setComment(comment);
+    setIsCommentsModal((prev) => !prev);
+  }
+
+  // Delete comment
+  function handleDeleteComment() {
+    deleteCommentMutation.mutate(comment.id);
+    setIsCommentsModal(false);
   }
   return (
     <>
@@ -290,6 +337,53 @@ function AdminUserManagement() {
             </button>
             <button
               onClick={() => setIsOpenApproveModal(false)}
+              className="btn ml-4"
+            >
+              Cancel
+            </button>
+          </Modal>
+        </div>
+
+        <h2>Comments</h2>
+        <table>
+          <thead>
+            <tr>
+              <th># ID</th>
+              <th>User</th>
+              <th>Comment</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {commentsData.map((comment) => (
+              <tr key={comment.id}>
+                <td>{comment.id}</td>
+                <td>{comment.nickname}</td>
+                <td>{comment.text}</td>
+                <td>{comment.createdAt}</td>
+
+                <td>
+                  <button
+                    onClick={() => handleDeleteCommentModal(comment)}
+                    className="btn btn-reject ml-4"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {/* Delete comment modal */}
+        <div className={isCommentsModal ? "d-block" : "d-none"}>
+          <Modal>
+            <p>Are you sure you want to delete this comment?</p>
+            <button onClick={handleDeleteComment} className="btn btn-reject">
+              Delete this comment
+            </button>
+            <button
+              onClick={() => setIsCommentsModal(false)}
               className="btn ml-4"
             >
               Cancel

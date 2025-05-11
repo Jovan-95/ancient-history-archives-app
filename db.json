@@ -138,50 +138,6 @@
   ],
   "comments": [
     {
-      "id": "1",
-      "artifactId": 1,
-      "userId": 2,
-      "text": "Fascinating how it helped decode Egyptian hieroglyphs!",
-      "createdAt": "2025-04-13T12:00:00Z"
-    },
-    {
-      "id": "2",
-      "artifactId": 2,
-      "userId": 1,
-      "text": "Unbelievable scale of craftsmanship.",
-      "createdAt": "2025-04-14T09:30:00Z"
-    },
-    {
-      "id": "3",
-      "artifactId": 2,
-      "userId": 1,
-      "text": "Amazing works.",
-      "createdAt": "2025-03-14T09:30:00Z"
-    },
-    {
-      "id": "4",
-      "artifactId": 2,
-      "userId": 1,
-      "text": "Burried for so long.",
-      "createdAt": "2025-05-14T09:30:00Z"
-    },
-    {
-      "id": "2f78",
-      "nickname": "dwadaw",
-      "text": "dawdaw",
-      "artifactId": 2,
-      "userId": "3",
-      "createdAt": "2025-04-18T11:19:23.076Z"
-    },
-    {
-      "id": "7cb1",
-      "nickname": "awdawd",
-      "text": "awdawd",
-      "artifactId": 2,
-      "userId": "3",
-      "createdAt": "2025-04-18T11:20:24.059Z"
-    },
-    {
       "id": "dd16",
       "nickname": "JV",
       "text": "Hamurabiiii",
@@ -222,14 +178,6 @@
       "createdAt": "2025-04-18T13:17:25.775Z"
     },
     {
-      "id": "4475",
-      "nickname": "rytrty",
-      "text": "rtyr",
-      "collectionId": 1,
-      "userId": "f3dc",
-      "createdAt": "2025-04-19T12:42:19.456Z"
-    },
-    {
       "id": "6723",
       "nickname": "JV95",
       "text": "Serbiaaa",
@@ -268,14 +216,6 @@
       "timelineId": 1746093170547,
       "userId": null,
       "createdAt": "2025-05-01T09:53:11.651Z"
-    },
-    {
-      "id": "6416",
-      "nickname": "juhnlohulo",
-      "text": "huohuohu",
-      "artifactId": 1,
-      "userId": null,
-      "createdAt": "2025-05-06T11:21:17.248Z"
     }
   ],
   "empires": [
@@ -423,21 +363,6 @@
       "likesTimelines": [],
       "status": "active",
       "avatar": "/images/boy-1.jpg"
-    },
-    {
-      "id": "d657",
-      "username": "Cica",
-      "email": "cica@gmail.com",
-      "password": "444444",
-      "confirmPassword": "444444",
-      "role": "Researcher",
-      "bookmarksArtifacts": [],
-      "likesArtifacts": [],
-      "bookmarksCollections": [],
-      "likesCollections": [],
-      "bookmarksTimelines": [],
-      "likesTimelines": [],
-      "status": "banned"
     }
   ]
 }

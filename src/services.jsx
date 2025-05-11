@@ -747,6 +747,23 @@ export async function postComment(comment) {
   }
 }
 
+// Delete HTTP method
+export async function deleteComment(id) {
+  try {
+    const res = await fetch(`http://localhost:5000/comments/${id}`, {
+      method: "DELETE",
+    });
+    if (!res.ok) {
+      throw new Error(`${res.status}, ${res.statusText}`);
+    }
+    const data = await res.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 /////////// Dynamic HTTP request for approving all data types
 export async function updateEntityStatus(endpoint, id, status) {
   const res = await fetch(`http://localhost:5000/${endpoint}/${id}`, {
