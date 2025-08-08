@@ -8,7 +8,7 @@
       "region": "Egypt",
       "imageUrl": "/images/rosetta.jpg",
       "collectionId": 1,
-      "likes": 103,
+      "likes": 104,
       "views": 540,
       "tags": [
         "language",
@@ -268,7 +268,7 @@
       "userId": "eb09",
       "createdAt": "2025-05-09T10:41:21.833Z",
       "likes": [],
-      "status": "pending"
+      "status": "approved"
     }
   ],
   "figures": [
@@ -310,7 +310,7 @@
       "userId": "eb09",
       "createdAt": "2025-05-09T10:42:51.881Z",
       "likes": [],
-      "status": "pending"
+      "status": "approved"
     }
   ],
   "users": [
@@ -321,7 +321,7 @@
       "avatar": "/images/boy-2.jpg",
       "password": "222222",
       "confirmPassword": "222222",
-      "role": "Reader",
+      "role": "Researcher",
       "bookmarksArtifacts": [],
       "likesArtifacts": [
         "1"
@@ -339,7 +339,9 @@
       "password": "111111",
       "confirmPassword": "111111",
       "role": "Admin",
-      "bookmarksArtifacts": [],
+      "bookmarksArtifacts": [
+        "1"
+      ],
       "likesArtifacts": [],
       "bookmarksCollections": [],
       "likesCollections": [],
@@ -363,6 +365,22 @@
       "likesTimelines": [],
       "status": "active",
       "avatar": "/images/boy-1.jpg"
+    },
+    {
+      "id": "65a1",
+      "username": "Cica",
+      "email": "cica@gmail.com",
+      "password": "111111",
+      "confirmPassword": "111111",
+      "role": "Reader",
+      "bookmarksArtifacts": [],
+      "likesArtifacts": [],
+      "bookmarksCollections": [],
+      "likesCollections": [],
+      "bookmarksTimelines": [],
+      "likesTimelines": [],
+      "status": "active",
+      "avatar": "/images/girl-1.jpg"
     }
   ]
 }
