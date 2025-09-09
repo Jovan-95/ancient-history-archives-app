@@ -1,0 +1,25 @@
+.header-wrapper {
+  .header {
+    height: 60px;
+    background-color: #8b7355;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    svg {
+      cursor: pointer;
+    }
+  }
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+.navigation {
+  a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    margin-block: 16px;
+  }
+}

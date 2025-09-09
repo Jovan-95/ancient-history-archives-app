@@ -196,9 +196,9 @@ function SubmitContent() {
   }
 
   return (
-    <div>
+    <div className="p-16">
       <h2>Create & submit content</h2>{" "}
-      <div>
+      <div className="submit-content-forms">
         <button onClick={(e) => handleFormShowing(e)} className="btn">
           Create Artifact
         </button>

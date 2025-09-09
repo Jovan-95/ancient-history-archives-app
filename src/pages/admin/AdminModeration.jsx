@@ -239,72 +239,75 @@ function AdminModeration() {
   }
   return (
     <div>
-      <h1>Admin moderation</h1>
-
       <div className="admin-table">
+        <h1>Admin moderation</h1>
+
         <h2>Pending Artifacts Submissions</h2>
-        <table>
-          <thead>
-            <tr>
-              {/* <th>#</th> */}
-              <th>Title</th>
-              <th>Type</th>
-              <th>Status</th>
-              <th>Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* <!-- Example row - ti ćeš mapirati svoje podatke iz Reacta --> */}
-            {artifactsData.map((artifact) => (
-              <tr key={artifact.id}>
-                {/* <td>{artifact.id}</td> */}
-                <td>{artifact.title}</td>
-                <td>Artifact</td>
-                <td>
-                  <span
-                    className={
-                      artifact.status === "pending"
-                        ? "text-yellow"
-                        : artifact.status === "approved"
-                        ? "text-green"
-                        : artifact.status === "rejected"
-                        ? "text-red"
-                        : ""
-                    }
-                  >
-                    {artifact.status}
-                  </span>
-                </td>
-                <td>{artifact.createdAt}</td>
-                <td>
-                  <button
-                    disabled={artifact.status === "approved" ? true : false}
-                    onClick={() => handleApprovingArtifact(artifact)}
-                    className={
-                      artifact.status === "approved"
-                        ? "btn-disabled"
-                        : "btn-approve"
-                    }
-                  >
-                    Approve
-                  </button>{" "}
-                  <button
-                    onClick={() => handleRejectingArtifact(artifact)}
-                    disabled={artifact.status === "rejected" ? true : false}
-                    className={
-                      artifact.status !== "rejected"
-                        ? "btn-reject"
-                        : "btn-disabled"
-                    }
-                  >
-                    Reject
-                  </button>
-                </td>
+        <div className="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                {/* <th>#</th> */}
+                <th>Title</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {/* <!-- Example row - ti ćeš mapirati svoje podatke iz Reacta --> */}
+              {artifactsData.map((artifact) => (
+                <tr key={artifact.id}>
+                  {/* <td>{artifact.id}</td> */}
+                  <td>{artifact.title}</td>
+                  <td>Artifact</td>
+                  <td>
+                    <span
+                      className={
+                        artifact.status === "pending"
+                          ? "text-yellow"
+                          : artifact.status === "approved"
+                          ? "text-green"
+                          : artifact.status === "rejected"
+                          ? "text-red"
+                          : ""
+                      }
+                    >
+                      {artifact.status}
+                    </span>
+                  </td>
+                  <td>{artifact.createdAt}</td>
+                  <td>
+                    <button
+                      disabled={artifact.status === "approved" ? true : false}
+                      onClick={() => handleApprovingArtifact(artifact)}
+                      className={
+                        artifact.status === "approved"
+                          ? "btn-disabled"
+                          : "btn-approve"
+                      }
+                    >
+                      Approve
+                    </button>{" "}
+                    <button
+                      onClick={() => handleRejectingArtifact(artifact)}
+                      disabled={artifact.status === "rejected" ? true : false}
+                      className={
+                        artifact.status !== "rejected"
+                          ? "btn-reject"
+                          : "btn-disabled"
+                      }
+                    >
+                      Reject
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
         <button onClick={deleteRejectedArtifacts} className="btn-reject">
           Clear all rejected
         </button>

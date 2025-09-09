@@ -26,7 +26,7 @@
       "region": "China",
       "imageUrl": "/images/terracotta.jpg",
       "collectionId": 2,
-      "likes": 124,
+      "likes": 125,
       "views": 890,
       "tags": [
         "funerary",
@@ -99,7 +99,7 @@
         }
       ],
       "createdBy": 1,
-      "likes": 3,
+      "likes": 4,
       "createdAt": "2023-06-14T10:00:00Z",
       "status": "approved"
     },
@@ -170,14 +170,6 @@
       "createdAt": "2025-04-18T13:17:06.967Z"
     },
     {
-      "id": "ac67",
-      "nickname": "jvv",
-      "text": "chinaaa",
-      "collectionId": 2,
-      "userId": "3",
-      "createdAt": "2025-04-18T13:17:25.775Z"
-    },
-    {
       "id": "6723",
       "nickname": "JV95",
       "text": "Serbiaaa",
@@ -216,6 +208,14 @@
       "timelineId": 1746093170547,
       "userId": null,
       "createdAt": "2025-05-01T09:53:11.651Z"
+    },
+    {
+      "id": "26a0",
+      "nickname": "JV",
+      "text": "TEST",
+      "artifactId": 2,
+      "userId": "eb09",
+      "createdAt": "2025-09-09T07:28:09.771Z"
     }
   ],
   "empires": [
@@ -334,19 +334,24 @@
     },
     {
       "id": "eb09",
-      "username": "Jovan-95",
+      "username": "Jovan",
       "email": "vuksanovicjovan@hotmail.com",
       "password": "111111",
       "confirmPassword": "111111",
       "role": "Admin",
       "bookmarksArtifacts": [
-        "1"
+        "1",
+        "2"
       ],
       "likesArtifacts": [],
       "bookmarksCollections": [],
       "likesCollections": [],
-      "bookmarksTimelines": [],
-      "likesTimelines": [],
+      "bookmarksTimelines": [
+        "1"
+      ],
+      "likesTimelines": [
+        "1"
+      ],
       "status": "active",
       "avatar": "/images/boy-1.jpg"
     },

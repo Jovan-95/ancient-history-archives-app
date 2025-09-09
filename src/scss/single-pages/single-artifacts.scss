@@ -35,6 +35,8 @@
     }
   }
 }
+
+// Comments
 .comment-wrapper {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
@@ -111,7 +113,7 @@
   &__btn {
     padding: 0.8rem 1.5rem;
     font-weight: bold;
-    background-color: #2f4f4f;
+    background-color: #8b7355;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -119,7 +121,7 @@
     transition: background-color 0.2s;
 
     &:hover {
-      background-color: #1e3636;
+      background-color: #d4af37;
     }
   }
 }

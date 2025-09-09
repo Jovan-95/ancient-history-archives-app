@@ -1,4 +1,4 @@
-.modal {
+.mob-modal {
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
@@ -11,15 +11,19 @@
 }
 
 /* Modal Content/Box */
-.modal-content {
-  // width: 450px !important;
-  max-width: 450px;
-  border-radius: 8px;
+.mob-modal-content {
+  width: 100% !important;
+  height: 100%;
   text-align: center;
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  background: linear-gradient(to top, #d4af37, #8b7355);
   padding: 20px;
-  border: 1px solid #888;
+
+  div {
+    color: #fff;
+    font-size: 22px;
+    margin-block: 26px;
+    font-weight: 500;
+  }
 }
 
 /* The Close Button */

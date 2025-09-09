@@ -249,7 +249,7 @@ function Profile() {
             {/* <!-- Bookmark kartice --> */}
             {userBookmarkedArtifacts.map((el) => (
               <div key={el.id}>
-                {el.title}{" "}
+                <p className="card-title"> {el.title} </p>
                 <button
                   onClick={() => handleRemoveBookmarksFromUserArtifacts(el)}
                   className="btn btn--cta"
@@ -267,7 +267,7 @@ function Profile() {
             {/* <!-- Bookmark kartice --> */}
             {userBookmarkedCollections.map((el) => (
               <div key={el.id}>
-                {el.title}{" "}
+                <p className="card-title"> {el.title} </p>
                 <button
                   onClick={() => handleRemoveBookmarksFromUserCollections(el)}
                   className="btn btn--cta"
@@ -285,7 +285,7 @@ function Profile() {
             {/* <!-- Bookmark kartice --> */}
             {userBookmarkedTimelines.map((el) => (
               <div key={el.id}>
-                {el.title}{" "}
+                <p className="card-title"> {el.title} </p>
                 <button
                   onClick={() => handleRemoveBookmarksFromUserTimelines(el)}
                   className="btn btn--cta"
@@ -303,7 +303,7 @@ function Profile() {
             {/* <!-- Liked kartice --> */}
             {userLikedArtifacts.map((el) => (
               <div key={el.id}>
-                {el.title}
+                <p className="card-title"> {el.title} </p>
                 <button
                   onClick={() => handleRemoveLikesFromUserArtifacts(el)}
                   className="btn btn--cta"
@@ -321,7 +321,7 @@ function Profile() {
             {/* <!-- Liked kartice --> */}
             {userLikedCollections.map((el) => (
               <div key={el.id}>
-                {el.title}{" "}
+                <p className="card-title"> {el.title} </p>
                 <button
                   onClick={() => handleRemoveLikesFromUserCollection(el)}
                   className="btn btn--cta"
@@ -339,7 +339,7 @@ function Profile() {
             {/* <!-- Liked kartice --> */}
             {userLikedTimelines.map((el) => (
               <div key={el.id}>
-                {el.title}{" "}
+                <p className="card-title"> {el.title} </p>
                 <button
                   onClick={() => handleRemoveLikesFromUserTimeline(el)}
                   className="btn btn--cta"

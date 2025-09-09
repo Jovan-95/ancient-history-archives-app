@@ -149,8 +149,8 @@ function ProfileCard({
                   <div className="auth-field">
                     <label className="auth-label">Username</label>
                     <input
-                      value={username}
                       onChange={(e) => setUsername(e.target.value)}
+                      value={username}
                       type="text"
                       name="username"
                       className="auth-input"
@@ -160,6 +160,7 @@ function ProfileCard({
                   <div className="auth-field">
                     <label className="auth-label">Email</label>
                     <input
+                      disabled
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       type="email"
@@ -171,8 +172,8 @@ function ProfileCard({
                   <div className="auth-field">
                     <label className="auth-label">Password</label>
                     <input
-                      value={password}
                       onChange={(e) => setPassword(e.target.value)}
+                      value={password}
                       type="password"
                       name="password"
                       className="auth-input"
@@ -182,8 +183,8 @@ function ProfileCard({
                   <div className="auth-field">
                     <label className="auth-label">Confirm Password</label>
                     <input
-                      value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
+                      value={confirmPassword}
                       type="password"
                       name="confirmPassword"
                       className="auth-input"

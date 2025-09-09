@@ -21,7 +21,6 @@ function Sidebar() {
       <h2>History App</h2>
       <nav>
         <NavLink to="/home">Home</NavLink>
-        {/* <NavLink to="/dashboard">Dashboard</NavLink> */}
         <NavLink to="/explore">Explore</NavLink>
         <NavLink to="/profile">Profile</NavLink>
         <NavLink to="/submit-content">Submit</NavLink>
@@ -30,9 +29,6 @@ function Sidebar() {
         <NavLink to="/admin/admin-user-management">
           Admin User Management
         </NavLink>
-
-        {/* <NavLink to="/bookmarks">Bookmarks</NavLink>
-        <NavLink to="/timeline">Timeline</NavLink> */}
       </nav>
       <div
         style={{
