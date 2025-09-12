@@ -315,68 +315,71 @@ function AdminModeration() {
 
       <div className="admin-table">
         <h2>Pending Collections Submissions</h2>
-        <table>
-          <thead>
-            <tr>
-              {/* <th>#</th> */}
-              <th>Title</th>
-              <th>Type</th>
-              <th>Status</th>
-              <th>Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* <!-- Example row - ti ćeš mapirati svoje podatke iz Reacta --> */}
-            {collectionsData.map((collection) => (
-              <tr key={collection.id}>
-                {/* <td>{artifact.id}</td> */}
-                <td>{collection.title}</td>
-                <td>Collection</td>
-                <td>
-                  <span
-                    className={
-                      collection.status === "pending"
-                        ? "text-yellow"
-                        : collection.status === "approved"
-                        ? "text-green"
-                        : collection.status === "rejected"
-                        ? "text-red"
-                        : ""
-                    }
-                  >
-                    {collection.status}
-                  </span>
-                </td>
-                <td>{collection.createdAt}</td>
-                <td>
-                  <button
-                    disabled={collection.status === "approved" ? true : false}
-                    onClick={() => handleApprovingCollection(collection)}
-                    className={
-                      collection.status === "approved"
-                        ? "btn-disabled"
-                        : "btn-approve"
-                    }
-                  >
-                    Approve
-                  </button>{" "}
-                  <button
-                    onClick={() => handleRejectingCollection(collection)}
-                    disabled={collection.status === "rejected" ? true : false}
-                    className={
-                      collection.status !== "rejected"
-                        ? "btn-reject"
-                        : "btn-disabled"
-                    }
-                  >
-                    Reject
-                  </button>{" "}
-                </td>
+        <div className="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                {/* <th>#</th> */}
+                <th>Title</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {/* <!-- Example row - ti ćeš mapirati svoje podatke iz Reacta --> */}
+              {collectionsData.map((collection) => (
+                <tr key={collection.id}>
+                  {/* <td>{artifact.id}</td> */}
+                  <td>{collection.title}</td>
+                  <td>Collection</td>
+                  <td>
+                    <span
+                      className={
+                        collection.status === "pending"
+                          ? "text-yellow"
+                          : collection.status === "approved"
+                          ? "text-green"
+                          : collection.status === "rejected"
+                          ? "text-red"
+                          : ""
+                      }
+                    >
+                      {collection.status}
+                    </span>
+                  </td>
+                  <td>{collection.createdAt}</td>
+                  <td>
+                    <button
+                      disabled={collection.status === "approved" ? true : false}
+                      onClick={() => handleApprovingCollection(collection)}
+                      className={
+                        collection.status === "approved"
+                          ? "btn-disabled"
+                          : "btn-approve"
+                      }
+                    >
+                      Approve
+                    </button>{" "}
+                    <button
+                      onClick={() => handleRejectingCollection(collection)}
+                      disabled={collection.status === "rejected" ? true : false}
+                      className={
+                        collection.status !== "rejected"
+                          ? "btn-reject"
+                          : "btn-disabled"
+                      }
+                    >
+                      Reject
+                    </button>{" "}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
         <button onClick={deleteRejectedCollections} className="btn-reject">
           Clear all rejected
         </button>
@@ -384,68 +387,71 @@ function AdminModeration() {
 
       <div className="admin-table">
         <h2>Pending Timelines Submissions</h2>
-        <table>
-          <thead>
-            <tr>
-              {/* <th>#</th> */}
-              <th>Title</th>
-              <th>Type</th>
-              <th>Status</th>
-              <th>Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* <!-- Example row - ti ćeš mapirati svoje podatke iz Reacta --> */}
-            {timelinesData.map((timeline) => (
-              <tr key={timeline.id}>
-                {/* <td>{artifact.id}</td> */}
-                <td>{timeline.title}</td>
-                <td>Timeline</td>
-                <td>
-                  <span
-                    className={
-                      timeline.status === "pending"
-                        ? "text-yellow"
-                        : timeline.status === "approved"
-                        ? "text-green"
-                        : timeline.status === "rejected"
-                        ? "text-red"
-                        : ""
-                    }
-                  >
-                    {timeline.status}
-                  </span>
-                </td>
-                <td>{timeline.createdAt}</td>
-                <td>
-                  <button
-                    disabled={timeline.status === "approved" ? true : false}
-                    onClick={() => handleApprovingTimeline(timeline)}
-                    className={
-                      timeline.status === "approved"
-                        ? "btn-disabled"
-                        : "btn-approve"
-                    }
-                  >
-                    Approve
-                  </button>{" "}
-                  <button
-                    onClick={() => handleRejectingTimeline(timeline)}
-                    disabled={timeline.status === "rejected" ? true : false}
-                    className={
-                      timeline.status !== "rejected"
-                        ? "btn-reject"
-                        : "btn-disabled"
-                    }
-                  >
-                    Reject
-                  </button>{" "}
-                </td>
+        <div className="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                {/* <th>#</th> */}
+                <th>Title</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {/* <!-- Example row - ti ćeš mapirati svoje podatke iz Reacta --> */}
+              {timelinesData.map((timeline) => (
+                <tr key={timeline.id}>
+                  {/* <td>{artifact.id}</td> */}
+                  <td>{timeline.title}</td>
+                  <td>Timeline</td>
+                  <td>
+                    <span
+                      className={
+                        timeline.status === "pending"
+                          ? "text-yellow"
+                          : timeline.status === "approved"
+                          ? "text-green"
+                          : timeline.status === "rejected"
+                          ? "text-red"
+                          : ""
+                      }
+                    >
+                      {timeline.status}
+                    </span>
+                  </td>
+                  <td>{timeline.createdAt}</td>
+                  <td>
+                    <button
+                      disabled={timeline.status === "approved" ? true : false}
+                      onClick={() => handleApprovingTimeline(timeline)}
+                      className={
+                        timeline.status === "approved"
+                          ? "btn-disabled"
+                          : "btn-approve"
+                      }
+                    >
+                      Approve
+                    </button>{" "}
+                    <button
+                      onClick={() => handleRejectingTimeline(timeline)}
+                      disabled={timeline.status === "rejected" ? true : false}
+                      className={
+                        timeline.status !== "rejected"
+                          ? "btn-reject"
+                          : "btn-disabled"
+                      }
+                    >
+                      Reject
+                    </button>{" "}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
         <button onClick={deleteRejectedTimelines} className="btn-reject">
           Clear all rejected
         </button>
@@ -453,68 +459,71 @@ function AdminModeration() {
 
       <div className="admin-table">
         <h2>Pending Figures Submissions</h2>
-        <table>
-          <thead>
-            <tr>
-              {/* <th>#</th> */}
-              <th>Title</th>
-              <th>Type</th>
-              <th>Status</th>
-              <th>Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* <!-- Example row - ti ćeš mapirati svoje podatke iz Reacta --> */}
-            {figuresData.map((figure) => (
-              <tr key={figure.id}>
-                {/* <td>{artifact.id}</td> */}
-                <td>{figure.name}</td>
-                <td>Figure</td>
-                <td>
-                  <span
-                    className={
-                      figure.status === "pending"
-                        ? "text-yellow"
-                        : figure.status === "approved"
-                        ? "text-green"
-                        : figure.status === "rejected"
-                        ? "text-red"
-                        : ""
-                    }
-                  >
-                    {figure.status}
-                  </span>
-                </td>
-                <td>{figure.createdAt}</td>
-                <td>
-                  <button
-                    disabled={figure.status === "approved" ? true : false}
-                    onClick={() => handleApprovingFigure(figure)}
-                    className={
-                      figure.status === "approved"
-                        ? "btn-disabled"
-                        : "btn-approve"
-                    }
-                  >
-                    Approve
-                  </button>{" "}
-                  <button
-                    onClick={() => handleRejectingFigure(figure)}
-                    disabled={figure.status === "rejected" ? true : false}
-                    className={
-                      figure.status !== "rejected"
-                        ? "btn-reject"
-                        : "btn-disabled"
-                    }
-                  >
-                    Reject
-                  </button>{" "}
-                </td>
+        <div className="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                {/* <th>#</th> */}
+                <th>Title</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {/* <!-- Example row - ti ćeš mapirati svoje podatke iz Reacta --> */}
+              {figuresData.map((figure) => (
+                <tr key={figure.id}>
+                  {/* <td>{artifact.id}</td> */}
+                  <td>{figure.name}</td>
+                  <td>Figure</td>
+                  <td>
+                    <span
+                      className={
+                        figure.status === "pending"
+                          ? "text-yellow"
+                          : figure.status === "approved"
+                          ? "text-green"
+                          : figure.status === "rejected"
+                          ? "text-red"
+                          : ""
+                      }
+                    >
+                      {figure.status}
+                    </span>
+                  </td>
+                  <td>{figure.createdAt}</td>
+                  <td>
+                    <button
+                      disabled={figure.status === "approved" ? true : false}
+                      onClick={() => handleApprovingFigure(figure)}
+                      className={
+                        figure.status === "approved"
+                          ? "btn-disabled"
+                          : "btn-approve"
+                      }
+                    >
+                      Approve
+                    </button>{" "}
+                    <button
+                      onClick={() => handleRejectingFigure(figure)}
+                      disabled={figure.status === "rejected" ? true : false}
+                      className={
+                        figure.status !== "rejected"
+                          ? "btn-reject"
+                          : "btn-disabled"
+                      }
+                    >
+                      Reject
+                    </button>{" "}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
         <button onClick={deleteRejectedFigures} className="btn-reject">
           Clear all rejected
         </button>
@@ -522,68 +531,71 @@ function AdminModeration() {
 
       <div className="admin-table">
         <h2>Pending Empire Submissions</h2>
-        <table>
-          <thead>
-            <tr>
-              {/* <th>#</th> */}
-              <th>Title</th>
-              <th>Type</th>
-              <th>Status</th>
-              <th>Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* <!-- Example row - ti ćeš mapirati svoje podatke iz Reacta --> */}
-            {empiresData.map((empire) => (
-              <tr key={empire.id}>
-                {/* <td>{artifact.id}</td> */}
-                <td>{empire.name}</td>
-                <td>Empire</td>
-                <td>
-                  <span
-                    className={
-                      empire.status === "pending"
-                        ? "text-yellow"
-                        : empire.status === "approved"
-                        ? "text-green"
-                        : empire.status === "rejected"
-                        ? "text-red"
-                        : ""
-                    }
-                  >
-                    {empire.status}
-                  </span>
-                </td>
-                <td>{empire.createdAt}</td>
-                <td>
-                  <button
-                    disabled={empire.status === "approved" ? true : false}
-                    onClick={() => handleApprovingEmpire(empire)}
-                    className={
-                      empire.status === "approved"
-                        ? "btn-disabled"
-                        : "btn-approve"
-                    }
-                  >
-                    Approve
-                  </button>{" "}
-                  <button
-                    onClick={() => handleRejectingEmpire(empire)}
-                    disabled={empire.status === "rejected" ? true : false}
-                    className={
-                      empire.status !== "rejected"
-                        ? "btn-reject"
-                        : "btn-disabled"
-                    }
-                  >
-                    Reject
-                  </button>{" "}
-                </td>
+        <div className="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                {/* <th>#</th> */}
+                <th>Title</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {/* <!-- Example row - ti ćeš mapirati svoje podatke iz Reacta --> */}
+              {empiresData.map((empire) => (
+                <tr key={empire.id}>
+                  {/* <td>{artifact.id}</td> */}
+                  <td>{empire.name}</td>
+                  <td>Empire</td>
+                  <td>
+                    <span
+                      className={
+                        empire.status === "pending"
+                          ? "text-yellow"
+                          : empire.status === "approved"
+                          ? "text-green"
+                          : empire.status === "rejected"
+                          ? "text-red"
+                          : ""
+                      }
+                    >
+                      {empire.status}
+                    </span>
+                  </td>
+                  <td>{empire.createdAt}</td>
+                  <td>
+                    <button
+                      disabled={empire.status === "approved" ? true : false}
+                      onClick={() => handleApprovingEmpire(empire)}
+                      className={
+                        empire.status === "approved"
+                          ? "btn-disabled"
+                          : "btn-approve"
+                      }
+                    >
+                      Approve
+                    </button>{" "}
+                    <button
+                      onClick={() => handleRejectingEmpire(empire)}
+                      disabled={empire.status === "rejected" ? true : false}
+                      className={
+                        empire.status !== "rejected"
+                          ? "btn-reject"
+                          : "btn-disabled"
+                      }
+                    >
+                      Reject
+                    </button>{" "}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
         <button onClick={deleteRejectedEmpires} className="btn-reject">
           Clear all rejected
         </button>
