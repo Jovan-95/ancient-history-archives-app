@@ -207,61 +207,97 @@ function AdminUserManagement() {
   }
   return (
     <>
-      <div className="admin-table">
-        <h2>Users</h2>
+      <div className="admin-page">
+        <div className="admin-page-content">
+          <h2>Users</h2>
 
-        <div className="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th>Role</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {usersData.map((user) => (
-                <tr key={user.id}>
-                  <td>{user.id}</td>
-                  <td>{user.username}</td>
-                  <td>{user.email}</td>
-                  <td>{user.status}</td>
-                  <td>
-                    <span>{user.role}</span>
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => handleApproveModal(user)}
-                      className="btn btn-approve"
-                    >
-                      Approve
-                    </button>
-                    <button
-                      onClick={() => handleOpenRemoveModal(user)}
-                      className="btn btn-reject ml-4"
-                    >
-                      Delete
-                    </button>
-                    <button
-                      onClick={() => handleBanModal(user)}
-                      className="btn btn--cta ml-4"
-                    >
-                      Ban
-                    </button>
-                    <button
-                      onClick={() => handleModal(user)}
-                      className="btn btn--auth ml-4"
-                    >
-                      Change role?
-                    </button>
-                  </td>
+          <div className="table-wrapper">
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Status</th>
+                  <th>Role</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {usersData.map((user) => (
+                  <tr key={user.id}>
+                    <td>{user.id}</td>
+                    <td>{user.username}</td>
+                    <td>{user.email}</td>
+                    <td>{user.status}</td>
+                    <td>
+                      <span>{user.role}</span>
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => handleApproveModal(user)}
+                        className="btn btn-approve"
+                      >
+                        Approve
+                      </button>
+                      <button
+                        onClick={() => handleOpenRemoveModal(user)}
+                        className="btn btn-reject ml-4"
+                      >
+                        Delete
+                      </button>
+                      <button
+                        onClick={() => handleBanModal(user)}
+                        className="btn btn--cta ml-4"
+                      >
+                        Ban
+                      </button>
+                      <button
+                        onClick={() => handleModal(user)}
+                        className="btn btn--auth ml-4"
+                      >
+                        Change role?
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h2>Comments</h2>
+          <div className="table-wrapper">
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  <th># ID</th>
+                  <th>User</th>
+                  <th>Comment</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {commentsData.map((comment) => (
+                  <tr key={comment.id}>
+                    <td>{comment.id}</td>
+                    <td>{comment.nickname}</td>
+                    <td>{comment.text}</td>
+                    <td>{comment.createdAt}</td>
+
+                    <td>
+                      <button
+                        onClick={() => handleDeleteCommentModal(comment)}
+                        className="btn btn-reject ml-4"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         {/* change role */}
@@ -346,40 +382,6 @@ function AdminUserManagement() {
               Cancel
             </button>
           </Modal>
-        </div>
-
-        <h2>Comments</h2>
-        <div className="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th># ID</th>
-                <th>User</th>
-                <th>Comment</th>
-                <th>Date</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {commentsData.map((comment) => (
-                <tr key={comment.id}>
-                  <td>{comment.id}</td>
-                  <td>{comment.nickname}</td>
-                  <td>{comment.text}</td>
-                  <td>{comment.createdAt}</td>
-
-                  <td>
-                    <button
-                      onClick={() => handleDeleteCommentModal(comment)}
-                      className="btn btn-reject ml-4"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
 
         {/* Delete comment modal */}

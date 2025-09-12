@@ -26,7 +26,7 @@
       "region": "China",
       "imageUrl": "/images/terracotta.jpg",
       "collectionId": 2,
-      "likes": 125,
+      "likes": 126,
       "views": 890,
       "tags": [
         "funerary",
@@ -342,7 +342,9 @@
       "bookmarksArtifacts": [
         "2"
       ],
-      "likesArtifacts": [],
+      "likesArtifacts": [
+        "2"
+      ],
       "bookmarksCollections": [],
       "likesCollections": [],
       "bookmarksTimelines": [
