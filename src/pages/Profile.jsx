@@ -20,6 +20,8 @@ import {
   showErrorToast,
   showInfoToast,
 } from "../components/Toast";
+import EmtyContent from "../components/EmtyContent";
+import ListedItems from "../components/profile-components/ListedItems";
 
 function Profile() {
   // Logged user from redux
@@ -246,108 +248,102 @@ function Profile() {
         <section className="user-section">
           <h3>Bookmarked Artifacts:</h3>
           <div className="card-list" id="bookmarkedList">
-            {/* <!-- Bookmark kartice --> */}
-            {userBookmarkedArtifacts.map((el) => (
-              <div key={el.id}>
-                <p className="card-title"> {el.title} </p>
-                <button
-                  onClick={() => handleRemoveBookmarksFromUserArtifacts(el)}
-                  className="btn btn--cta"
-                >
-                  Remove from bookmarks
-                </button>
-              </div>
-            ))}
+            {userBookmarkedArtifacts.length < 1 ? (
+              <EmtyContent />
+            ) : (
+              userBookmarkedArtifacts.map((el) => (
+                <ListedItems
+                  key={el.id}
+                  el={el}
+                  handleRemove={handleRemoveBookmarksFromUserArtifacts}
+                />
+              ))
+            )}
           </div>
         </section>
 
         <section className="user-section">
           <h3>Bookmarked Collections:</h3>
           <div className="card-list" id="bookmarkedList">
-            {/* <!-- Bookmark kartice --> */}
-            {userBookmarkedCollections.map((el) => (
-              <div key={el.id}>
-                <p className="card-title"> {el.title} </p>
-                <button
-                  onClick={() => handleRemoveBookmarksFromUserCollections(el)}
-                  className="btn btn--cta"
-                >
-                  Remove from bookmarks
-                </button>
-              </div>
-            ))}
+            {userBookmarkedCollections.length < 1 ? (
+              <EmtyContent />
+            ) : (
+              userBookmarkedCollections.map((el) => (
+                <ListedItems
+                  key={el.id}
+                  el={el}
+                  handleRemove={handleRemoveBookmarksFromUserCollections}
+                />
+              ))
+            )}
           </div>
         </section>
 
         <section className="user-section">
           <h3>Bookmarked Timelines:</h3>
           <div className="card-list" id="bookmarkedList">
-            {/* <!-- Bookmark kartice --> */}
-            {userBookmarkedTimelines.map((el) => (
-              <div key={el.id}>
-                <p className="card-title"> {el.title} </p>
-                <button
-                  onClick={() => handleRemoveBookmarksFromUserTimelines(el)}
-                  className="btn btn--cta"
-                >
-                  Remove from bookmarks
-                </button>
-              </div>
-            ))}
+            {userBookmarkedTimelines.length < 1 ? (
+              <EmtyContent />
+            ) : (
+              userBookmarkedTimelines.map((el) => (
+                <ListedItems
+                  key={el.id}
+                  el={el}
+                  handleRemove={handleRemoveBookmarksFromUserTimelines}
+                />
+              ))
+            )}
           </div>
         </section>
 
         <section className="user-section">
           <h3>Liked Artifacts:</h3>
           <div className="card-list" id="likedList">
-            {/* <!-- Liked kartice --> */}
-            {userLikedArtifacts.map((el) => (
-              <div key={el.id}>
-                <p className="card-title"> {el.title} </p>
-                <button
-                  onClick={() => handleRemoveLikesFromUserArtifacts(el)}
-                  className="btn btn--cta"
-                >
-                  Remove from likes
-                </button>
-              </div>
-            ))}
+            {userLikedArtifacts.length < 1 ? (
+              <EmtyContent />
+            ) : (
+              userLikedArtifacts.map((el) => (
+                <ListedItems
+                  key={el.id}
+                  el={el}
+                  handleRemove={handleRemoveLikesFromUserArtifacts}
+                />
+              ))
+            )}
           </div>
         </section>
 
         <section className="user-section">
           <h3>Liked Collections:</h3>
           <div className="card-list" id="likedList">
-            {/* <!-- Liked kartice --> */}
-            {userLikedCollections.map((el) => (
-              <div key={el.id}>
-                <p className="card-title"> {el.title} </p>
-                <button
-                  onClick={() => handleRemoveLikesFromUserCollection(el)}
-                  className="btn btn--cta"
-                >
-                  Remove from likes
-                </button>
-              </div>
-            ))}
+            {userLikedCollections.length < 1 ? (
+              <EmtyContent />
+            ) : (
+              userLikedCollections.map((el) => (
+                <ListedItems
+                  key={el.id}
+                  el={el}
+                  handleRemove={handleRemoveLikesFromUserCollection}
+                />
+              ))
+            )}
           </div>
         </section>
 
         <section className="user-section">
           <h3>Liked Timelines:</h3>
           <div className="card-list" id="likedList">
-            {/* <!-- Liked kartice --> */}
-            {userLikedTimelines.map((el) => (
-              <div key={el.id}>
-                <p className="card-title"> {el.title} </p>
-                <button
-                  onClick={() => handleRemoveLikesFromUserTimeline(el)}
-                  className="btn btn--cta"
-                >
-                  Remove from likes
-                </button>
-              </div>
-            ))}
+            {userLikedTimelines.length < 1 ? (
+              <EmtyContent />
+            ) : (
+              userLikedTimelines.map((el) => (
+                <ListedItems
+                  key={el.id}
+                  el={el}
+                  handleRemove={handleRemoveLikesFromUserTimeline}
+                />
+              ))
+            )}
           </div>
         </section>
 

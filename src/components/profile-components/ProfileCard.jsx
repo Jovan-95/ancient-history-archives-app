@@ -4,11 +4,7 @@ import Modal from "../Modal";
 import { useSelector } from "react-redux";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { changeUserAvatar, editUser } from "../../services";
-import {
-  showSuccessToast,
-  showErrorToast,
-  showInfoToast,
-} from "../../components/Toast";
+import { showSuccessToast, showErrorToast } from "../../components/Toast";
 
 function ProfileCard({
   showAvatars,
@@ -88,13 +84,13 @@ function ProfileCard({
       <div className="user-info">
         <div>
           <img
-            className={!showAvatars ? "d-block" : "d-none"}
+            className={!showAvatars ? "d-block self-center" : "d-none"}
             src={user.avatar}
             alt="Profile picture"
           />
           <div className={showAvatars ? "d-block" : "d-none"}></div>
           <button
-            className={!showAvatars ? "d-block " : "d-none"}
+            className={!showAvatars ? "d-block btn mt-12" : "d-none"}
             onClick={() => setShowAvatars(true)}
           >
             Change avatar

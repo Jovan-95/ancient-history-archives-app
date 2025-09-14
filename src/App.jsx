@@ -18,6 +18,8 @@ import SingleFigure from "./pages/single-pages/SingleFigure";
 import SingleProfile from "./pages/single-pages/SingleProfile";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import getUsers from "./services";
+import { useSelector } from "react-redux";
 
 const Register = lazy(() => import("./pages/Register"));
 const Login = lazy(() => import("./pages/Login"));
@@ -27,11 +29,7 @@ const Explore = lazy(() => import("./pages/Explore"));
 const Profile = lazy(() => import("./pages/Profile"));
 const SubmitContent = lazy(() => import("./pages/SubmitContent"));
 const Notifications = lazy(() => import("./pages/Notifications"));
-const Bookmarks = lazy(() => import("./pages/Bookmarks"));
-const TimelineViewer = lazy(() => import("./pages/TimelineViewer"));
 const Unauthorized = lazy(() => import("./pages/Unauthorized"));
-
-const Settings = lazy(() => import("./pages/Settings"));
 const AdminModeration = lazy(() => import("./pages/admin/AdminModeration"));
 const AdminUserManagement = lazy(() =>
   import("./pages/admin/AdminUserManagement")
@@ -81,19 +79,19 @@ function App() {
                   </PrivateRoute>
                 }
               />
-              {/* <Route
+              <Route
                 path="/dashboard"
                 element={
                   <PrivateRoute>
                     <Dashboard />
                   </PrivateRoute>
                 }
-              /> */}
+              />
               <Route
                 path="admin/admin-moderation"
                 element={
                   <PrivateRoute>
-                    <PermissionRoute allowedRoles={["Admin", "Researcher"]}>
+                    <PermissionRoute allowedRoles={["Admin"]}>
                       <AdminModeration />
                     </PermissionRoute>
                   </PrivateRoute>
@@ -103,7 +101,7 @@ function App() {
                 path="admin/admin-user-management"
                 element={
                   <PrivateRoute>
-                    <PermissionRoute allowedRoles={["Admin", "Researcher"]}>
+                    <PermissionRoute allowedRoles={["Admin"]}>
                       <AdminUserManagement />
                     </PermissionRoute>
                   </PrivateRoute>
@@ -198,30 +196,6 @@ function App() {
                   </PrivateRoute>
                 }
               />
-              {/* <Route
-                path="/bookmarks"
-                element={
-                  <PrivateRoute>
-                    <Bookmarks />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/timeline"
-                element={
-                  <PrivateRoute>
-                    <TimelineViewer />
-                  </PrivateRoute>
-                }
-              /> */}
-              {/* <Route
-                path="/settings"
-                element={
-                  <PrivateRoute>
-                    <Settings />
-                  </PrivateRoute>
-                }
-              /> */}
             </Route>
           </Routes>
         </Suspense>
