@@ -13,6 +13,7 @@
 @import "./scss/components/modal.scss";
 @import "./scss/pages/admin-moderation.scss";
 @import "./scss/pages/notifications.scss";
+@import "./scss/pages/stats.scss";
 @import "./scss/fonts.scss";
 @import "./scss/pages/unauthorized.scss";
 
@@ -36,6 +37,10 @@ html {
   margin-top: 12px;
 }
 
+.mt-10 {
+  margin-top: 10px;
+}
+
 .submit-content-forms {
   button {
     width: 100%;
@@ -47,4 +52,8 @@ html {
 .self-center {
   display: flex;
   justify-self: anchor-center;
+}
+
+.selected-img {
+  border: 1px solid blue !important;
 }

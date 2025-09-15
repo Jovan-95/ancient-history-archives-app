@@ -8,7 +8,7 @@
       "region": "Egypt",
       "imageUrl": "/images/rosetta.jpg",
       "collectionId": 1,
-      "likes": 106,
+      "likes": 107,
       "views": 540,
       "tags": [
         "language",
@@ -52,17 +52,6 @@
         "babylon"
       ],
       "createdAt": "2023-08-10T14:00:00Z",
-      "status": "approved"
-    },
-    {
-      "id": "1757838406902",
-      "title": "Jovan",
-      "description": "wadawd",
-      "period": "awdawd",
-      "region": "awdaw",
-      "userId": "1a8d",
-      "createdAt": "2025-09-14T08:26:46.902Z",
-      "likes": "1",
       "status": "approved"
     }
   ],
@@ -338,25 +327,14 @@
       "createdAt": "2025-05-09T10:42:51.881Z",
       "likes": [],
       "status": "approved"
-    },
-    {
-      "id": "1757838392791",
-      "name": "stefan",
-      "knownFor": "stefan",
-      "era": "16th century",
-      "region": "nis",
-      "userId": "1a8d",
-      "createdAt": "2025-09-14T08:26:32.791Z",
-      "likes": [],
-      "status": "pending"
     }
   ],
   "users": [
     {
       "id": "eb09",
-      "username": "Jovan",
+      "username": "Jovan-95",
       "email": "vuksanovicjovan@hotmail.com",
-      "password": "111111",
+      "password": "222222",
       "confirmPassword": "111111",
       "role": "Admin",
       "bookmarksArtifacts": [],

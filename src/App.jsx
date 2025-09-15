@@ -80,7 +80,7 @@ function App() {
                 }
               />
               <Route
-                path="/dashboard"
+                path="/stats"
                 element={
                   <PrivateRoute>
                     <Dashboard />

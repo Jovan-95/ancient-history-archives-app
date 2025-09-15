@@ -1,3 +1,15 @@
+.auth-box {
+  .logo-wrapper {
+    display: flex;
+    justify-content: center;
+    img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+    }
+  }
+}
+
 .auth-title {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
@@ -40,7 +52,8 @@
   text-align: center;
 
   .auth-link {
-    color: #4a90e2;
+    color: rgb(139, 115, 85);
+    cursor: pointer;
     text-decoration: none;
 
     &:hover {

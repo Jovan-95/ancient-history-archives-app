@@ -71,6 +71,9 @@ function Login() {
   return (
     <div className="wrapper-auth">
       <div className="auth-box">
+        <div className="logo-wrapper">
+          <img src="/images/ancient-history-logo.png" alt="logo" />
+        </div>
         <h2 className="auth-title">Login</h2>
 
         <form className="auth-form">

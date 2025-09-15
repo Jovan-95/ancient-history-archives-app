@@ -67,12 +67,7 @@ function Home() {
             designed to spark curiosity, foster learning, and connect you with
             the stories of the past. Each artifact, figure, timeline, and
             collection has been thoughtfully curated to offer a rich and
-            engaging journey through time. Whether you're a researcher, student,
-            history enthusiast, or simply someone eager to explore, you'll find
-            inspiration and knowledge here. Discover kingdoms that stood for
-            centuries, meet rulers who changed the world, and uncover objects
-            that survived millennia — each one carrying a story worth
-            remembering.{" "}
+            engaging journey through time.
           </p>
           <button onClick={goToExplore} className="btn btn--cta">
             Explore Now

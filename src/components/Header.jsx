@@ -2,15 +2,36 @@
 import { useState } from "react";
 import MobileModal from "./MobileModal";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../redux/authSlice";
 import Modal from "./Modal";
+import { useQuery } from "@tanstack/react-query";
+import getUsers from "../services";
 
 function Header() {
   const [mobModal, setMobModal] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+
+  const loggedUser = useSelector((state) => state.auth.loggedInUser);
+
+  // ReactQuery Get users
+  const {
+    data: usersData,
+    isLoading: usersIsLoading,
+    error: usersError,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: getUsers,
+  });
+
+  // HTTP loading and error
+  if (usersIsLoading) return <p>Loading...</p>;
+  if (usersError) return <p>Error loading data.</p>;
+
+  // Finding logged user on backend by comparing with logged user from redux
+  const user = usersData.find((user) => user.id === loggedUser.id);
 
   function handleLogout() {
     console.log("Logout");
@@ -51,36 +72,38 @@ function Header() {
                   <NavLink to="/home" onClick={() => setMobModal(false)}>
                     Home
                   </NavLink>
+                  <NavLink to="/stats" onClick={() => setMobModal(false)}>
+                    Statistics
+                  </NavLink>
                   <NavLink to="/explore" onClick={() => setMobModal(false)}>
                     Explore
                   </NavLink>
                   <NavLink to="/profile" onClick={() => setMobModal(false)}>
                     Profile
                   </NavLink>
-                  <NavLink
-                    to="/submit-content"
-                    onClick={() => setMobModal(false)}
-                  >
-                    Submit
-                  </NavLink>
+                  {user?.role === "Admin" || user?.role === "Researcher" ? (
+                    <NavLink to="/submit-content">Submit</NavLink>
+                  ) : (
+                    ""
+                  )}
                   <NavLink
                     to="/notifications"
                     onClick={() => setMobModal(false)}
                   >
                     Notifications
                   </NavLink>
-                  <NavLink
-                    onClick={() => setMobModal(false)}
-                    to="/admin/admin-moderation"
-                  >
-                    Admin Moderation
-                  </NavLink>
-                  <NavLink
-                    onClick={() => setMobModal(false)}
-                    to="/admin/admin-user-management"
-                  >
-                    Admin User Management
-                  </NavLink>
+                  {user?.role === "Admin" ? (
+                    <>
+                      <NavLink to="/admin/admin-moderation">
+                        Admin Moderation
+                      </NavLink>
+                      <NavLink to="/admin/admin-user-management">
+                        Admin User Management
+                      </NavLink>
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </nav>
                 <div
                   style={{

@@ -39,10 +39,14 @@ function Sidebar() {
   }
   return (
     <aside className="sidebar">
-      <h2>History App</h2>
+      <h2>
+        <div className="logo-wrapper">
+          <img src="/images/ancient-history-logo.png" alt="logo" />
+        </div>
+      </h2>
       <nav>
         <NavLink to="/home">Home</NavLink>
-        <NavLink to="/Dashboard">Dashboard</NavLink>
+        <NavLink to="/stats">Statistics</NavLink>
         <NavLink to="/explore">Explore</NavLink>
         <NavLink to="/profile">Profile</NavLink>
         {user?.role === "Admin" || user?.role === "Researcher" ? (

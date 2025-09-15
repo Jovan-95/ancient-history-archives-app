@@ -59,6 +59,7 @@ function SubmitContent() {
       // Automatski refresh komentara posle uspešnog posta
       queryClient.invalidateQueries({ queryKey: ["timelines"] });
       setTitle("");
+      setEventObj({ year: "", title: "" });
     },
   });
 
@@ -69,6 +70,9 @@ function SubmitContent() {
       // Automatski refresh komentara posle uspešnog posta
       queryClient.invalidateQueries({ queryKey: ["empires"] });
       setTitle("");
+      setDesc("");
+      setPeriod("");
+      setRegion("");
     },
   });
 
@@ -79,6 +83,9 @@ function SubmitContent() {
       // Automatski refresh komentara posle uspešnog posta
       queryClient.invalidateQueries({ queryKey: ["figures"] });
       setTitle("");
+      setDesc("");
+      setPeriod("");
+      setRegion("");
     },
   });
 
@@ -338,7 +345,7 @@ function SubmitContent() {
                 }
                 value={eventObj.title}
                 type="text"
-                className="auth-input"
+                className="auth-input mt-16"
               />
             </div>
 

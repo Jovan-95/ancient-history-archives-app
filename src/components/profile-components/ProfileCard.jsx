@@ -23,10 +23,10 @@ function ProfileCard({
   const queryClient = useQueryClient();
 
   // Edit user fields
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(loggedUser.username);
   const [email, setEmail] = useState(loggedUser.email);
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [password, setPassword] = useState(loggedUser.password);
+  const [confirmPassword, setConfirmPassword] = useState(loggedUser.password);
 
   // open modal edit user (profile)
   function openEditProfileModal() {
@@ -90,7 +90,7 @@ function ProfileCard({
           />
           <div className={showAvatars ? "d-block" : "d-none"}></div>
           <button
-            className={!showAvatars ? "d-block btn mt-12" : "d-none"}
+            className={!showAvatars ? "d-block btn mt-10" : "d-none"}
             onClick={() => setShowAvatars(true)}
           >
             Change avatar
@@ -115,7 +115,7 @@ function ProfileCard({
               key={img}
               src={img}
               onClick={() => setAvatarImg(img)}
-              className={avatarImg === img ? "selected" : ""}
+              className={avatarImg === img ? "selected selected-img" : ""}
               alt="Choose avatar"
             />
           ))}
@@ -138,6 +138,7 @@ function ProfileCard({
               Edit profile
             </button>
           </div>
+          {/* Edit modal */}
           <div className={openEditModal ? "d-block" : "d-none"}>
             <Modal>
               <div>

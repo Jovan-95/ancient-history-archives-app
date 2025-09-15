@@ -37,7 +37,8 @@
       font-weight: 500;
       border-radius: 8px;
       transition: all 0.3s ease;
-      color: #4a3f35;
+      color: #8b7355;
+      min-width: 100px;
 
       &.active {
         background: #8b7355; /* zlatna */
@@ -47,7 +48,7 @@
 
       &:hover {
         background: #e5d0a8; /* svetlija bronza */
-        color: #222;
+        color: #8b7355;
         transform: translateY(-2px);
       }
     }

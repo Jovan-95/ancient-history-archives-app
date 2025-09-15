@@ -9,6 +9,7 @@ import {
   getTimelines,
 } from "../services";
 import { useEffect, useState } from "react";
+import Tabs from "../components/Tabs";
 
 function Explore() {
   const [activeTab, setActiveTab] = useState("all");
@@ -62,20 +63,6 @@ function Explore() {
     queryKey: ["figures"],
     queryFn: getFigures,
   });
-
-  function testHTTPdata() {
-    console.log("artifacts", artifactsData);
-    console.log("collections", collectionsData);
-    console.log("timelines", timelinesData);
-    console.log("empires", empiresData);
-    console.log("figures", figuresData);
-  }
-
-  // Tabs changing
-  function handleTab(e) {
-    const tabName = e.target.textContent;
-    setActiveTab(tabName.toLowerCase());
-  }
 
   // Scroll to ID section
   const location = useLocation();
@@ -140,47 +127,7 @@ function Explore() {
           timeless artifacts, and detailed timelines.
         </p>
       </div>
-
-      <div className="explore__filters">
-        <button
-          onClick={(e) => handleTab(e)}
-          className={`filter-btn ${activeTab === "all" ? "active" : ""}`}
-        >
-          All
-        </button>
-        <button
-          onClick={(e) => handleTab(e)}
-          className={`filter-btn ${activeTab === "empires" ? "active" : ""}`}
-        >
-          Empires
-        </button>
-        <button
-          onClick={(e) => handleTab(e)}
-          className={`filter-btn ${activeTab === "figures" ? "active" : ""}`}
-        >
-          Figures
-        </button>
-        <button
-          onClick={(e) => handleTab(e)}
-          className={`filter-btn ${activeTab === "artifacts" ? "active" : ""}`}
-        >
-          Artifacts
-        </button>
-        <button
-          onClick={(e) => handleTab(e)}
-          className={`filter-btn ${activeTab === "timelines" ? "active" : ""}`}
-        >
-          Timelines
-        </button>
-        <button
-          onClick={(e) => handleTab(e)}
-          className={`filter-btn ${
-            activeTab === "collections" ? "active" : ""
-          }`}
-        >
-          Collections
-        </button>
-      </div>
+      <Tabs setActiveTab={setActiveTab} activeTab={activeTab} />
 
       {(activeTab === "artifacts" || activeTab === "all") && (
         <div id="artifacts">
@@ -345,8 +292,6 @@ function Explore() {
       <div>
         <Outlet />
       </div>
-
-      <button onClick={testHTTPdata}>TEST HTTP DATA</button>
     </section>
   );
 }
