@@ -379,6 +379,35 @@ export async function changeUserStatus(id, status) {
   }
 }
 
+//// Patch HTTP method send message
+export async function sendMessage(userId, newMessage) {
+  try {
+    const resUser = await fetch(`http://localhost:5000/users/${userId}`);
+    if (!resUser.ok) throw new Error(`${resUser.status} ${resUser.statusText}`);
+    const user = await resUser.json();
+
+    // 2. Napravi updated inbox (ako inbox ne postoji, koristi prazno polje)
+    const updatedInbox = Array.isArray(user.inbox)
+      ? [...user.inbox, newMessage]
+      : [newMessage];
+
+    const resPatch = await fetch(`http://localhost:5000/users/${userId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ inbox: updatedInbox }),
+    });
+
+    if (!resPatch.ok)
+      throw new Error(`${resPatch.status} ${resPatch.statusText}`);
+
+    const data = await resPatch.json();
+    console.log("Message sent:", data);
+    return data;
+  } catch (err) {
+    console.error("Error sending message:", err);
+  }
+}
+
 // Delete HTTP method
 export async function deleteUser(userId) {
   try {

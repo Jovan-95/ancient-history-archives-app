@@ -49,6 +49,8 @@ function Sidebar() {
         <NavLink to="/stats">Statistics</NavLink>
         <NavLink to="/explore">Explore</NavLink>
         <NavLink to="/profile">Profile</NavLink>
+        <NavLink to="/inbox">Inbox</NavLink>
+
         {user?.role === "Admin" || user?.role === "Researcher" ? (
           <NavLink to="/submit-content">Submit</NavLink>
         ) : (

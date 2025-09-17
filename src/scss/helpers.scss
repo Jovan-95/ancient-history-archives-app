@@ -57,3 +57,25 @@ select {
     border-color: #888;
   }
 }
+
+textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
+  }
+
+  &::placeholder {
+    color: #aaa;
+  }
+}

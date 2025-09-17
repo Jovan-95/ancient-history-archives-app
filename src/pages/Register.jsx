@@ -58,6 +58,14 @@ function Register() {
       likesCollections: [],
       bookmarksTimelines: [],
       likesTimelines: [],
+      inbox: [
+        {
+          id: "",
+          from: "",
+          message: "",
+          timestamp: "",
+        },
+      ],
       status: "pending",
     });
 

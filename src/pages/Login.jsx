@@ -13,7 +13,7 @@ import {
 
 function Login() {
   const [loginUserObj, setLoginUserObj] = useState({ email: "", password: "" });
-  const loggedUser = useSelector((state) => state.auth.loggedInUser);
+  // const loggedUser = useSelector((state) => state.auth.loggedInUser);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

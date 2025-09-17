@@ -27,6 +27,7 @@ const Home = lazy(() => import("./pages/Home"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Explore = lazy(() => import("./pages/Explore"));
 const Profile = lazy(() => import("./pages/Profile"));
+const Inbox = lazy(() => import("./pages/Inbox"));
 const SubmitContent = lazy(() => import("./pages/SubmitContent"));
 const Notifications = lazy(() => import("./pages/Notifications"));
 const Unauthorized = lazy(() => import("./pages/Unauthorized"));
@@ -165,6 +166,15 @@ function App() {
                 element={
                   <PrivateRoute>
                     <Profile />
+                  </PrivateRoute>
+                }
+              />
+
+              <Route
+                path="/inbox"
+                element={
+                  <PrivateRoute>
+                    <Inbox />
                   </PrivateRoute>
                 }
               />
