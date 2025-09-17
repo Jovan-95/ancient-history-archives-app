@@ -31,6 +31,10 @@ function Sidebar() {
 
   // Finding logged user on backend by comparing with logged user from redux
   const user = usersData.find((user) => user.id === loggedUser.id);
+  // console.log("user", user.inbox);
+
+  const inboxNumber = user.inbox.filter((msg) => msg.visibility === false);
+  // console.log(inboxNumber);
 
   function handleLogout() {
     console.log("Logout");
@@ -49,7 +53,18 @@ function Sidebar() {
         <NavLink to="/stats">Statistics</NavLink>
         <NavLink to="/explore">Explore</NavLink>
         <NavLink to="/profile">Profile</NavLink>
-        <NavLink to="/inbox">Inbox</NavLink>
+        <NavLink to="/inbox">
+          Inbox{" "}
+          {inboxNumber.length === 0 ? (
+            <span className="inbox-num-wrapper-zero">
+              <span className="inbox-num">{inboxNumber.length}</span>
+            </span>
+          ) : (
+            <span className="inbox-num-wrapper">
+              <span className="inbox-num">{inboxNumber.length}</span>
+            </span>
+          )}
+        </NavLink>
 
         {user?.role === "Admin" || user?.role === "Researcher" ? (
           <NavLink to="/submit-content">Submit</NavLink>

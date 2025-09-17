@@ -379,6 +379,36 @@ export async function changeUserStatus(id, status) {
   }
 }
 
+// Patch HTTP method change msg status
+export async function updateMessageVisibility(userId, msgId, newVisibility) {
+  try {
+    // 1. Uzmi trenutnog usera
+    const resUser = await fetch(`http://localhost:5000/users/${userId}`);
+    if (!resUser.ok)
+      throw new Error(`${resUser.status}: ${resUser.statusText}`);
+    const user = await resUser.json();
+
+    // 2. Kreiraj novi inbox niz sa promenjenom visibility samo za tu poruku
+    const updatedInbox = (user.inbox || []).map((msg) =>
+      msg.id === msgId ? { ...msg, visibility: newVisibility } : msg
+    );
+
+    // 3. PATCH zahtev ka json-server
+    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ inbox: updatedInbox }),
+    });
+
+    if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error("Error updating message visibility:", err);
+    throw err;
+  }
+}
+
 //// Patch HTTP method send message
 export async function sendMessage(userId, newMessage) {
   try {

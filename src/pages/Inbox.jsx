@@ -1,10 +1,14 @@
 /* eslint-disable no-unused-vars */
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import getUsers from "../services";
+import getUsers, { sendMessage, updateMessageVisibility } from "../services";
 import { useSelector } from "react-redux";
+import { showErrorToast, showSuccessToast } from "../components/Toast";
 
 function Inbox() {
+  const queryClient = useQueryClient();
+  const [msgStatus, setMsgStatus] = useState();
+
   // ReactQuery Get users
   const {
     data: usersData,
@@ -15,15 +19,38 @@ function Inbox() {
     queryFn: getUsers,
   });
 
+  // Mutation
+  const { mutate: toggleVisibility } = useMutation({
+    mutationFn: ({ userId, msgId, newVisibility }) =>
+      updateMessageVisibility(userId, msgId, newVisibility),
+    onSuccess: (data) => {
+      // Osveži cache da UI odmah prikaže promenu
+      queryClient.invalidateQueries(["users"]);
+    },
+  });
+
   const loggedUser = useSelector((state) => state.auth.loggedInUser);
 
   const currentUser = usersData?.find((u) => u.id === loggedUser.id);
-  const [inbox, setInbox] = useState(currentUser?.inbox || []);
+  const inbox = currentUser?.inbox || [];
+
+  function handleMsgToggle(msg) {
+    toggleVisibility({
+      userId: loggedUser.id, // id trenutnog korisnika
+      msgId: msg.id,
+      newVisibility: !msg.visibility,
+    });
+  }
 
   // HTTP loading and error
   if (usersIsLoading) return <p>Loading...</p>;
   if (usersError) return <p>Error loading data.</p>;
 
+  function handleMsgStatus(msg) {
+    console.log(msg);
+    setMsgStatus((prev) => !prev);
+    console.log(msgStatus);
+  }
   return (
     <div className="inbox-page">
       <h1>📥 Inbox</h1>
@@ -37,13 +64,22 @@ function Inbox() {
               <div className="message-header">
                 <span className="from">From: {msg.from}</span>
                 <span className="timestamp">
-                  {new Date(msg.timestamp).toLocaleString()}
+                  {new Date(msg.timestamp).toLocaleString()}{" "}
+                  <div className="d-flex items-center">
+                    <input
+                      checked={msg.visibility}
+                      onChange={() => handleMsgToggle(msg)}
+                      type="checkbox"
+                    />
+                    <div className="msg-visibility">
+                      {msg.visibility ? <p>Read</p> : <p>Unread</p>}
+                    </div>
+                  </div>
                 </span>
               </div>
               <div className="message-body">
                 <p>{msg.message}</p>
               </div>
-              {/* Ovde možeš kasnije dodati dugme Read/Mark as Read */}
             </div>
           ))}
         </div>

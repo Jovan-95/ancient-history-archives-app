@@ -339,16 +339,11 @@
       "avatar": "/images/boy-2.jpg",
       "inbox": [
         {
-          "id": "1758105504312",
+          "id": "1758114189523",
           "from": "test",
-          "message": "fsef",
-          "timestamp": 1758105504312
-        },
-        {
-          "id": "1758105507583",
-          "from": "test",
-          "message": "sefsefsefs",
-          "timestamp": 1758105507583
+          "message": "sefgwestfgwsetgfws",
+          "timestamp": 1758114189523,
+          "visibility": false
         }
       ]
     },
@@ -367,22 +362,18 @@
       "likesTimelines": [],
       "inbox": [
         {
-          "id": "1758103991154",
-          "from": "Jovan-95",
-          "message": "dawdawd",
-          "timestamp": 1758103991154
-        },
-        {
-          "id": "1758103998946",
-          "from": "Jovan-95",
-          "message": "aawdawd",
-          "timestamp": 1758103998946
-        },
-        {
-          "id": "1758104099194",
+          "id": "1758109844089",
           "from": "Jovan",
-          "message": "test",
-          "timestamp": 1758104099194
+          "message": "wdadawda",
+          "timestamp": 1758109844089,
+          "visibility": true
+        },
+        {
+          "id": "1758109847113",
+          "from": "Jovan",
+          "message": "adawda",
+          "timestamp": 1758109847113,
+          "visibility": false
         }
       ],
       "status": "active",

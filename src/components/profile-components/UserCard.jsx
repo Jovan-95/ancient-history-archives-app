@@ -44,6 +44,7 @@ function UserCard({ el, user }) {
       from: user.username,
       message: messageText,
       timestamp: Date.now(),
+      visibility: false,
     };
     mutateSendMessage({ userId: targetUserId, message: inboxObj });
   }
