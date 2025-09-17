@@ -85,7 +85,7 @@ function Sidebar() {
       </nav>
       <div
         style={{
-          marginTop: "100px",
+          marginTop: "40px",
         }}
       >
         <button className="btn" onClick={() => setIsOpen(true)}>

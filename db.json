@@ -344,6 +344,27 @@
           "message": "sefgwestfgwsetgfws",
           "timestamp": 1758114189523,
           "visibility": false
+        },
+        {
+          "id": "1758119959062",
+          "from": "test",
+          "message": "dadawd",
+          "timestamp": 1758119959062,
+          "visibility": false
+        },
+        {
+          "id": "1758119961478",
+          "from": "test",
+          "message": "dawdawd",
+          "timestamp": 1758119961478,
+          "visibility": false
+        },
+        {
+          "id": "1758119963502",
+          "from": "test",
+          "message": "awdawdaw",
+          "timestamp": 1758119963502,
+          "visibility": false
         }
       ]
     },
@@ -373,6 +394,27 @@
           "from": "Jovan",
           "message": "adawda",
           "timestamp": 1758109847113,
+          "visibility": true
+        },
+        {
+          "id": "1758120956036",
+          "from": "Jovan",
+          "message": "4t4et",
+          "timestamp": 1758120956036,
+          "visibility": false
+        },
+        {
+          "id": "1758120964468",
+          "from": "Jovan",
+          "message": "t4e4te4t",
+          "timestamp": 1758120964468,
+          "visibility": false
+        },
+        {
+          "id": "1758120966604",
+          "from": "Jovan",
+          "message": "te4te4t",
+          "timestamp": 1758120966604,
           "visibility": false
         }
       ],
@@ -381,6 +423,52 @@
       "from": "Jovan-95",
       "message": "aaaa",
       "timestamp": "2025-09-17T10:10:07.738Z"
+    },
+    {
+      "id": "2f0e",
+      "username": "smesko",
+      "email": "smesko@gmail.com",
+      "password": "111111",
+      "confirmPassword": "111111",
+      "role": "Researcher",
+      "bookmarksArtifacts": [],
+      "likesArtifacts": [],
+      "bookmarksCollections": [],
+      "likesCollections": [],
+      "bookmarksTimelines": [],
+      "likesTimelines": [],
+      "inbox": [
+        {
+          "id": "",
+          "from": "",
+          "message": "",
+          "timestamp": ""
+        }
+      ],
+      "status": "active"
+    },
+    {
+      "id": "5080",
+      "username": "Lisa",
+      "email": "lisa@gmail.com",
+      "password": "111111",
+      "confirmPassword": "111111",
+      "role": "Researcher",
+      "bookmarksArtifacts": [],
+      "likesArtifacts": [],
+      "bookmarksCollections": [],
+      "likesCollections": [],
+      "bookmarksTimelines": [],
+      "likesTimelines": [],
+      "inbox": [
+        {
+          "id": "",
+          "from": "",
+          "message": "",
+          "timestamp": ""
+        }
+      ],
+      "status": "active"
     }
   ]
 }
