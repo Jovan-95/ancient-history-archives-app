@@ -55,7 +55,7 @@ function Home() {
     <div>
       <section className="home">
         <div className="intro">
-          <h1>Welcome to Ancient History Archive</h1>
+          <h1>Welcome to Ancient History</h1>
           <p>
             Step into the world of forgotten empires, legendary figures, and
             timeless artifacts that shaped the course of human civilization. Our
