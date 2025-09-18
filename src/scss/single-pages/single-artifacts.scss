@@ -7,6 +7,14 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
+  div button {
+    @media (max-width: 768px) {
+      width: 100%;
+      margin-inline: 0;
+      margin-block: 6px;
+    }
+  }
+
   &__header {
     margin-bottom: 2rem;
     border-bottom: 2px solid #ddd;

@@ -95,7 +95,12 @@ function Header() {
                     )}
                   </NavLink>
                   {user?.role === "Admin" || user?.role === "Researcher" ? (
-                    <NavLink to="/submit-content">Submit</NavLink>
+                    <NavLink
+                      to="/submit-content"
+                      onClick={() => setMobModal(false)}
+                    >
+                      Submit
+                    </NavLink>
                   ) : (
                     ""
                   )}
@@ -107,10 +112,16 @@ function Header() {
                   </NavLink>
                   {user?.role === "Admin" ? (
                     <>
-                      <NavLink to="/admin/admin-moderation">
+                      <NavLink
+                        to="/admin/admin-moderation"
+                        onClick={() => setMobModal(false)}
+                      >
                         Admin Moderation
                       </NavLink>
-                      <NavLink to="/admin/admin-user-management">
+                      <NavLink
+                        to="/admin/admin-user-management"
+                        onClick={() => setMobModal(false)}
+                      >
                         Admin User Management
                       </NavLink>
                     </>
