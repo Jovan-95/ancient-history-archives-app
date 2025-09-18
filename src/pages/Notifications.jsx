@@ -12,7 +12,7 @@ function Notifications() {
   );
 
   function handleRemoveNotification(note) {
-    console.log(note);
+    // console.log(note);
     dispatch(removeNotification(note));
   }
 

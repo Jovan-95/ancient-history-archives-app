@@ -45,7 +45,8 @@ function ProfileCard({
   const { mutate: changeAvatar } = useMutation({
     mutationFn: ({ userId, avatarImg }) => changeUserAvatar(userId, avatarImg),
     onSuccess: () => {
-      queryClient.invalidateQueries(["users"]); // osvežava users podatke
+      queryClient.invalidateQueries(["users"]);
+      showSuccessToast("Avatar is changed!");
     },
   });
 
@@ -76,7 +77,6 @@ function ProfileCard({
       avatarImg: avatarImg,
     });
     setShowAvatars(false);
-    showSuccessToast("Avatar is changed!");
   }
   return (
     <section className="current-user">

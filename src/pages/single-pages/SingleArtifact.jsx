@@ -107,8 +107,9 @@ function SingleArtifact() {
 
   // Finding comment for this specific artifact with ID comparation
   const artifactComments = commentsData.filter(
-    (comment) => comment.artifactId === Number(singleArtifact.id)
+    (comment) => comment.artifactId === singleArtifact.id
   );
+  console.log("singleArt", singleArtifact);
 
   // Comment posting
   function handleCommentPosting() {
@@ -118,9 +119,11 @@ function SingleArtifact() {
     commentMutation.mutate({
       nickname: nickname,
       text: commentText,
-      artifactId: Number(singleArtifact.id),
+      artifactId: singleArtifact.id,
       userId: loggedUser.id,
       createdAt: new Date().toISOString(),
+      timelineId: "",
+      collectionId: "",
     });
   }
 

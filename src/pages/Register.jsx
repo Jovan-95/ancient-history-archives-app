@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../services";
 import { showSuccessToast, showErrorToast } from "../components/Toast";
@@ -14,21 +14,22 @@ function Register() {
   });
 
   const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email regex
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
   };
 
-  function handleRegister(e) {
+  async function handleRegister(e) {
     e.preventDefault();
 
     // Form validation
     if (
-      userObj.username === "" ||
-      userObj.email === "" ||
-      userObj.password === "" ||
-      userObj.confirmPassword === ""
-    )
+      !userObj.username ||
+      !userObj.email ||
+      !userObj.password ||
+      !userObj.confirmPassword
+    ) {
       return showErrorToast("Fill all fields!");
+    }
 
     if (userObj.username.length < 3) {
       return showErrorToast("Username is too short!");
@@ -39,50 +40,49 @@ function Register() {
     }
 
     if (userObj.password.length < 6) {
-      return showErrorToast("Password is to short!");
+      return showErrorToast("Password is too short!");
     }
 
     if (userObj.password !== userObj.confirmPassword) {
       return showErrorToast("Passwords are not matching!");
     }
 
-    showSuccessToast("You registration is successfull!");
+    try {
+      await registerUser({
+        username: userObj.username,
+        email: userObj.email,
+        password: userObj.password,
+        confirmPassword: userObj.confirmPassword,
+        role: "Researcher",
+        bookmarksArtifacts: [],
+        likesArtifacts: [],
+        bookmarksCollections: [],
+        likesCollections: [],
+        bookmarksTimelines: [],
+        likesTimelines: [],
+        inbox: [],
+        status: "pending",
+        avatar: "/images/boy-1.jpg",
+      });
 
-    // POST HTTP call and register new user with default role
-    registerUser({
-      ...userObj,
-      role: "Researcher",
-      bookmarksArtifacts: [],
-      likesArtifacts: [],
-      bookmarksCollections: [],
-      likesCollections: [],
-      bookmarksTimelines: [],
-      likesTimelines: [],
-      inbox: [
-        {
-          id: "",
-          from: "",
-          message: "",
-          timestamp: "",
-        },
-      ],
-      status: "pending",
-    });
+      showSuccessToast("Registration successful!");
+      navigate("/login");
 
-    navigate("/login");
-
-    // reset fields
-    setUserObj({
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    });
+      setUserObj({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+    } catch (err) {
+      showErrorToast("Registration failed: " + err.message);
+    }
   }
 
   function goToLogin() {
     navigate("/login");
   }
+
   return (
     <div className="wrapper-auth">
       <div className="auth-box">
@@ -91,7 +91,7 @@ function Register() {
         </div>
         <h2 className="auth-title">Create Your Account</h2>
 
-        <form className="auth-form">
+        <form className="auth-form" onSubmit={handleRegister}>
           <div className="auth-field">
             <label className="auth-label">Username</label>
             <input
@@ -144,11 +144,7 @@ function Register() {
             />
           </div>
 
-          <button
-            onClick={handleRegister}
-            type="submit"
-            className="btn btn--auth"
-          >
+          <button type="submit" className="btn btn--auth">
             Register
           </button>
         </form>

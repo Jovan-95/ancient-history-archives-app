@@ -47,6 +47,8 @@ function SubmitContent() {
     onSuccess: () => {
       // Automatski refresh komentara posle uspešnog posta
       queryClient.invalidateQueries({ queryKey: ["collections"] });
+      showSuccessToast("Collection is submited!");
+
       setTitle("");
       setDesc("");
     },
@@ -56,10 +58,10 @@ function SubmitContent() {
   const addTimelineMutation = useMutation({
     mutationFn: addTimeline,
     onSuccess: () => {
-      // Automatski refresh komentara posle uspešnog posta
       queryClient.invalidateQueries({ queryKey: ["timelines"] });
       setTitle("");
       setEventObj({ year: "", title: "" });
+      showSuccessToast("Timeline is submited!");
     },
   });
 
@@ -67,8 +69,8 @@ function SubmitContent() {
   const addEmpireMutation = useMutation({
     mutationFn: addEmpire,
     onSuccess: () => {
-      // Automatski refresh komentara posle uspešnog posta
       queryClient.invalidateQueries({ queryKey: ["empires"] });
+      showSuccessToast("Empire is submited!");
       setTitle("");
       setDesc("");
       setPeriod("");
@@ -80,12 +82,12 @@ function SubmitContent() {
   const addFigureMutation = useMutation({
     mutationFn: addFigures,
     onSuccess: () => {
-      // Automatski refresh komentara posle uspešnog posta
       queryClient.invalidateQueries({ queryKey: ["figures"] });
       setTitle("");
       setDesc("");
       setPeriod("");
       setRegion("");
+      showSuccessToast("Figure is submited!");
     },
   });
 
@@ -102,7 +104,6 @@ function SubmitContent() {
       description: desc,
       period: period,
       region: region,
-      id: Date.now().toString(),
       userId: loggedUser.id,
       createdAt: new Date().toISOString(),
       likes: [],
@@ -123,13 +124,11 @@ function SubmitContent() {
     addCollectionMutation.mutate({
       title: title,
       description: desc,
-      id: Date.now().toString(),
-      userId: loggedUser.id,
+      createdBy: loggedUser.id,
       createdAt: new Date().toISOString(),
-      likes: [],
+      likes: 0,
       status: "pending",
     });
-    showSuccessToast("Collection is submited!");
   }
 
   function handleTimelineSubmit(e) {
@@ -142,16 +141,14 @@ function SubmitContent() {
 
     const newTimelineObj = {
       title: title,
-      id: Date.now().toString(),
-      userId: loggedUser.id,
+      createdBy: loggedUser.id,
       createdAt: new Date().toISOString(),
-      likes: [],
+      likes: 0,
       events: [{ year: eventObj.year, title: eventObj.title }],
       status: "pending",
     };
     // Post HTTP method calling
     addTimelineMutation.mutate(newTimelineObj);
-    showSuccessToast("Timeline is submited!");
   }
 
   function handleEmpireSubmit(e) {
@@ -163,17 +160,13 @@ function SubmitContent() {
     }
 
     addEmpireMutation.mutate({
-      name: title,
-      description: desc,
-      era: period,
-      region: region,
-      id: Date.now().toString(),
-      userId: loggedUser.id,
-      createdAt: new Date().toISOString(),
-      likes: [],
-      status: "pending",
+      name: title, //
+      description: desc, //
+      era: period, //
+      region: region, //
+      createdAt: new Date().toISOString(), //
+      status: "pending", //
     });
-    showSuccessToast("Empire is submited!");
   }
 
   function handleFigureSubmit(e) {
@@ -188,13 +181,9 @@ function SubmitContent() {
       knownFor: desc,
       era: period,
       region: region,
-      id: Date.now().toString(),
-      userId: loggedUser.id,
       createdAt: new Date().toISOString(),
-      likes: [],
       status: "pending",
     });
-    showSuccessToast("Figure is submited!");
   }
 
   function handleFormShowing(e) {

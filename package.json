@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.6.1",
+    "@supabase/supabase-js": "^2.57.4",
     "@tanstack/react-query": "^5.74.0",
     "@tanstack/react-query-devtools": "^5.73.3",
     "chart.js": "^4.5.0",

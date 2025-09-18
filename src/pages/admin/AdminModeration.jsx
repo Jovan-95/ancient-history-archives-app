@@ -19,6 +19,7 @@ import {
   showErrorToast,
   showInfoToast,
 } from "../../components/Toast";
+import { supabase } from "../../supabaseClient";
 
 /* eslint-disable no-unused-vars */
 function AdminModeration() {
@@ -111,14 +112,17 @@ function AdminModeration() {
   }
 
   // Dynamic Delete HTTP method ALL rejected
-  function useDeleteRejectedEntities(endpoint, deleteFn) {
+  function useDeleteRejectedEntities(endpoint) {
+    const queryClient = useQueryClient();
+
     return useMutation({
       mutationFn: async () => {
-        const res = await fetch(`http://localhost:5000/${endpoint}`);
-        const data = await res.json();
-        const rejected = data.filter((item) => item.status === "rejected");
+        const { error } = await supabase
+          .from(endpoint)
+          .delete()
+          .eq("status", "rejected");
 
-        await Promise.all(rejected.map((item) => deleteFn(item.id)));
+        if (error) throw error;
       },
       onSuccess: () => {
         queryClient.invalidateQueries([endpoint]);
@@ -176,7 +180,7 @@ function AdminModeration() {
     return <p>Error loading data.</p>;
 
   // Finding logged user on backend by comparing with logged user from redux
-  const user = usersData.find((user) => user.id === loggedUser.id);
+  // const user = usersData.find((user) => user.id === loggedUser.id);
 
   // Approve artifact
   function handleApprovingArtifact(artifact) {

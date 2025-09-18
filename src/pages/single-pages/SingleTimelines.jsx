@@ -107,7 +107,7 @@ function SingleTimelines() {
 
   // Finding comment for this specific timeline with ID comparation
   const timelinesComments = commentsData.filter(
-    (comment) => comment.timelineId === Number(singleTimeline.id)
+    (comment) => comment.timelineId === singleTimeline.id
   );
 
   // Comment posting
@@ -118,9 +118,11 @@ function SingleTimelines() {
     commentMutation.mutate({
       nickname: nickname,
       text: commentText,
-      timelineId: Number(singleTimeline.id),
+      timelineId: singleTimeline.id,
       userId: loggedUser.id,
       createdAt: new Date().toISOString(),
+      artifactId: "",
+      collectionId: "",
     });
   }
 

@@ -109,7 +109,7 @@ function SingleCollection() {
 
   // Collection comments
   const collectionComments = commentsData.filter(
-    (comment) => comment.collectionId === Number(singleCollection.id)
+    (comment) => comment.collectionId === singleCollection.id
   );
 
   // Comment posting
@@ -120,9 +120,11 @@ function SingleCollection() {
     commentMutation.mutate({
       nickname: nickname,
       text: commentText,
-      collectionId: Number(singleCollection.id),
+      collectionId: singleCollection.id,
       userId: loggedUser.id,
       createdAt: new Date().toISOString(),
+      timelineId: "",
+      artifactId: "",
     });
   }
 

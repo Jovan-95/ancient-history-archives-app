@@ -1,842 +1,446 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable no-unused-vars */
+import { supabase } from "./supabaseClient";
 
-//// BE routes on local
-// http://localhost:5000/artifacts
-// http://localhost:5000/collections
-// http://localhost:5000/timelines
-// http://localhost:5000/empires
-// http://localhost:5000/figures
-// http://localhost:5000/comments
-// http://localhost:5000/users
-
-// Live Render BE
-// const BASE_URL = "https://ancient-history-backend.onrender.com/api";
-
-// Local BE
-const BASE_URL = "http://localhost:5000";
-
-////  Users
-// Get HTTP method
+//// Users
 export default async function getUsers() {
-  try {
-    const res = await fetch(`${BASE_URL}/users`);
-
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase.from("users").select("*");
+  if (error) throw error;
+  return data;
 }
 
-// Post HTTP method
 export async function registerUser(user) {
-  try {
-    const res = await fetch(`${BASE_URL}/users`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
+  const { data, error } = await supabase.from("users").insert([user]).select(); // select() vraća ubačeni row
+
+  if (error) {
+    console.error("Error registering user:", error);
+    throw error;
   }
+
+  return data;
 }
 
-// Patch HTTP method for partialy editing user object (bookmarkArtifact)
 export async function addBookmarkToUserArtifact(userId, updatedBookmarksArray) {
-  try {
-    const res = await fetch(`${BASE_URL}/users/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ bookmarksArtifacts: updatedBookmarksArray }),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("users")
+    .update({ bookmarksArtifacts: updatedBookmarksArray })
+    .eq("id", userId)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-//// Patch HTTP method remove elements from user object array
 export async function removeArtifactFromBookmarks(
   userId,
   updatedBookmarksArray
 ) {
-  try {
-    const res = await fetch(`${BASE_URL}/users/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ bookmarksArtifacts: updatedBookmarksArray }),
-    });
-    if (!res.ok) {
-      throw new Error(`${res.status}, ${res.statusText}`);
-    }
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("users")
+    .update({ bookmarksArtifacts: updatedBookmarksArray })
+    .eq("id", userId)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-// Patch HTTP method for partialy editing user object (likesArtifact)
 export async function addLikeToUserArtifact(userId, updatedLikesArray) {
-  try {
-    const res = await fetch(`${BASE_URL}/users/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ likesArtifacts: updatedLikesArray }),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("users")
+    .update({ likesArtifacts: updatedLikesArray })
+    .eq("id", userId)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-//// Patch HTTP method remove elements from user object array
 export async function removeArtifactFromLikes(userId, updatedLikesArray) {
-  try {
-    const res = await fetch(`${BASE_URL}/users/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ likesArtifacts: updatedLikesArray }),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("users")
+    .update({ likesArtifacts: updatedLikesArray })
+    .eq("id", userId)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-// Patch HTTP method for partialy editing user object (bookmarkCollections)
 export async function addBookmarkToUserCollection(
   userId,
   updatedBookmarksArray
 ) {
-  try {
-    const res = await fetch(`${BASE_URL}/users/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ bookmarksCollections: updatedBookmarksArray }),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("users")
+    .update({ bookmarksCollections: updatedBookmarksArray })
+    .eq("id", userId)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-//// Patch HTTP method remove elements from user object array(collections)
 export async function removeCollectionFromBookmarks(
   userId,
   updatedBookmarksArray
 ) {
-  try {
-    const res = await fetch(`${BASE_URL}/users/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ bookmarksCollections: updatedBookmarksArray }),
-    });
-    if (!res.ok) {
-      throw new Error(`${res.status}, ${res.statusText}`);
-    }
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("users")
+    .update({ bookmarksCollections: updatedBookmarksArray })
+    .eq("id", userId)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-// Patch HTTP method for partialy editing user object (likesCollections)
 export async function addLikeToUserCollection(userId, updatedLikesArray) {
-  try {
-    const res = await fetch(`${BASE_URL}/users/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ likesCollections: updatedLikesArray }),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("users")
+    .update({ likesCollections: updatedLikesArray })
+    .eq("id", userId)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-//// Patch HTTP method remove elements from user object array(collections)
 export async function removeCollectionFromLikes(userId, updatedLikesArray) {
-  try {
-    const res = await fetch(`${BASE_URL}/users/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ likesCollections: updatedLikesArray }),
-    });
-    if (!res.ok) {
-      throw new Error(`${res.status}, ${res.statusText}`);
-    }
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("users")
+    .update({ likesCollections: updatedLikesArray })
+    .eq("id", userId)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-// Patch HTTP method for partialy editing user object (bookmarkTimelines)
 export async function addBookmarkToUserTimeline(userId, updatedBookmarksArray) {
-  try {
-    const res = await fetch(`${BASE_URL}/users/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ bookmarksTimelines: updatedBookmarksArray }),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("users")
+    .update({ bookmarksTimelines: updatedBookmarksArray })
+    .eq("id", userId)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-//// Patch HTTP method remove elements from user object array(collections)
 export async function removeTimelineFromBookmarks(
   userId,
   updatedBookmarksArray
 ) {
-  try {
-    const res = await fetch(`${BASE_URL}/users/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ bookmarksTimelines: updatedBookmarksArray }),
-    });
-    if (!res.ok) {
-      throw new Error(`${res.status}, ${res.statusText}`);
-    }
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("users")
+    .update({ bookmarksTimelines: updatedBookmarksArray })
+    .eq("id", userId)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-// Patch HTTP method for partialy editing user object (likesTimelines)
 export async function addLikeToUserTimelines(userId, updatedLikesArray) {
-  try {
-    const res = await fetch(`${BASE_URL}/users/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ likesTimelines: updatedLikesArray }),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("users")
+    .update({ likesTimelines: updatedLikesArray })
+    .eq("id", userId)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-//// Patch HTTP method remove elements from user object array(collections)
 export async function removeTimelineFromLikes(userId, updatedLikesArray) {
-  try {
-    const res = await fetch(`${BASE_URL}/users/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ likesTimelines: updatedLikesArray }),
-    });
-    if (!res.ok) {
-      throw new Error(`${res.status}, ${res.statusText}`);
-    }
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("users")
+    .update({ likesTimelines: updatedLikesArray })
+    .eq("id", userId)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-//// Patch HTTP method change user avatar
 export async function changeUserAvatar(userId, avatarImg) {
-  try {
-    const res = await fetch(`${BASE_URL}/users/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ avatar: avatarImg }),
-    });
-    if (!res.ok) {
-      throw new Error(`${res.status}, ${res.statusText}`);
-    }
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("users")
+    .update({ avatar: avatarImg })
+    .eq("id", userId)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-//// Patch HTTP method Edit user
 export async function editUser(userId, editedObj) {
-  try {
-    const res = await fetch(`${BASE_URL}/users/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(editedObj),
-    });
-    if (!res.ok) {
-      throw new Error(`${res.status}, ${res.statusText}`);
-    }
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("users")
+    .update(editedObj)
+    .eq("id", userId)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-//// Patch HTTP method change user role
 export async function changeUserRole(id, role) {
-  try {
-    const res = await fetch(`${BASE_URL}/users/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ role: role }),
-    });
-    if (!res.ok) {
-      throw new Error(`${res.status}, ${res.statusText}`);
-    }
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("users")
+    .update({ role })
+    .eq("id", id)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-//// Patch HTTP method change user status (ban, unban)
 export async function changeUserStatus(id, status) {
-  try {
-    const res = await fetch(`${BASE_URL}/users/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ status: status }),
-    });
-    if (!res.ok) {
-      throw new Error(`${res.status}, ${res.statusText}`);
-    }
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("users")
+    .update({ status })
+    .eq("id", id)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-// Patch HTTP method change msg status
 export async function updateMessageVisibility(userId, msgId, newVisibility) {
-  try {
-    // 1. Uzmi trenutnog usera
-    const resUser = await fetch(`${BASE_URL}/users/${userId}`);
-    if (!resUser.ok)
-      throw new Error(`${resUser.status}: ${resUser.statusText}`);
-    const user = await resUser.json();
+  const { data: user, error: fetchErr } = await supabase
+    .from("users")
+    .select("*")
+    .eq("id", userId)
+    .single();
+  if (fetchErr) throw fetchErr;
 
-    // 2. Kreiraj novi inbox niz sa promenjenom visibility samo za tu poruku
-    const updatedInbox = (user.inbox || []).map((msg) =>
-      msg.id === msgId ? { ...msg, visibility: newVisibility } : msg
-    );
+  const updatedInbox = (user.inbox || []).map((msg) =>
+    msg.id === msgId ? { ...msg, visibility: newVisibility } : msg
+  );
 
-    // 3. PATCH zahtev ka json-server
-    const res = await fetch(`${BASE_URL}/users/${userId}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ inbox: updatedInbox }),
-    });
+  const { data, error } = await supabase
+    .from("users")
+    .update({ inbox: updatedInbox })
+    .eq("id", userId)
+    .select();
 
-    if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
-    const data = await res.json();
-    return data;
-  } catch (err) {
-    console.error("Error updating message visibility:", err);
-    throw err;
-  }
+  if (error) throw error;
+  return data;
 }
 
-//// Patch HTTP method send message
 export async function sendMessage(userId, newMessage) {
-  try {
-    const resUser = await fetch(`${BASE_URL}/users/${userId}`);
-    if (!resUser.ok) throw new Error(`${resUser.status} ${resUser.statusText}`);
-    const user = await resUser.json();
+  const { data: user, error: fetchErr } = await supabase
+    .from("users")
+    .select("*")
+    .eq("id", userId)
+    .single();
+  if (fetchErr) throw fetchErr;
 
-    // 2. Napravi updated inbox (ako inbox ne postoji, koristi prazno polje)
-    const updatedInbox = Array.isArray(user.inbox)
-      ? [...user.inbox, newMessage]
-      : [newMessage];
+  const updatedInbox = Array.isArray(user.inbox)
+    ? [...user.inbox, newMessage]
+    : [newMessage];
 
-    const resPatch = await fetch(`${BASE_URL}/users/${userId}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ inbox: updatedInbox }),
-    });
+  const { data, error } = await supabase
+    .from("users")
+    .update({ inbox: updatedInbox })
+    .eq("id", userId)
+    .select();
 
-    if (!resPatch.ok)
-      throw new Error(`${resPatch.status} ${resPatch.statusText}`);
-
-    const data = await resPatch.json();
-    console.log("Message sent:", data);
-    return data;
-  } catch (err) {
-    console.error("Error sending message:", err);
-  }
+  if (error) throw error;
+  return data;
 }
 
-// Delete HTTP method
 export async function deleteUser(userId) {
-  try {
-    const res = await fetch(`${BASE_URL}/users/${userId}`, {
-      method: "DELETE",
-    });
-    if (!res.ok) {
-      throw new Error(`${res.status}, ${res.statusText}`);
-    }
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("users")
+    .delete()
+    .eq("id", userId)
+    .select();
+  if (error) throw error;
+  return data;
 }
-
-// Put (edit) HTTP method
 
 //// Artifacts
-// Get HTTP method
 export async function getArtifacts() {
-  try {
-    const res = await fetch(`${BASE_URL}/artifacts`);
-
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase.from("artifacts").select("*");
+  if (error) throw error;
+  return data;
 }
 
-// Patch HTTP method for partialy editing artifact object (likes)
 export async function addLikeToArtifact(artifactsId, updatedLikesNum) {
-  try {
-    const res = await fetch(`${BASE_URL}/artifacts/${artifactsId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ likes: updatedLikesNum }),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("artifacts")
+    .update({ likes: updatedLikesNum })
+    .eq("id", artifactsId)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-// Post HTTP method for adding new artifact
 export async function addArtifact(artifact) {
-  try {
-    const res = await fetch(`${BASE_URL}/artifacts`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(artifact),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("artifacts")
+    .insert([artifact])
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-// Delete HTTP method
 export async function deleteArtifact(id) {
-  try {
-    const res = await fetch(`${BASE_URL}/artifacts/${id}`, {
-      method: "DELETE",
-    });
-    if (!res.ok) {
-      throw new Error(`${res.status}, ${res.statusText}`);
-    }
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("artifacts")
+    .delete()
+    .eq("id", id)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
 //// Collections
-// Get HTTP method
 export async function getCollections() {
-  try {
-    const res = await fetch(`${BASE_URL}/collections`);
-
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase.from("collections").select("*");
+  if (error) throw error;
+  return data;
 }
 
-// Patch HTTP method for partialy editing collection object (likes)
 export async function addLikeToCollection(collectionId, updatedLikesNum) {
-  try {
-    const res = await fetch(`${BASE_URL}/collections/${collectionId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ likes: updatedLikesNum }),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("collections")
+    .update({ likes: updatedLikesNum })
+    .eq("id", collectionId)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-// Post HTTP method for adding new collection
 export async function addCollection(collection) {
-  try {
-    const res = await fetch(`${BASE_URL}/collections`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(collection),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("collections")
+    .insert([collection])
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-// Delete HTTP method
 export async function deleteCollection(id) {
-  try {
-    const res = await fetch(`${BASE_URL}/collections/${id}`, {
-      method: "DELETE",
-    });
-    if (!res.ok) {
-      throw new Error(`${res.status}, ${res.statusText}`);
-    }
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("collections")
+    .delete()
+    .eq("id", id)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
 //// Timelines
-// Get HTTP method
 export async function getTimelines() {
-  try {
-    const res = await fetch(`${BASE_URL}/timelines`);
-
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase.from("timelines").select("*");
+  if (error) throw error;
+  return data;
 }
 
-// Patch HTTP method for partialy editing timeline object (likes)
 export async function addLikeToTimelines(timelineId, updatedLikesNum) {
-  try {
-    const res = await fetch(`${BASE_URL}/timelines/${timelineId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ likes: updatedLikesNum }),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("timelines")
+    .update({ likes: updatedLikesNum })
+    .eq("id", timelineId)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-// Post HTTP method for adding new timeline
 export async function addTimeline(timeline) {
-  try {
-    const res = await fetch(`${BASE_URL}/timelines`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(timeline),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("timelines")
+    .insert([timeline])
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-// Delete HTTP method
 export async function deleteTimeline(id) {
-  try {
-    const res = await fetch(`${BASE_URL}/timelines/${id}`, {
-      method: "DELETE",
-    });
-    if (!res.ok) {
-      throw new Error(`${res.status}, ${res.statusText}`);
-    }
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("timelines")
+    .delete()
+    .eq("id", id)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
 //// Empires
-// Get HTTP method
 export async function getEmpires() {
-  try {
-    const res = await fetch(`${BASE_URL}/empires`);
-
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase.from("empires").select("*");
+  if (error) throw error;
+  return data;
 }
 
-// Post HTTP method for adding new empire
 export async function addEmpire(empire) {
-  try {
-    const res = await fetch(`${BASE_URL}/empires`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(empire),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("empires")
+    .insert([empire])
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-// Delete HTTP method
 export async function deleteEmpire(id) {
-  try {
-    const res = await fetch(`${BASE_URL}/empires/${id}`, {
-      method: "DELETE",
-    });
-    if (!res.ok) {
-      throw new Error(`${res.status}, ${res.statusText}`);
-    }
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("empires")
+    .delete()
+    .eq("id", id)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
 //// Figures
-// Get HTTP method
 export async function getFigures() {
-  try {
-    const res = await fetch(`${BASE_URL}/figures`);
-
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase.from("figures").select("*");
+  if (error) throw error;
+  return data;
 }
 
-// Post HTTP method for adding new figure
 export async function addFigures(figure) {
-  try {
-    const res = await fetch(`${BASE_URL}/figures`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(figure),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("figures")
+    .insert([figure])
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-// Delete HTTP method
 export async function deleteFigure(id) {
-  try {
-    const res = await fetch(`${BASE_URL}/figures/${id}`, {
-      method: "DELETE",
-    });
-    if (!res.ok) {
-      throw new Error(`${res.status}, ${res.statusText}`);
-    }
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("figures")
+    .delete()
+    .eq("id", id)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
 //// Comments
-// Get HTTP method
 export async function getComments() {
-  try {
-    const res = await fetch(`${BASE_URL}/comments`);
-
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase.from("comments").select("*");
+  if (error) throw error;
+  return data;
 }
 
-// Post HTTP method
 export async function postComment(comment) {
-  try {
-    const res = await fetch(`${BASE_URL}/comments`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(comment),
-    });
-    if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
-    const data = await res.json();
-    // console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("comments")
+    .insert([comment])
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-// Delete HTTP method
 export async function deleteComment(id) {
-  try {
-    const res = await fetch(`${BASE_URL}/comments/${id}`, {
-      method: "DELETE",
-    });
-    if (!res.ok) {
-      throw new Error(`${res.status}, ${res.statusText}`);
-    }
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
+  const { data, error } = await supabase
+    .from("comments")
+    .delete()
+    .eq("id", id)
+    .select();
+  if (error) throw error;
+  return data;
 }
 
-/////////// Dynamic HTTP request for approving all data types
-export async function updateEntityStatus(endpoint, id, status) {
-  const res = await fetch(`${BASE_URL}/${endpoint}/${id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ status }),
-  });
+export async function updateEntityStatus(table, id, status) {
+  const { data, error } = await supabase
+    .from(table)
+    .update({ status })
+    .eq("id", id)
+    .select();
 
-  if (!res.ok) {
-    throw new Error(`Error updating ${endpoint}: ${res.statusText}`);
+  if (error) {
+    console.error(`Error updating status in ${table}:`, error);
+    throw error;
   }
 
-  return await res.json();
+  return data;
 }

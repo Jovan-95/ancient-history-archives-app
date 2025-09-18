@@ -10,11 +10,7 @@ import getUsers, {
 } from "../../services";
 import { useState } from "react";
 import Modal from "../../components/Modal";
-import {
-  showSuccessToast,
-  showErrorToast,
-  showInfoToast,
-} from "../../components/Toast";
+import { showSuccessToast, showInfoToast } from "../../components/Toast";
 
 /* eslint-disable no-unused-vars */
 function AdminUserManagement() {

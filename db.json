@@ -335,7 +335,7 @@
   "users": [
     {
       "id": "eb09",
-      "username": "Jovan",
+      "username": "Jovan-95",
       "email": "vuksanovicjovan@hotmail.com",
       "password": "222222",
       "confirmPassword": "111111",
@@ -347,7 +347,7 @@
       "bookmarksTimelines": [],
       "likesTimelines": [],
       "status": "active",
-      "avatar": "/images/boy-2.jpg",
+      "avatar": "/images/boy-1.jpg",
       "inbox": [
         {
           "id": "1758114189523",
