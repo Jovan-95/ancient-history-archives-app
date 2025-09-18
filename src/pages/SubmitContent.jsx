@@ -107,7 +107,7 @@ function SubmitContent() {
       userId: loggedUser.id,
       createdAt: new Date().toISOString(),
       likes: [],
-      status: "pending",
+      status: "approved",
     });
     showSuccessToast("Artifact is submited!");
   }
@@ -127,7 +127,7 @@ function SubmitContent() {
       createdBy: loggedUser.id,
       createdAt: new Date().toISOString(),
       likes: 0,
-      status: "pending",
+      status: "approved",
     });
   }
 
@@ -145,7 +145,7 @@ function SubmitContent() {
       createdAt: new Date().toISOString(),
       likes: 0,
       events: [{ year: eventObj.year, title: eventObj.title }],
-      status: "pending",
+      status: "approved",
     };
     // Post HTTP method calling
     addTimelineMutation.mutate(newTimelineObj);
@@ -165,7 +165,7 @@ function SubmitContent() {
       era: period, //
       region: region, //
       createdAt: new Date().toISOString(), //
-      status: "pending", //
+      status: "approved", //
     });
   }
 
@@ -182,7 +182,7 @@ function SubmitContent() {
       era: period,
       region: region,
       createdAt: new Date().toISOString(),
-      status: "pending",
+      status: "approved",
     });
   }
 
