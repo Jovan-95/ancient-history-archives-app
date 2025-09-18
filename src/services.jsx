@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-unused-vars */
 
-//// BE routes
+//// BE routes on local
 // http://localhost:5000/artifacts
 // http://localhost:5000/collections
 // http://localhost:5000/timelines
@@ -10,13 +10,17 @@
 // http://localhost:5000/comments
 // http://localhost:5000/users
 
-import { useState } from "react";
+// Live Render BE
+// const BASE_URL = "https://ancient-history-backend.onrender.com/api";
+
+// Local BE
+const BASE_URL = "http://localhost:5000";
 
 ////  Users
 // Get HTTP method
 export default async function getUsers() {
   try {
-    const res = await fetch("http://localhost:5000/users");
+    const res = await fetch(`${BASE_URL}/users`);
 
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
@@ -29,7 +33,7 @@ export default async function getUsers() {
 // Post HTTP method
 export async function registerUser(user) {
   try {
-    const res = await fetch("http://localhost:5000/users", {
+    const res = await fetch(`${BASE_URL}/users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,7 +52,7 @@ export async function registerUser(user) {
 // Patch HTTP method for partialy editing user object (bookmarkArtifact)
 export async function addBookmarkToUserArtifact(userId, updatedBookmarksArray) {
   try {
-    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +74,7 @@ export async function removeArtifactFromBookmarks(
   updatedBookmarksArray
 ) {
   try {
-    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -91,7 +95,7 @@ export async function removeArtifactFromBookmarks(
 // Patch HTTP method for partialy editing user object (likesArtifact)
 export async function addLikeToUserArtifact(userId, updatedLikesArray) {
   try {
-    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -110,7 +114,7 @@ export async function addLikeToUserArtifact(userId, updatedLikesArray) {
 //// Patch HTTP method remove elements from user object array
 export async function removeArtifactFromLikes(userId, updatedLikesArray) {
   try {
-    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -132,7 +136,7 @@ export async function addBookmarkToUserCollection(
   updatedBookmarksArray
 ) {
   try {
-    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -154,7 +158,7 @@ export async function removeCollectionFromBookmarks(
   updatedBookmarksArray
 ) {
   try {
-    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -175,7 +179,7 @@ export async function removeCollectionFromBookmarks(
 // Patch HTTP method for partialy editing user object (likesCollections)
 export async function addLikeToUserCollection(userId, updatedLikesArray) {
   try {
-    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -194,7 +198,7 @@ export async function addLikeToUserCollection(userId, updatedLikesArray) {
 //// Patch HTTP method remove elements from user object array(collections)
 export async function removeCollectionFromLikes(userId, updatedLikesArray) {
   try {
-    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -215,7 +219,7 @@ export async function removeCollectionFromLikes(userId, updatedLikesArray) {
 // Patch HTTP method for partialy editing user object (bookmarkTimelines)
 export async function addBookmarkToUserTimeline(userId, updatedBookmarksArray) {
   try {
-    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -237,7 +241,7 @@ export async function removeTimelineFromBookmarks(
   updatedBookmarksArray
 ) {
   try {
-    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -258,7 +262,7 @@ export async function removeTimelineFromBookmarks(
 // Patch HTTP method for partialy editing user object (likesTimelines)
 export async function addLikeToUserTimelines(userId, updatedLikesArray) {
   try {
-    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -277,7 +281,7 @@ export async function addLikeToUserTimelines(userId, updatedLikesArray) {
 //// Patch HTTP method remove elements from user object array(collections)
 export async function removeTimelineFromLikes(userId, updatedLikesArray) {
   try {
-    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -298,7 +302,7 @@ export async function removeTimelineFromLikes(userId, updatedLikesArray) {
 //// Patch HTTP method change user avatar
 export async function changeUserAvatar(userId, avatarImg) {
   try {
-    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -319,7 +323,7 @@ export async function changeUserAvatar(userId, avatarImg) {
 //// Patch HTTP method Edit user
 export async function editUser(userId, editedObj) {
   try {
-    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -340,7 +344,7 @@ export async function editUser(userId, editedObj) {
 //// Patch HTTP method change user role
 export async function changeUserRole(id, role) {
   try {
-    const res = await fetch(`http://localhost:5000/users/${id}`, {
+    const res = await fetch(`${BASE_URL}/users/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -361,7 +365,7 @@ export async function changeUserRole(id, role) {
 //// Patch HTTP method change user status (ban, unban)
 export async function changeUserStatus(id, status) {
   try {
-    const res = await fetch(`http://localhost:5000/users/${id}`, {
+    const res = await fetch(`${BASE_URL}/users/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -383,7 +387,7 @@ export async function changeUserStatus(id, status) {
 export async function updateMessageVisibility(userId, msgId, newVisibility) {
   try {
     // 1. Uzmi trenutnog usera
-    const resUser = await fetch(`http://localhost:5000/users/${userId}`);
+    const resUser = await fetch(`${BASE_URL}/users/${userId}`);
     if (!resUser.ok)
       throw new Error(`${resUser.status}: ${resUser.statusText}`);
     const user = await resUser.json();
@@ -394,7 +398,7 @@ export async function updateMessageVisibility(userId, msgId, newVisibility) {
     );
 
     // 3. PATCH zahtev ka json-server
-    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ inbox: updatedInbox }),
@@ -412,7 +416,7 @@ export async function updateMessageVisibility(userId, msgId, newVisibility) {
 //// Patch HTTP method send message
 export async function sendMessage(userId, newMessage) {
   try {
-    const resUser = await fetch(`http://localhost:5000/users/${userId}`);
+    const resUser = await fetch(`${BASE_URL}/users/${userId}`);
     if (!resUser.ok) throw new Error(`${resUser.status} ${resUser.statusText}`);
     const user = await resUser.json();
 
@@ -421,7 +425,7 @@ export async function sendMessage(userId, newMessage) {
       ? [...user.inbox, newMessage]
       : [newMessage];
 
-    const resPatch = await fetch(`http://localhost:5000/users/${userId}`, {
+    const resPatch = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ inbox: updatedInbox }),
@@ -441,7 +445,7 @@ export async function sendMessage(userId, newMessage) {
 // Delete HTTP method
 export async function deleteUser(userId) {
   try {
-    const res = await fetch(`http://localhost:5000/users/${userId}`, {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
       method: "DELETE",
     });
     if (!res.ok) {
@@ -461,7 +465,7 @@ export async function deleteUser(userId) {
 // Get HTTP method
 export async function getArtifacts() {
   try {
-    const res = await fetch("http://localhost:5000/artifacts");
+    const res = await fetch(`${BASE_URL}/artifacts`);
 
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
@@ -475,7 +479,7 @@ export async function getArtifacts() {
 // Patch HTTP method for partialy editing artifact object (likes)
 export async function addLikeToArtifact(artifactsId, updatedLikesNum) {
   try {
-    const res = await fetch(`http://localhost:5000/artifacts/${artifactsId}`, {
+    const res = await fetch(`${BASE_URL}/artifacts/${artifactsId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -494,7 +498,7 @@ export async function addLikeToArtifact(artifactsId, updatedLikesNum) {
 // Post HTTP method for adding new artifact
 export async function addArtifact(artifact) {
   try {
-    const res = await fetch("http://localhost:5000/artifacts", {
+    const res = await fetch(`${BASE_URL}/artifacts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -513,7 +517,7 @@ export async function addArtifact(artifact) {
 // Delete HTTP method
 export async function deleteArtifact(id) {
   try {
-    const res = await fetch(`http://localhost:5000/artifacts/${id}`, {
+    const res = await fetch(`${BASE_URL}/artifacts/${id}`, {
       method: "DELETE",
     });
     if (!res.ok) {
@@ -531,7 +535,7 @@ export async function deleteArtifact(id) {
 // Get HTTP method
 export async function getCollections() {
   try {
-    const res = await fetch("http://localhost:5000/collections");
+    const res = await fetch(`${BASE_URL}/collections`);
 
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
@@ -545,16 +549,13 @@ export async function getCollections() {
 // Patch HTTP method for partialy editing collection object (likes)
 export async function addLikeToCollection(collectionId, updatedLikesNum) {
   try {
-    const res = await fetch(
-      `http://localhost:5000/collections/${collectionId}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ likes: updatedLikesNum }),
-      }
-    );
+    const res = await fetch(`${BASE_URL}/collections/${collectionId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ likes: updatedLikesNum }),
+    });
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
     console.log(data);
@@ -567,7 +568,7 @@ export async function addLikeToCollection(collectionId, updatedLikesNum) {
 // Post HTTP method for adding new collection
 export async function addCollection(collection) {
   try {
-    const res = await fetch("http://localhost:5000/collections", {
+    const res = await fetch(`${BASE_URL}/collections`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -586,7 +587,7 @@ export async function addCollection(collection) {
 // Delete HTTP method
 export async function deleteCollection(id) {
   try {
-    const res = await fetch(`http://localhost:5000/collections/${id}`, {
+    const res = await fetch(`${BASE_URL}/collections/${id}`, {
       method: "DELETE",
     });
     if (!res.ok) {
@@ -604,7 +605,7 @@ export async function deleteCollection(id) {
 // Get HTTP method
 export async function getTimelines() {
   try {
-    const res = await fetch("http://localhost:5000/timelines");
+    const res = await fetch(`${BASE_URL}/timelines`);
 
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
@@ -618,7 +619,7 @@ export async function getTimelines() {
 // Patch HTTP method for partialy editing timeline object (likes)
 export async function addLikeToTimelines(timelineId, updatedLikesNum) {
   try {
-    const res = await fetch(`http://localhost:5000/timelines/${timelineId}`, {
+    const res = await fetch(`${BASE_URL}/timelines/${timelineId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -637,7 +638,7 @@ export async function addLikeToTimelines(timelineId, updatedLikesNum) {
 // Post HTTP method for adding new timeline
 export async function addTimeline(timeline) {
   try {
-    const res = await fetch("http://localhost:5000/timelines", {
+    const res = await fetch(`${BASE_URL}/timelines`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -656,7 +657,7 @@ export async function addTimeline(timeline) {
 // Delete HTTP method
 export async function deleteTimeline(id) {
   try {
-    const res = await fetch(`http://localhost:5000/timelines/${id}`, {
+    const res = await fetch(`${BASE_URL}/timelines/${id}`, {
       method: "DELETE",
     });
     if (!res.ok) {
@@ -674,7 +675,7 @@ export async function deleteTimeline(id) {
 // Get HTTP method
 export async function getEmpires() {
   try {
-    const res = await fetch("http://localhost:5000/empires");
+    const res = await fetch(`${BASE_URL}/empires`);
 
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
@@ -688,7 +689,7 @@ export async function getEmpires() {
 // Post HTTP method for adding new empire
 export async function addEmpire(empire) {
   try {
-    const res = await fetch("http://localhost:5000/empires", {
+    const res = await fetch(`${BASE_URL}/empires`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -707,7 +708,7 @@ export async function addEmpire(empire) {
 // Delete HTTP method
 export async function deleteEmpire(id) {
   try {
-    const res = await fetch(`http://localhost:5000/empires/${id}`, {
+    const res = await fetch(`${BASE_URL}/empires/${id}`, {
       method: "DELETE",
     });
     if (!res.ok) {
@@ -725,7 +726,7 @@ export async function deleteEmpire(id) {
 // Get HTTP method
 export async function getFigures() {
   try {
-    const res = await fetch("http://localhost:5000/figures");
+    const res = await fetch(`${BASE_URL}/figures`);
 
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
@@ -739,7 +740,7 @@ export async function getFigures() {
 // Post HTTP method for adding new figure
 export async function addFigures(figure) {
   try {
-    const res = await fetch("http://localhost:5000/figures", {
+    const res = await fetch(`${BASE_URL}/figures`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -758,7 +759,7 @@ export async function addFigures(figure) {
 // Delete HTTP method
 export async function deleteFigure(id) {
   try {
-    const res = await fetch(`http://localhost:5000/figures/${id}`, {
+    const res = await fetch(`${BASE_URL}/figures/${id}`, {
       method: "DELETE",
     });
     if (!res.ok) {
@@ -776,7 +777,7 @@ export async function deleteFigure(id) {
 // Get HTTP method
 export async function getComments() {
   try {
-    const res = await fetch("http://localhost:5000/comments");
+    const res = await fetch(`${BASE_URL}/comments`);
 
     if (!res.ok) throw new Error(`${res.status}, ${res.statusText}`);
     const data = await res.json();
@@ -790,7 +791,7 @@ export async function getComments() {
 // Post HTTP method
 export async function postComment(comment) {
   try {
-    const res = await fetch("http://localhost:5000/comments", {
+    const res = await fetch(`${BASE_URL}/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -809,7 +810,7 @@ export async function postComment(comment) {
 // Delete HTTP method
 export async function deleteComment(id) {
   try {
-    const res = await fetch(`http://localhost:5000/comments/${id}`, {
+    const res = await fetch(`${BASE_URL}/comments/${id}`, {
       method: "DELETE",
     });
     if (!res.ok) {
@@ -825,7 +826,7 @@ export async function deleteComment(id) {
 
 /////////// Dynamic HTTP request for approving all data types
 export async function updateEntityStatus(endpoint, id, status) {
-  const res = await fetch(`http://localhost:5000/${endpoint}/${id}`, {
+  const res = await fetch(`${BASE_URL}/${endpoint}/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
