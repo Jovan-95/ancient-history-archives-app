@@ -81,6 +81,10 @@
     padding: 2rem;
     border-top: 1px solid #e5e7eb;
 
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+
     h2 {
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
@@ -110,8 +114,8 @@
 
       .username {
         font-size: 1.1rem;
-        font-weight: 500;
-        color: #333;
+        font-weight: 600;
+        color: #8b7355;
       }
     }
   }

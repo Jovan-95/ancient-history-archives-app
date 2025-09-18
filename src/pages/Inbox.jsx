@@ -127,9 +127,7 @@ function Inbox() {
             <div key={user.id} className="user-card">
               <span className="username">{user.username}</span>
               {user.id === currentUser.id ? (
-                <p style={{ color: "green" }}>
-                  You can't send message to yourself!
-                </p>
+                <p style={{ color: "green" }}>Your profile!</p>
               ) : (
                 <button
                   onClick={() => openMessageModal(user.id)}
