@@ -78,7 +78,7 @@ function Inbox() {
 
     const inboxObj = {
       id: String(Date.now()),
-      from: currentUser.username,
+      from: currentUser?.username,
       message: messageText,
       timestamp: Date.now(),
       visibility: false,
@@ -123,21 +123,20 @@ function Inbox() {
         <h2>👥 All Users</h2>
 
         <div className="user-list">
-          {usersData.map((user) => (
-            <div key={user.id} className="user-card">
-              <span className="username">{user.username}</span>
-              {user.id === currentUser.id ? (
-                <p style={{ color: "green" }}>Your profile!</p>
-              ) : (
+          {usersData.map((user) =>
+            user?.id !== currentUser?.id ? (
+              <div key={user.id} className="user-card">
+                <span className="username">{user.username}</span>
+
                 <button
                   onClick={() => openMessageModal(user.id)}
                   className="btn"
                 >
                   Send Message
                 </button>
-              )}
-            </div>
-          ))}
+              </div>
+            ) : null
+          )}
         </div>
       </div>
       {messageModal && (

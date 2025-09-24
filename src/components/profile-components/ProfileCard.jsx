@@ -73,7 +73,7 @@ function ProfileCard({
   function handleAvatarChange() {
     // Patch method call
     changeAvatar({
-      userId: user.id,
+      userId: user?.id,
       avatarImg: avatarImg,
     });
     setShowAvatars(false);
@@ -85,7 +85,7 @@ function ProfileCard({
         <div>
           <img
             className={!showAvatars ? "d-block self-center" : "d-none"}
-            src={user.avatar}
+            src={user?.avatar}
             alt="Profile picture"
           />
           <div className={showAvatars ? "d-block" : "d-none"}></div>
@@ -123,14 +123,14 @@ function ProfileCard({
 
         <div>
           <p className="username-text">
-            <strong>Username: </strong> {user.username}
+            <strong>Username: </strong> {user?.username}
           </p>
           <p className="email-text">
-            <strong>Email: </strong> {user.email}
+            <strong>Email: </strong> {user?.email}
           </p>
           <p className="role-text">
             <strong>Role: </strong>
-            {user.role}
+            {user?.role}
           </p>
           <div>
             {" "}

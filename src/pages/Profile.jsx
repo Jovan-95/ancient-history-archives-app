@@ -140,32 +140,32 @@ function Profile() {
 
   // Create new array with user bookmark artifact
   const userBookmarkedArtifacts = artifactsData.filter((artifact) =>
-    user.bookmarksArtifacts?.includes(String(artifact.id))
+    user?.bookmarksArtifacts?.includes(String(artifact.id))
   );
 
   // Create new array with user liked artifact
   const userLikedArtifacts = artifactsData.filter((artifact) =>
-    user.likesArtifacts?.includes(String(artifact.id))
+    user?.likesArtifacts?.includes(String(artifact.id))
   );
 
   // Create new array with user bookmark collections
   const userBookmarkedCollections = collectionsData.filter((collection) =>
-    user.bookmarksCollections?.includes(String(collection.id))
+    user?.bookmarksCollections?.includes(String(collection.id))
   );
 
   // Create new array with user like collections
   const userLikedCollections = collectionsData.filter((collection) =>
-    user.likesCollections?.includes(String(collection.id))
+    user?.likesCollections?.includes(String(collection.id))
   );
 
   // Create new array with user bookmark timelines
   const userBookmarkedTimelines = timelinesData.filter((timeline) =>
-    user.bookmarksTimelines?.includes(String(timeline.id))
+    user?.bookmarksTimelines?.includes(String(timeline.id))
   );
 
   // Create new array with user like timelines
   const userLikedTimelines = timelinesData.filter((timeline) =>
-    user.likesTimelines?.includes(String(timeline.id))
+    user?.likesTimelines?.includes(String(timeline.id))
   );
 
   // Removing artifact from bookmarks array

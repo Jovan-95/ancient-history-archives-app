@@ -109,7 +109,7 @@ function SingleArtifact() {
   const artifactComments = commentsData.filter(
     (comment) => comment.artifactId === singleArtifact.id
   );
-  console.log("singleArt", singleArtifact);
+  // console.log("singleArt", singleArtifact);
 
   // Comment posting
   function handleCommentPosting() {
@@ -163,7 +163,7 @@ function SingleArtifact() {
   // Like artifact
   function handleLike() {
     // Check for already liked (duplicates)
-    const alreadyLiked = patchedUser.likesArtifacts.find(
+    const alreadyLiked = patchedUser?.likesArtifacts?.find(
       (like) => like === singleArtifact.id
     );
 
@@ -181,7 +181,7 @@ function SingleArtifact() {
       updatedLikes,
     });
 
-    const updatedLikesNum = singleArtifact.likes + 1;
+    const updatedLikesNum = Number(singleArtifact.likes) + 1;
     console.log(updatedLikesNum);
 
     // Patch method calling
@@ -206,11 +206,10 @@ function SingleArtifact() {
             <strong>Region:</strong> {singleArtifact.region}
           </p>
           <p className="single-page__text">
-            <strong>Discovered:</strong> {singleArtifact.createdAt}
+            <strong>Discovered:</strong>{" "}
+            {new Date(singleArtifact.createdAt).toLocaleString()}
           </p>
-          <p>
-            <strong>Type ID : {singleArtifact.id}</strong>{" "}
-          </p>
+
           <p>
             <strong>Likes : {singleArtifact.likes}</strong>{" "}
           </p>
@@ -240,21 +239,12 @@ function SingleArtifact() {
         <div>
           {artifactComments.map((comment) => (
             <div className="comment-wrapper" key={comment.id}>
-              <div className="type-id">
-                <strong>Artifact (type) ID : {comment.artifactId}</strong>{" "}
-              </div>
-              <div className="comment-id">
-                <strong>Comment ID : {comment.id}</strong>
-              </div>
-              <div className="user-id">
-                <strong>User ID : {comment.userId}</strong>
-              </div>
               <div className="user-id">
                 <strong>Nickname : {comment.nickname}</strong>
               </div>
               <div className="comment-text">{comment.text}</div>
               <div className="comment-id">
-                <strong>{comment.createdAt}</strong>
+                <strong> {new Date(comment.createdAt).toLocaleString()}</strong>
               </div>
             </div>
           ))}

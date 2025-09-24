@@ -279,7 +279,7 @@ function AdminUserManagement() {
                     <td>{comment.id}</td>
                     <td>{comment.nickname}</td>
                     <td>{comment.text}</td>
-                    <td>{comment.createdAt}</td>
+                    <td>{new Date(comment.createdAt).toLocaleString()}</td>
 
                     <td>
                       <button

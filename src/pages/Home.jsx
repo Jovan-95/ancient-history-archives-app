@@ -39,6 +39,7 @@ function Home() {
   function goToExplore() {
     navigate("/explore");
   }
+  // console.log(timelinesData);
 
   // HTTP loading and error
   if (artifactsIsLoading || collectionsIsLoading || timelinesIsLoading)

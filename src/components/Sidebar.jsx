@@ -33,11 +33,11 @@ function Sidebar() {
   const user = usersData.find((user) => user.id === loggedUser.id);
   // console.log("user", user.inbox);
 
-  const inboxNumber = user.inbox.filter((msg) => msg.visibility === false);
+  const inboxNumber = user?.inbox.filter((msg) => msg.visibility === false);
   // console.log(inboxNumber);
 
   function handleLogout() {
-    console.log("Logout");
+    // console.log("Logout");
     dispatch(logoutUser());
     navigate("/login");
   }
@@ -55,13 +55,13 @@ function Sidebar() {
         <NavLink to="/profile">Profile</NavLink>
         <NavLink to="/inbox">
           Inbox{" "}
-          {inboxNumber.length === 0 ? (
+          {inboxNumber?.length === 0 ? (
             <span className="inbox-num-wrapper-zero">
-              <span className="inbox-num">{inboxNumber.length}</span>
+              <span className="inbox-num">{inboxNumber?.length}</span>
             </span>
           ) : (
             <span className="inbox-num-wrapper">
-              <span className="inbox-num">{inboxNumber.length}</span>
+              <span className="inbox-num">{inboxNumber?.length}</span>
             </span>
           )}
         </NavLink>

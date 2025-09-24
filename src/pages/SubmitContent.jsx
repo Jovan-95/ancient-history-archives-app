@@ -38,6 +38,7 @@ function SubmitContent() {
       setDesc("");
       setPeriod("");
       setRegion("");
+      showInfoToast("Artifact is waiting for approval!");
     },
   });
 
@@ -47,8 +48,7 @@ function SubmitContent() {
     onSuccess: () => {
       // Automatski refresh komentara posle uspešnog posta
       queryClient.invalidateQueries({ queryKey: ["collections"] });
-      showSuccessToast("Collection is submited!");
-
+      showInfoToast("Collection is waiting for approval!");
       setTitle("");
       setDesc("");
     },
@@ -61,7 +61,7 @@ function SubmitContent() {
       queryClient.invalidateQueries({ queryKey: ["timelines"] });
       setTitle("");
       setEventObj({ year: "", title: "" });
-      showSuccessToast("Timeline is submited!");
+      showInfoToast("Timeline is waiting for approval!");
     },
   });
 
@@ -70,7 +70,7 @@ function SubmitContent() {
     mutationFn: addEmpire,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["empires"] });
-      showSuccessToast("Empire is submited!");
+      showInfoToast("Empire is waiting for approval!");
       setTitle("");
       setDesc("");
       setPeriod("");
@@ -87,7 +87,7 @@ function SubmitContent() {
       setDesc("");
       setPeriod("");
       setRegion("");
-      showSuccessToast("Figure is submited!");
+      showInfoToast("Figure is waiting for approval!");
     },
   });
 
@@ -106,10 +106,9 @@ function SubmitContent() {
       region: region,
       userId: loggedUser.id,
       createdAt: new Date().toISOString(),
-      likes: [],
-      status: "approved",
+      likes: 0,
+      status: "pending",
     });
-    showSuccessToast("Artifact is submited!");
   }
 
   function handleCollectionSubmit(e) {
@@ -127,7 +126,7 @@ function SubmitContent() {
       createdBy: loggedUser.id,
       createdAt: new Date().toISOString(),
       likes: 0,
-      status: "approved",
+      status: "pending",
     });
   }
 
@@ -145,7 +144,7 @@ function SubmitContent() {
       createdAt: new Date().toISOString(),
       likes: 0,
       events: [{ year: eventObj.year, title: eventObj.title }],
-      status: "approved",
+      status: "pending",
     };
     // Post HTTP method calling
     addTimelineMutation.mutate(newTimelineObj);
@@ -165,7 +164,7 @@ function SubmitContent() {
       era: period, //
       region: region, //
       createdAt: new Date().toISOString(), //
-      status: "approved", //
+      status: "pending", //
     });
   }
 
@@ -182,7 +181,7 @@ function SubmitContent() {
       era: period,
       region: region,
       createdAt: new Date().toISOString(),
-      status: "approved",
+      status: "pending",
     });
   }
 

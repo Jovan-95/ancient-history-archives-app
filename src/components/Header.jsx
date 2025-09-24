@@ -32,7 +32,7 @@ function Header() {
 
   // Finding logged user on backend by comparing with logged user from redux
   const user = usersData.find((user) => user.id === loggedUser.id);
-  const inboxNumber = user.inbox.filter((msg) => msg.visibility === false);
+  const inboxNumber = user?.inbox.filter((msg) => msg.visibility === false);
 
   function handleLogout() {
     console.log("Logout");

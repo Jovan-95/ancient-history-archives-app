@@ -282,7 +282,7 @@ function AdminModeration() {
                         {artifact.status}
                       </span>
                     </td>
-                    <td>{artifact.createdAt}</td>
+                    <td>{new Date(artifact.createdAt).toLocaleString()}</td>
                     <td>
                       <button
                         disabled={artifact.status === "approved" ? true : false}
@@ -356,7 +356,7 @@ function AdminModeration() {
                         {collection.status}
                       </span>
                     </td>
-                    <td>{collection.createdAt}</td>
+                    <td>{new Date(collection.createdAt).toLocaleString()}</td>
                     <td>
                       <button
                         disabled={
@@ -434,7 +434,7 @@ function AdminModeration() {
                         {timeline.status}
                       </span>
                     </td>
-                    <td>{timeline.createdAt}</td>
+                    <td>{new Date(timeline.createdAt).toLocaleString()}</td>
                     <td>
                       <button
                         disabled={timeline.status === "approved" ? true : false}
@@ -508,7 +508,7 @@ function AdminModeration() {
                         {figure.status}
                       </span>
                     </td>
-                    <td>{figure.createdAt}</td>
+                    <td>{new Date(figure.createdAt).toLocaleString()}</td>
                     <td>
                       <button
                         disabled={figure.status === "approved" ? true : false}
@@ -582,7 +582,7 @@ function AdminModeration() {
                         {empire.status}
                       </span>
                     </td>
-                    <td>{empire.createdAt}</td>
+                    <td>{new Date(empire.createdAt).toLocaleString()}</td>
                     <td>
                       <button
                         disabled={empire.status === "approved" ? true : false}

@@ -52,16 +52,18 @@ function UserCard({ el, user }) {
   return (
     <>
       <div key={el.id} className="user-card">
-        {user.id === el.id && <h2 style={{ color: "green" }}>Your profile!</h2>}
+        {user?.id === el.id && (
+          <h2 style={{ color: "green" }}>Your profile!</h2>
+        )}
 
         <div>
-          <strong>Username:</strong> {el.username}
+          <strong>Username:</strong> {el?.username}
         </div>
         <div>
-          <strong>Email:</strong> {el.email}
+          <strong>Email:</strong> {el?.email}
         </div>
         <div>
-          <strong>Role:</strong> {el.role}
+          <strong>Role:</strong> {el?.role}
         </div>
 
         <div>
@@ -70,7 +72,7 @@ function UserCard({ el, user }) {
           </NavLink>
         </div>
 
-        {user.id !== el.id && (
+        {user?.id !== el.id && (
           <button
             onClick={() => openMessageModal(el.id)}
             className="btn btn--cta"
@@ -78,7 +80,7 @@ function UserCard({ el, user }) {
             Send message
           </button>
         )}
-        {user.id === el.id && (
+        {user?.id === el.id && (
           <p style={{ color: "green" }}>You can't send message to yourself!</p>
         )}
       </div>
