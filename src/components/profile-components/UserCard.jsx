@@ -41,7 +41,8 @@ function UserCard({ el, user }) {
 
     const inboxObj = {
       id: String(Date.now()),
-      from: user.username,
+      from: user.id,
+      to: targetUserId,
       message: messageText,
       timestamp: Date.now(),
       visibility: false,

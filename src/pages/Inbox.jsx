@@ -1,16 +1,16 @@
 /* eslint-disable no-unused-vars */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import getUsers, { sendMessage, updateMessageVisibility } from "../services";
 import { useSelector } from "react-redux";
 import { showErrorToast, showSuccessToast } from "../components/Toast";
-import Modal from "../components/Modal";
 
 function Inbox() {
   const queryClient = useQueryClient();
-  const [messageModal, setMessageModal] = useState(false);
   const [messageText, setMessageText] = useState("");
-  const [targetUserId, setTargetUserId] = useState(null);
+
+  const [convoUser, setConvoUser] = useState("");
+  const [currentUserState, setCurrentUserState] = useState(null);
 
   // ReactQuery Get users
   const {
@@ -39,7 +39,6 @@ function Inbox() {
       queryClient.invalidateQueries(["users"]);
       showSuccessToast("Message sent!");
       setMessageText("");
-      setMessageModal(false);
     },
     onError: () => {
       showErrorToast("Error sending message!");
@@ -56,6 +55,11 @@ function Inbox() {
     });
   }
 
+  useEffect(() => {
+    const user = usersData?.find((u) => u.id === loggedUser.id);
+    setCurrentUserState(user);
+  }, [usersData, loggedUser.id]);
+
   // HTTP loading and error
   if (usersIsLoading) return <p>Loading...</p>;
   if (usersError) return <p>Error loading data.</p>;
@@ -63,9 +67,9 @@ function Inbox() {
   const currentUser = usersData?.find((u) => u.id === loggedUser.id);
   const inbox = currentUser?.inbox || [];
 
-  function openMessageModal(id) {
-    setMessageModal(true);
-    setTargetUserId(id);
+  //
+  function handleConversation(user) {
+    setConvoUser(user);
   }
 
   function handleSendMessage(e) {
@@ -78,46 +82,26 @@ function Inbox() {
 
     const inboxObj = {
       id: String(Date.now()),
-      from: currentUser?.username,
+      from: currentUserState.id,
+      to: convoUser.id,
       message: messageText,
       timestamp: Date.now(),
       visibility: false,
     };
-    mutateSendMessage({ userId: targetUserId, message: inboxObj });
+
+    setConvoUser((prev) => ({
+      ...prev,
+      inbox: [...(prev.inbox || []), inboxObj],
+    }));
+
+    mutateSendMessage({ userId: convoUser.id, message: inboxObj });
+
+    setMessageText("");
   }
+
   return (
     <div className="inbox-page">
       <h1>📥 Inbox</h1>
-
-      {inbox.length === 0 ? (
-        <p className="empty-message">Your inbox is empty.</p>
-      ) : (
-        <div className="messages-wrapper">
-          {inbox.map((msg) => (
-            <div key={msg.id} className="message-card">
-              <div className="message-header">
-                <span className="from">From: {msg.from}</span>
-                <span className="timestamp">
-                  {new Date(msg.timestamp).toLocaleString()}{" "}
-                  <div className="d-flex items-center">
-                    <input
-                      checked={msg.visibility}
-                      onChange={() => handleMsgToggle(msg)}
-                      type="checkbox"
-                    />
-                    <div className="msg-visibility">
-                      {msg.visibility ? <p>Read</p> : <p>Unread</p>}
-                    </div>
-                  </div>
-                </span>
-              </div>
-              <div className="message-body">
-                <p>{msg.message}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
 
       <div className="user-list-section">
         <h2>👥 All Users</h2>
@@ -127,47 +111,70 @@ function Inbox() {
             user?.id !== currentUser?.id ? (
               <div key={user.id} className="user-card">
                 <span className="username">{user.username}</span>
-
                 <button
-                  onClick={() => openMessageModal(user.id)}
+                  onClick={() => handleConversation(user)}
                   className="btn"
                 >
-                  Send Message
+                  Conversation
                 </button>
               </div>
-            ) : null
+            ) : (
+              ""
+            )
           )}
         </div>
-      </div>
-      {messageModal && (
-        <Modal>
-          <div style={{ padding: "1rem" }}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "end",
-                cursor: "pointer",
-                marginBottom: "8px",
-              }}
-              onClick={() => setMessageModal(false)}
-            >
-              X
-            </div>
-            <form onSubmit={handleSendMessage}>
-              <textarea
+
+        {/* TEST */}
+        {convoUser && (
+          <section className="conversation">
+            <h3>Conversation with {convoUser.username}</h3>
+
+            {(() => {
+              // 1. Skupi sve poruke između currentUserState i convoUser
+              const conversationMessages = [
+                ...(currentUserState?.inbox || []),
+                ...(convoUser?.inbox || []),
+              ].filter(
+                (msg) =>
+                  (msg.from === currentUserState.id &&
+                    msg.to === convoUser.id) ||
+                  (msg.from === convoUser.id && msg.to === currentUserState.id)
+              );
+
+              // 2. Sortiraj po timestamp-u
+              conversationMessages.sort((a, b) => a.timestamp - b.timestamp);
+
+              // 3. Renderuj poruke
+              return conversationMessages.map((msg) => (
+                <div
+                  key={msg.id}
+                  className={`message ${
+                    msg.from === currentUserState.id ? "from-me" : "from-them"
+                  }`}
+                >
+                  <div className="bubble">{msg.message}</div>
+                  <span className="time">
+                    {new Date(msg.timestamp).toLocaleString()}
+                  </span>
+                </div>
+              ));
+            })()}
+
+            {/* Polje za kucanje nove poruke */}
+            <form className="message-input" onSubmit={handleSendMessage}>
+              <input
+                type="text"
                 value={messageText}
                 onChange={(e) => setMessageText(e.target.value)}
                 placeholder="Type your message..."
               />
-              <div style={{ marginTop: "1rem" }}>
-                <button type="submit" className="btn btn--cta">
-                  Send
-                </button>
-              </div>
+              <button type="submit" className="btn btn--cta">
+                Send
+              </button>
             </form>
-          </div>
-        </Modal>
-      )}
+          </section>
+        )}
+      </div>
     </div>
   );
 }
