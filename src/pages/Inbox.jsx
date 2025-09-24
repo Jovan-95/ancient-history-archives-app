@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import getUsers, { sendMessage, updateMessageVisibility } from "../services";
 import { useSelector } from "react-redux";
 import { showErrorToast, showSuccessToast } from "../components/Toast";
+import { supabase } from "../supabaseClient";
 
 function Inbox() {
   const queryClient = useQueryClient();
@@ -59,6 +60,37 @@ function Inbox() {
     const user = usersData?.find((u) => u.id === loggedUser.id);
     setCurrentUserState(user);
   }, [usersData, loggedUser.id]);
+
+  // --- Supabase Realtime subscription ---
+  useEffect(() => {
+    // Kreiraj kanal za realtime
+    const channel = supabase
+      .channel("public:users") // ime kanala, možeš staviti po tabeli
+      .on(
+        "postgres_changes",
+        { event: "UPDATE", schema: "public", table: "users" },
+        (payload) => {
+          const updatedUser = payload.new;
+          if (
+            convoUser &&
+            (updatedUser.id === convoUser.id ||
+              updatedUser.id === loggedUser.id)
+          ) {
+            if (updatedUser.id === loggedUser.id) {
+              setCurrentUserState(updatedUser);
+            }
+            if (updatedUser.id === convoUser.id) {
+              setConvoUser(updatedUser);
+            }
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [convoUser, loggedUser.id]);
 
   // HTTP loading and error
   if (usersIsLoading) return <p>Loading...</p>;
