@@ -48,13 +48,13 @@ function Inbox() {
 
   const loggedUser = useSelector((state) => state.auth.loggedInUser);
 
-  function handleMsgToggle(msg) {
-    toggleVisibility({
-      userId: loggedUser.id, // id trenutnog korisnika
-      msgId: msg.id,
-      newVisibility: !msg.visibility,
-    });
-  }
+  // function handleMsgToggle(msg) {
+  //   toggleVisibility({
+  //     userId: loggedUser.id, // id trenutnog korisnika
+  //     msgId: msg.id,
+  //     newVisibility: !msg.visibility,
+  //   });
+  // }
 
   useEffect(() => {
     const user = usersData?.find((u) => u.id === loggedUser.id);
@@ -156,55 +156,59 @@ function Inbox() {
           )}
         </div>
 
-        {/* TEST */}
         {convoUser && (
-          <section className="conversation">
-            <h3>Conversation with {convoUser.username}</h3>
+          <>
+            <section className="conversation">
+              <h3>Conversation with {convoUser.username}</h3>
 
-            {(() => {
-              // 1. Skupi sve poruke između currentUserState i convoUser
-              const conversationMessages = [
-                ...(currentUserState?.inbox || []),
-                ...(convoUser?.inbox || []),
-              ].filter(
-                (msg) =>
-                  (msg.from === currentUserState.id &&
-                    msg.to === convoUser.id) ||
-                  (msg.from === convoUser.id && msg.to === currentUserState.id)
-              );
+              {(() => {
+                // 1. Skupi sve poruke između currentUserState i convoUser
+                const conversationMessages = [
+                  ...(currentUserState?.inbox || []),
+                  ...(convoUser?.inbox || []),
+                ].filter(
+                  (msg) =>
+                    (msg.from === currentUserState.id &&
+                      msg.to === convoUser.id) ||
+                    (msg.from === convoUser.id &&
+                      msg.to === currentUserState.id)
+                );
 
-              // 2. Sortiraj po timestamp-u
-              conversationMessages.sort((a, b) => a.timestamp - b.timestamp);
+                // 2. Sortiraj po timestamp-u
+                conversationMessages.sort((a, b) => a.timestamp - b.timestamp);
 
-              // 3. Renderuj poruke
-              return conversationMessages.map((msg) => (
-                <div
-                  key={msg.id}
-                  className={`message ${
-                    msg.from === currentUserState.id ? "from-me" : "from-them"
-                  }`}
-                >
-                  <div className="bubble">{msg.message}</div>
-                  <span className="time">
-                    {new Date(msg.timestamp).toLocaleString()}
-                  </span>
-                </div>
-              ));
-            })()}
+                // 3. Renderuj poruke
+                return conversationMessages.map((msg) => (
+                  <div
+                    key={msg.id}
+                    className={`message ${
+                      msg.from === currentUserState.id ? "from-me" : "from-them"
+                    }`}
+                  >
+                    <div className="bubble">{msg.message}</div>
+                    <span className="time">
+                      {new Date(msg.timestamp).toLocaleString()}
+                    </span>
+                  </div>
+                ));
+              })()}
 
-            {/* Polje za kucanje nove poruke */}
-            <form className="message-input" onSubmit={handleSendMessage}>
-              <input
-                type="text"
-                value={messageText}
-                onChange={(e) => setMessageText(e.target.value)}
-                placeholder="Type your message..."
-              />
-              <button type="submit" className="btn btn--cta">
-                Send
-              </button>
-            </form>
-          </section>
+              {/* Polje za kucanje nove poruke */}
+            </section>
+            <div className="conversation-input">
+              <form className="message-input" onSubmit={handleSendMessage}>
+                <input
+                  type="text"
+                  value={messageText}
+                  onChange={(e) => setMessageText(e.target.value)}
+                  placeholder="Type your message..."
+                />
+                <button type="submit" className="btn btn--cta">
+                  Send
+                </button>
+              </form>
+            </div>
+          </>
         )}
       </div>
     </div>
