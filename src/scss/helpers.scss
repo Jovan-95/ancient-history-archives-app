@@ -165,3 +165,10 @@ input[type="checkbox"] {
     border-color: darken(#b48a3c, 10%);
   }
 }
+
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+}

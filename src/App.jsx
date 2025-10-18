@@ -18,8 +18,8 @@ import SingleFigure from "./pages/single-pages/SingleFigure";
 import SingleProfile from "./pages/single-pages/SingleProfile";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import getUsers from "./services";
-import { useSelector } from "react-redux";
+import { NewtonsCradle } from "ldrs/react";
+import "ldrs/react/NewtonsCradle.css";
 
 const Register = lazy(() => import("./pages/Register"));
 const Login = lazy(() => import("./pages/Login"));
@@ -42,7 +42,13 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Suspense fallback={<h2>Loading...</h2>}>
+        <Suspense
+          fallback={
+            <div className="loading-wrapper">
+              <NewtonsCradle size="100" speed="1" color="#8b7355" />
+            </div>
+          }
+        >
           <ToastContainer position="top-right" autoClose={3000} />
 
           <Routes>

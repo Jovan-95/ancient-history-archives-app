@@ -168,7 +168,7 @@ function AdminModeration() {
     empiresIsLoading ||
     usersIsLoading
   )
-    return <p>Loading...</p>;
+    return <p></p>;
   if (
     artifactsError ||
     collectionsError ||

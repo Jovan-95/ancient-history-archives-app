@@ -5,6 +5,8 @@ import getUsers, { sendMessage, updateMessageVisibility } from "../services";
 import { useSelector } from "react-redux";
 import { showErrorToast, showSuccessToast } from "../components/Toast";
 import { supabase } from "../supabaseClient";
+import { NewtonsCradle } from "ldrs/react";
+import "ldrs/react/NewtonsCradle.css";
 
 function Inbox() {
   const queryClient = useQueryClient();
@@ -93,7 +95,12 @@ function Inbox() {
   }, [convoUser, loggedUser.id]);
 
   // HTTP loading and error
-  if (usersIsLoading) return <p>Loading...</p>;
+  if (usersIsLoading)
+    return (
+      <div className="loading-wrapper">
+        <NewtonsCradle size="100" speed="1" color="#8b7355" />
+      </div>
+    );
   if (usersError) return <p>Error loading data.</p>;
 
   const currentUser = usersData?.find((u) => u.id === loggedUser.id);

@@ -20,6 +20,8 @@ import getUsers, {
   getFigures,
   getTimelines,
 } from "../services";
+import { NewtonsCradle } from "ldrs/react";
+import "ldrs/react/NewtonsCradle.css";
 
 ChartJS.register(
   CategoryScale,
@@ -99,7 +101,11 @@ function Dashboard() {
     empiresIsLoading ||
     usersIsLoading
   )
-    return <p>Loading...</p>;
+    return (
+      <div className="loading-wrapper">
+        <NewtonsCradle size="100" speed="1" color="#8b7355" />
+      </div>
+    );
   if (
     artifactsError ||
     collectionsError ||

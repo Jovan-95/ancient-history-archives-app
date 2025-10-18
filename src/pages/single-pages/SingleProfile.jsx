@@ -18,7 +18,7 @@ function SingleProfile() {
   });
 
   // HTTP loading and error
-  if (usersIsLoading) return <p>Loading...</p>;
+  if (usersIsLoading) return <p></p>;
   if (usersError) return <p>Error loading data.</p>;
 
   const singleUser = usersData.find((user) => user.id === id);

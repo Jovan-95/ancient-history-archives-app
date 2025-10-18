@@ -98,7 +98,7 @@ function SingleCollection() {
 
   // HTTP loading and error
   if (collectionsIsLoading || commentsIsLoading || usersIsLoading)
-    return <p>Loading...</p>;
+    return <p></p>;
   if (collectionsError || commentsError || usersError)
     return <p>Error loading data.</p>;
 

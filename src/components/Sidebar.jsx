@@ -7,6 +7,8 @@ import Modal from "./Modal";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import getUsers from "../services";
+import { NewtonsCradle } from "ldrs/react";
+import "ldrs/react/NewtonsCradle.css";
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -25,8 +27,16 @@ function Sidebar() {
     queryFn: getUsers,
   });
 
+  // Default values shown
+
   // HTTP loading and error
-  if (usersIsLoading) return <p>Loading...</p>;
+  if (usersIsLoading)
+    return (
+      <div className="loading-wrapper">
+        <NewtonsCradle size="100" speed="1" color="#8b7355" />
+      </div>
+    );
+
   if (usersError) return <p>Error loading data.</p>;
 
   // Finding logged user on backend by comparing with logged user from redux

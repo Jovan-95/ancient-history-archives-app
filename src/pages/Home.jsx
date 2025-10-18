@@ -2,7 +2,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { NavLink, useNavigate } from "react-router-dom";
 import { getArtifacts, getCollections, getTimelines } from "../services";
-
+import { NewtonsCradle } from "ldrs/react";
+import "ldrs/react/NewtonsCradle.css";
 function Home() {
   const navigate = useNavigate();
 
@@ -43,7 +44,11 @@ function Home() {
 
   // HTTP loading and error
   if (artifactsIsLoading || collectionsIsLoading || timelinesIsLoading)
-    return <p>Loading...</p>;
+    return (
+      <div className="loading-wrapper">
+        <NewtonsCradle size="100" speed="1" color="#8b7355" />
+      </div>
+    );
   if (artifactsError || collectionsError || timelinesError)
     return <p>Error loading data.</p>;
 

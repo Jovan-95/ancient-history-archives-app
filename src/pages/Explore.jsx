@@ -10,6 +10,8 @@ import {
 } from "../services";
 import { useEffect, useState } from "react";
 import Tabs from "../components/Tabs";
+import { NewtonsCradle } from "ldrs/react";
+import "ldrs/react/NewtonsCradle.css";
 
 function Explore() {
   const [activeTab, setActiveTab] = useState("all");
@@ -84,7 +86,11 @@ function Explore() {
     figuresIsLoading ||
     empiresIsLoading
   )
-    return <p>Loading...</p>;
+    return (
+      <div className="loading-wrapper">
+        <NewtonsCradle size="100" speed="1" color="#8b7355" />
+      </div>
+    );
   if (
     artifactsError ||
     collectionsError ||

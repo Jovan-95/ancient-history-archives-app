@@ -97,8 +97,7 @@ function SingleArtifact() {
   const loggedUser = useSelector((state) => state.auth.loggedInUser);
 
   // HTTP loading and error
-  if (artifactsIsLoading || commentsIsLoading || usersIsLoading)
-    return <p>Loading...</p>;
+  if (artifactsIsLoading || commentsIsLoading || usersIsLoading) return <p></p>;
   if (artifactsError || commentsError || usersError)
     return <p>Error loading data.</p>;
 

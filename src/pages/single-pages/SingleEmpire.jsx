@@ -18,7 +18,7 @@ function SingleEmpire() {
   });
 
   // HTTP loading and error
-  if (empiresIsLoading) return <p>Loading...</p>;
+  if (empiresIsLoading) return <p></p>;
   if (empiresError) return <p>Error loading data.</p>;
 
   const empire = empiresData.find((empire) => empire.id === id);

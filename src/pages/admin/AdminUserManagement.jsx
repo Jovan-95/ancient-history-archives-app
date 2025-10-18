@@ -103,7 +103,7 @@ function AdminUserManagement() {
   });
 
   // HTTP loading and error
-  if (usersIsLoading || commentsIsLoading) return <p>Loading...</p>;
+  if (usersIsLoading || commentsIsLoading) return <p></p>;
   if (usersError || commentsError) return <p>Error loading data.</p>;
 
   // Finding logged user on backend by comparing with logged user from redux

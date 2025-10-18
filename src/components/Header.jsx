@@ -27,7 +27,7 @@ function Header() {
   });
 
   // HTTP loading and error
-  if (usersIsLoading) return <p>Loading...</p>;
+  if (usersIsLoading) return <p></p>;
   if (usersError) return <p>Error loading data.</p>;
 
   // Finding logged user on backend by comparing with logged user from redux

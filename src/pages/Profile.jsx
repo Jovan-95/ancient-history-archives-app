@@ -22,6 +22,8 @@ import {
 } from "../components/Toast";
 import EmtyContent from "../components/EmtyContent";
 import ListedItems from "../components/profile-components/ListedItems";
+import { NewtonsCradle } from "ldrs/react";
+import "ldrs/react/NewtonsCradle.css";
 
 function Profile() {
   // Logged user from redux
@@ -131,7 +133,11 @@ function Profile() {
     collectionsIsLoading ||
     timelinesIsLoading
   )
-    return <p>Loading...</p>;
+    return (
+      <div className="loading-wrapper">
+        <NewtonsCradle size="100" speed="1" color="#8b7355" />
+      </div>
+    );
   if (usersError || artifactsError || collectionsError || timelinesError)
     return <p>Error loading data.</p>;
 

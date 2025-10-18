@@ -18,7 +18,7 @@ function SingleFigure() {
   });
 
   // HTTP loading and error
-  if (figuresIsLoading) return <p>Loading...</p>;
+  if (figuresIsLoading) return <p></p>;
   if (figuresError) return <p>Error loading data.</p>;
 
   const figure = figuresData.find((figure) => figure.id === id);

@@ -97,8 +97,7 @@ function SingleTimelines() {
   const loggedUser = useSelector((state) => state.auth.loggedInUser);
 
   // HTTP loading and error
-  if (timelinesIsLoading || commentsIsLoading || usersIsLoading)
-    return <p>Loading...</p>;
+  if (timelinesIsLoading || commentsIsLoading || usersIsLoading) return <p></p>;
   if (timelinesError || commentsError || usersError)
     return <p>Error loading data.</p>;
 
