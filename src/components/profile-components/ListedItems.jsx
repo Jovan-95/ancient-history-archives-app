@@ -1,10 +1,14 @@
-function ListedItems({ el, handleRemove }) {
+import { NavLink } from "react-router-dom";
+
+function ListedItems({ el, handleRemove, basePath }) {
   return (
     <div key={el.id}>
-      <p className="card-title"> {el.title} </p>
-      <button onClick={() => handleRemove(el)} className="btn btn--cta">
-        Remove from bookmarks
-      </button>
+      <NavLink to={`/explore/${basePath}/${el.id}`}>
+        <p className="card-title">{el.title}</p>
+      </NavLink>{" "}
+      <span onClick={() => handleRemove(el)} className="remove">
+        X
+      </span>
     </div>
   );
 }

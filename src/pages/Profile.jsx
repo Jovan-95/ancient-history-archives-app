@@ -262,6 +262,7 @@ function Profile() {
                   key={el.id}
                   el={el}
                   handleRemove={handleRemoveBookmarksFromUserArtifacts}
+                  basePath="artifact"
                 />
               ))
             )}
@@ -279,6 +280,7 @@ function Profile() {
                   key={el.id}
                   el={el}
                   handleRemove={handleRemoveBookmarksFromUserCollections}
+                  basePath="collections"
                 />
               ))
             )}
@@ -296,6 +298,7 @@ function Profile() {
                   key={el.id}
                   el={el}
                   handleRemove={handleRemoveBookmarksFromUserTimelines}
+                  basePath="timelines"
                 />
               ))
             )}
@@ -313,6 +316,7 @@ function Profile() {
                   key={el.id}
                   el={el}
                   handleRemove={handleRemoveLikesFromUserArtifacts}
+                  basePath="artifact"
                 />
               ))
             )}
@@ -330,6 +334,7 @@ function Profile() {
                   key={el.id}
                   el={el}
                   handleRemove={handleRemoveLikesFromUserCollection}
+                  basePath="collections"
                 />
               ))
             )}
@@ -347,6 +352,7 @@ function Profile() {
                   key={el.id}
                   el={el}
                   handleRemove={handleRemoveLikesFromUserTimeline}
+                  basePath="timelines"
                 />
               ))
             )}

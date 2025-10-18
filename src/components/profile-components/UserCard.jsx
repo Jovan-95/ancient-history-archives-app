@@ -52,39 +52,36 @@ function UserCard({ el, user }) {
 
   return (
     <>
-      <div key={el.id} className="user-card">
-        {user?.id === el.id && (
-          <h2 style={{ color: "green" }}>Your profile!</h2>
-        )}
+      {user?.id === el.id ? (
+        ""
+      ) : (
+        <div key={el.id} className="user-card">
+          <div>
+            <strong>Username:</strong> {el?.username}
+          </div>
+          <div>
+            <strong>Email:</strong> {el?.email}
+          </div>
+          <div>
+            <strong>Role:</strong> {el?.role}
+          </div>
 
-        <div>
-          <strong>Username:</strong> {el?.username}
-        </div>
-        <div>
-          <strong>Email:</strong> {el?.email}
-        </div>
-        <div>
-          <strong>Role:</strong> {el?.role}
-        </div>
+          <div>
+            <NavLink to={`/profile/${el.id}`}>
+              <button className="btn btn--cta">More</button>
+            </NavLink>
+          </div>
 
-        <div>
-          <NavLink to={`/profile/${el.id}`}>
-            <button className="btn btn--cta">More</button>
-          </NavLink>
+          {user?.id !== el.id && (
+            <button
+              onClick={() => openMessageModal(el.id)}
+              className="btn btn--cta"
+            >
+              Send message
+            </button>
+          )}
         </div>
-
-        {user?.id !== el.id && (
-          <button
-            onClick={() => openMessageModal(el.id)}
-            className="btn btn--cta"
-          >
-            Send message
-          </button>
-        )}
-        {user?.id === el.id && (
-          <p style={{ color: "green" }}>You can't send message to yourself!</p>
-        )}
-      </div>
+      )}
 
       {messageModal && (
         <Modal>
