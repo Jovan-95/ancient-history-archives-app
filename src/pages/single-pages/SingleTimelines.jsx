@@ -109,6 +109,9 @@ function SingleTimelines() {
     (comment) => comment.timelineId === singleTimeline.id
   );
 
+  // Sort by newest
+  const sortedTlComments = [...timelinesComments].reverse();
+
   // Comment posting
   function handleCommentPosting() {
     // console.log("Currently logged user:", loggedUser);
@@ -223,23 +226,14 @@ function SingleTimelines() {
           <strong>Comments:</strong>
         </p>
         <div>
-          {timelinesComments.map((comment) => (
+          {sortedTlComments.map((comment) => (
             <div className="comment-wrapper" key={comment.id}>
-              <div className="type-id">
-                <strong>Timeline (type) ID : {comment.artifactId}</strong>{" "}
-              </div>
-              <div className="comment-id">
-                <strong>Comment ID : {comment.id}</strong>
-              </div>
-              <div className="user-id">
-                <strong>User ID : {comment.userId}</strong>
-              </div>
               <div className="user-id">
                 <strong>Nickname : {comment.nickname}</strong>
               </div>
               <div className="comment-text">{comment.text}</div>
               <div className="comment-id">
-                <strong>{comment.createdAt}</strong>
+                <strong>{new Date(comment.createdAt).toLocaleString()}</strong>
               </div>
             </div>
           ))}

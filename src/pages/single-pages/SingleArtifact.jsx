@@ -108,6 +108,10 @@ function SingleArtifact() {
   const artifactComments = commentsData.filter(
     (comment) => comment.artifactId === singleArtifact.id
   );
+
+  // Sort by newest
+  const sortedArtComments = [...artifactComments].reverse();
+
   // console.log("singleArt", singleArtifact);
 
   // Comment posting
@@ -236,7 +240,7 @@ function SingleArtifact() {
           <strong>Comments:</strong>
         </p>
         <div>
-          {artifactComments.map((comment) => (
+          {sortedArtComments.map((comment) => (
             <div className="comment-wrapper" key={comment.id}>
               <div className="user-id">
                 <strong>Nickname : {comment.nickname}</strong>

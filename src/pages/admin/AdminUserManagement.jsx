@@ -221,41 +221,47 @@ function AdminUserManagement() {
               </thead>
               <tbody>
                 {usersData.map((user) => (
-                  <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td>{user.username}</td>
-                    <td>{user.email}</td>
-                    <td>{user.status}</td>
-                    <td>
-                      <span>{user.role}</span>
-                    </td>
-                    <td>
-                      <button
-                        onClick={() => handleApproveModal(user)}
-                        className="btn btn-approve"
-                      >
-                        Approve
-                      </button>
-                      <button
-                        onClick={() => handleOpenRemoveModal(user)}
-                        className="btn btn-reject ml-4"
-                      >
-                        Delete
-                      </button>
-                      <button
-                        onClick={() => handleBanModal(user)}
-                        className="btn btn--cta ml-4"
-                      >
-                        Ban
-                      </button>
-                      <button
-                        onClick={() => handleModal(user)}
-                        className="btn btn--auth ml-4"
-                      >
-                        Change role?
-                      </button>
-                    </td>
-                  </tr>
+                  <>
+                    {user.id === loggedUser.id ? (
+                      ""
+                    ) : (
+                      <tr key={user.id}>
+                        <td>{user.id}</td>
+                        <td>{user.username}</td>
+                        <td>{user.email}</td>
+                        <td>{user.status}</td>
+                        <td>
+                          <span>{user.role}</span>
+                        </td>
+                        <td>
+                          <button
+                            onClick={() => handleApproveModal(user)}
+                            className="btn btn-approve"
+                          >
+                            Approve
+                          </button>
+                          <button
+                            onClick={() => handleOpenRemoveModal(user)}
+                            className="btn btn-reject ml-4"
+                          >
+                            Delete
+                          </button>
+                          <button
+                            onClick={() => handleBanModal(user)}
+                            className="btn btn--cta ml-4"
+                          >
+                            Ban
+                          </button>
+                          <button
+                            onClick={() => handleModal(user)}
+                            className="btn btn--auth ml-4"
+                          >
+                            Change role?
+                          </button>
+                        </td>
+                      </tr>
+                    )}
+                  </>
                 ))}
               </tbody>
             </table>
