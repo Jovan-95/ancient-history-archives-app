@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import getUsers, { sendMessage, updateMessageVisibility } from "../services";
 import { useSelector } from "react-redux";
 import { showErrorToast, showSuccessToast } from "../components/Toast";
@@ -15,6 +15,8 @@ function Inbox() {
   const [convoUser, setConvoUser] = useState("");
   const [currentUserState, setCurrentUserState] = useState(null);
 
+  const messagesEndRef = useRef(null);
+
   // ReactQuery Get users
   const {
     data: usersData,
@@ -23,16 +25,6 @@ function Inbox() {
   } = useQuery({
     queryKey: ["users"],
     queryFn: getUsers,
-  });
-
-  // Change msg status
-  const { mutate: toggleVisibility } = useMutation({
-    mutationFn: ({ userId, msgId, newVisibility }) =>
-      updateMessageVisibility(userId, msgId, newVisibility),
-    onSuccess: (data) => {
-      // Osveži cache da UI odmah prikaže promenu
-      queryClient.invalidateQueries(["users"]);
-    },
   });
 
   // Send message
@@ -49,14 +41,6 @@ function Inbox() {
   });
 
   const loggedUser = useSelector((state) => state.auth.loggedInUser);
-
-  // function handleMsgToggle(msg) {
-  //   toggleVisibility({
-  //     userId: loggedUser.id, // id trenutnog korisnika
-  //     msgId: msg.id,
-  //     newVisibility: !msg.visibility,
-  //   });
-  // }
 
   useEffect(() => {
     const user = usersData?.find((u) => u.id === loggedUser.id);
@@ -93,6 +77,13 @@ function Inbox() {
       supabase.removeChannel(channel);
     };
   }, [convoUser, loggedUser.id]);
+
+  // Scroll everytime new msg appears (conversationMessages changes)
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [usersData, convoUser]);
 
   // HTTP loading and error
   if (usersIsLoading)
@@ -200,7 +191,7 @@ function Inbox() {
                 ));
               })()}
 
-              {/* Polje za kucanje nove poruke */}
+              <div ref={messagesEndRef} />
             </section>
             <div className="conversation-input">
               <form className="message-input" onSubmit={handleSendMessage}>
